@@ -9356,7 +9356,7 @@
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
 	              $('#r-type').val(tempRowData.recordType);
-	              $('#r-ret').val("jsbdfkjbasdfjbdf");
+	              $('#r-ret').val(tempRowData.retentionSchedule);
 	
 	              var temp_record;
 	              for (var i = 0; i < recordsList.length; i++) {
@@ -9867,6 +9867,7 @@
 	
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 	
+	console.log("It's Working");
 	var hostWebUrl = void 0;
 	var appWebUrl = void 0;
 	var user = void 0;
