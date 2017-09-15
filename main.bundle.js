@@ -8841,6 +8841,8 @@
 	    // This code runs when the DOM is ready and creates a context object which is
 	    // needed to use the SharePoint object model
 	    $(document).ready(function () {
+	        console.log("It's Working");
+	
 	        // parses hostweb and appweb URLs from page URL
 	        hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
 	        appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
@@ -9867,7 +9869,6 @@
 	
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 	
-	console.log("It's Working");
 	var hostWebUrl = void 0;
 	var appWebUrl = void 0;
 	var user = void 0;
