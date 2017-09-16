@@ -8838,17 +8838,16 @@
 	var appWebUrl = '';
 	
 	function init() {
-	    // This code runs when the DOM is ready and creates a context object which is
-	    // needed to use the SharePoint object model
-	    $(document).ready(function () {
+	      // This code runs when the DOM is ready and creates a context object which is
+	      // needed to use the SharePoint object model
+	      $(document).ready(function () {
 	
-	        // parses hostweb and appweb URLs from page URL
-	        hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
-	        appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
-	        // loads index.aspx page
-	        indexPage.run(hostWebUrl, appWebUrl);
-	        alert("hi and bye");
-	    });
+	            // parses hostweb and appweb URLs from page URL
+	            hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
+	            appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
+	            // loads index.aspx page
+	            indexPage.run(hostWebUrl, appWebUrl);
+	      });
 	}
 
 /***/ },
