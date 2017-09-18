@@ -9328,15 +9328,15 @@
 	              }
 	              $('#r-func').append(funcOptions);
 	              var options = '';
-	              // for (var i = 0; i < categoryList.length; i++) {
-	              //   if (tempRowData.code == categoryList[i].substring(0, 5)) {
-	              //     options += '<option selected="selected">'
-	              //   } else {
-	              //     options += '<option>'
-	              //   }
-	              //   options += categoryList[i]
-	              //   options += '</option>'
-	              // }
+	              for (var i = 0; i < categoryList.length; i++) {
+	                if (tempRowData.code == categoryList[i].substring(0, 5)) {
+	                  options += '<option selected="selected">';
+	                } else {
+	                  options += '<option>';
+	                }
+	                options += categoryList[i];
+	                options += '</option>';
+	              }
 	              $('#r-cat').append(options);
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
