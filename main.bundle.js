@@ -9339,7 +9339,7 @@
 	                options += categoryList[i];
 	                options += '</option>';
 	              }
-	              $('#r-cat').val(tempRowData.recordCategory);
+	              $('#r-cat').val(temp_record['Retention_x0020_Exception']);
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
 	              $('#r-type').val(tempRowData.recordType);
@@ -9357,7 +9357,6 @@
 	              $('#admin-cmts').val(temp_record['Message_x0020_From_x0020_Admin']);
 	              initialCmt = $('#admin-cmts').val();
 	              if ($('#r-code').val()[0] === 'U') {
-
 	                $('#r-func').prop('disabled', false);
 	                $('#r-cat').prop('disabled', true);
 	                $('#r-type').prop('disabled', false);
