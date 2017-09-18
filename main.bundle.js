@@ -10178,7 +10178,10 @@
 	      'recordType': d[3],
 	      'function': d[4],
 	      'recordCategory': d[5] + ' - ' + d[6],
-	      'retentionSchedule': d[7]
+	      'retentionSchedule': d[7],
+	      'exception': d[8],
+	      'messageFromUser': d[9],
+	      'messageToUser': d[10]
 	   };
 	}
 
