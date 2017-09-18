@@ -9367,7 +9367,7 @@
 	              if ($('#r-func').val() == '') {
 	                $('#r-cat').empty();
 	                $('#r-cat').prop('disabled', true);
-	                //  $('#r-cat').val('')
+	                $('#r-cat').val('');
 	                return;
 	              }
 	              $('#r-cat').prop('disabled', false);
