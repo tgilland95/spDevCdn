@@ -9339,7 +9339,7 @@
 	                options += categoryList[i];
 	                options += '</option>';
 	              }
-	              $('#r-cat').val(temp_record['Retention_x0020_Exception']);
+
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
 	              $('#r-type').val(tempRowData.recordType);
@@ -9395,7 +9395,6 @@
 	              var newRet = $('#r-ret').val();
 	              var newExc = $('#r-exc').val();
 	              var newAdminCmts = $('#admin-cmts').val();
-
 	              var flag;
 	              if (newAdminCmts == initialCmt) {
 	                flag = 'No';
