@@ -9386,8 +9386,10 @@
 	              var newDept = $('#r-dept').val();
 	              var newFunc = $('#r-func').val();
 	              var newType = $('#r-type').val();
-	              var newCatID = $('#r-cat').val().substring(0, 5);
-	              var newCat = $('#r-cat').val().substring(8);
+	              if (tempRowData.recordCategory !== ' - ') {
+	                var newCatID = $('#r-cat').val().substring(0, 5);
+	                var newCat = $('#r-cat').val().substring(8);
+	              }
 	              var newRet = $('#r-ret').val();
 	              var newExc = $('#r-exc').val();
 	              var newAdminCmts = $('#admin-cmts').val();
