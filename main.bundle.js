@@ -9357,7 +9357,7 @@
 	              if ($('#r-code').val()[0] === 'U') {
 	
 	                $('#r-func').prop('disabled', false);
-	                $('#r-cat').prop('disabled', false);
+	                $('#r-cat').prop('disabled', true);
 	                $('#r-type').prop('disabled', false);
 	              }
 	            });
