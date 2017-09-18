@@ -8834,20 +8834,27 @@
 
 	ExecuteOrDelayUntilScriptLoaded(init, "sp.js");
 
+	// global vars
 	var hostWebUrl = '';
 	var appWebUrl = '';
+	var deptParam = '';
 
 	function init() {
-	      // This code runs when the DOM is ready and creates a context object which is
-	      // needed to use the SharePoint object model
-	      $(document).ready(function () {
-
-	            // parses hostweb and appweb URLs from page URL
-	            hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
-	            appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
-	            // loads index.aspx page
-	            indexPage.run(hostWebUrl, appWebUrl);
-	      });
+	  // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
+	  $(document).ready(function () {
+	    // parses hostweb and appweb URLs from page URL
+	    hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
+	    appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
+	    deptParam = decodeURIComponent((0, _Utils.getQueryStringParameter)("dept"));
+	    // deptParam used so that reload of page shows same dept already selected
+	    if (deptParam == "undefined") {
+	      // main function that drives page - no dept was selected
+	      indexPage.run(hostWebUrl, appWebUrl, '');
+	    } else {
+	      // main function that drives page - a dept was already selected
+	      indexPage.run(hostWebUrl, appWebUrl, deptParam);
+	    }
+	  });
 	}
 
 /***/ },
@@ -10568,340 +10575,125 @@
 	});
 	exports.init = init;
 	exports.getCurrentUser = getCurrentUser;
-	exports.getDeptInfo = getDeptInfo;
+	exports.getAdmins = getAdmins;
+	exports.getSize = getSize;
 	exports.getRepos = getRepos;
-	exports.getDepts = getDepts;
+	exports.getAllDepts = getAllDepts;
 	exports.getGeneralRetention = getGeneralRetention;
-	exports.getPendingRecords = getPendingRecords;
-	exports.getRecordsByDept = getRecordsByDept;
-	exports.getRecordsByCat = getRecordsByCat;
-	exports.getRecordsByType = getRecordsByType;
 	exports.getUserDepartments = getUserDepartments;
-	exports.getDRSCompleteness = getDRSCompleteness;
 	exports.getCommonRecords = getCommonRecords;
+	exports.getCompleteness = getCompleteness;
 	exports.getDeptRecords = getDeptRecords;
-	exports.updatePendingRecord = updatePendingRecord;
-	exports.approveRecords = approveRecords;
-	exports.updateRecord = updateRecord;
-	exports.deleteRecord = deleteRecord;
-	exports.getSizes = getSizes;
 	exports.updateSize = updateSize;
+	exports.setDRS = setDRS;
+	exports.setReview = setReview;
+	exports.messageRead = messageRead;
+	exports.updateRecord = updateRecord;
+	exports.updateCommonRecord = updateCommonRecord;
+	exports.deleteRecord = deleteRecord;
+	exports.addUniqueRecord = addUniqueRecord;
 	exports.addSize = addSize;
-	exports.addRecord = addRecord;
+	exports.addCommonRecord = addCommonRecord;
 	exports.searchUserInAdminList = searchUserInAdminList;
+
 	var hostWebUrl = '';
 	var appWebUrl = '';
+	var deptParam = '';
 
-	function init(hWebUrl, aWebUrl) {
+	function init(hWebUrl, aWebUrl, deptURLParam) {
 	  hostWebUrl = hWebUrl;
 	  appWebUrl = aWebUrl;
+	  deptParam = deptURLParam;
 	}
 
 	function getCurrentUser() {
 	  return $.ajax({
-	    url: "../_api/web/currentuser?$select=Title",
+	    url: "../_api/web/currentuser?$select=*",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
-	function getDeptInfo() {
+	function getAdmins() {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Information'" + ")/items?$top=1000&@target='" + hostWebUrl + "'&$select=*",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Administrators')/items?@target='" + hostWebUrl + "'",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
+	  });
+	}
+
+	function getSize(dept) {
+	  return $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items?@target='" + hostWebUrl + "'&$filter=Department_x0020_Number eq '" + dept + "'",
+	    method: "GET",
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
 	function getRepos() {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Repositories')/items?$t" + "op=1000&@target='" + hostWebUrl + "'&$select=Repository",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Repositories')/items?@target='" + hostWebUrl + "'&$select=Repository",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
-	function getDepts() {
+	function getAllDepts() {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness" + "')/items?$top=1000&@target='" + hostWebUrl + "'&$select=Department_x0020_Number",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness')/items?@target='" + hostWebUrl + "'&$select=*&$top=1000",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
 	function getGeneralRetention() {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('General Retention Sched" + "ule')/items?$top=1000&@target='" + hostWebUrl + "'&$select=*&$orderby=Function,Record_x0020_Category",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('General Retention Schedule')/items?@target='" + hostWebUrl + "'&$select=*&$orderby=Function,Record_x0020_Category_x0020_ID&$top=1000",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
-	}
-
-	function getPendingRecords() {
-	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'&$filter=Status eq 'Pending'&$orderby=Department_x0020_Number",
-	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
-	  });
-	}
-
-	function getRecordsByDept(dept) {
-	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'&$filter=Department_x0020_Number eq '" + dept + "'&$orderby=Function,Record_x0020_Type",
-	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
-	  });
-	}
-
-	function getRecordsByCat(cat) {
-	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items$top=1000&?@target='" + hostWebUrl + "'&$filter=Record_x0020_Category_x0020_ID eq '" + cat + "'&$orderby=Department_x0020_Number,Function,Record_x0020_Type",
-	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
-	  });
-	}
-
-	function getRecordsByType(type, flag) {
-	  if (flag) {
-	    return $.ajax({
-	      url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'&$filter=Record_x0020_Type eq '" + type + "'&$orderby=Department_x0020_Number,Function,Record_x0020_Type",
-	      method: "GET",
-	      headers: {
-	        "Accept": "application/json; odata=verbose"
-	      }
-	    });
-	  } else {
-	    return $.ajax({
-	      url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'&$filter=substringof('" + type + "',Record_x0020_Type)&$orderby=Department_x0020_Number,Function,Record_x0020_Type",
-	      method: "GET",
-	      headers: {
-	        "Accept": "application/json; odata=verbose"
-	      }
-	    });
-	  }
 	}
 
 	function getUserDepartments(userName) {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Information'" + ")/items?$top=1000&@target='" + hostWebUrl + "'&$filter=Person_x0020_Responsible_x0020_f eq '" + userName + "'",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Information')/items?@target='" + hostWebUrl + "'&$filter=Record_x0020_Liaison_x0020_Net_x eq '" + userName + "'&$top=1000",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
-	  });
-	}
-
-	function getDRSCompleteness() {
-	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness" + "')/items?$top=1000&@target='" + hostWebUrl + "'",
-	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
 	function getCommonRecords() {
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Common Records')/items?" + "$top=1000&@target='" + hostWebUrl + "'&$select=*&$orderby=Function,Record_x0020_Type",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Common Records')/items?@target='" + hostWebUrl + "'&$select=*&$orderby=Function,Record_x0020_Type&$top=1000",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
+	  });
+	}
+
+	function getCompleteness() {
+	  return $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness')/items?@target='" + hostWebUrl + "'&$select=*&$top=1000",
+	    method: "GET",
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
 	function getDeptRecords(dept) {
-	  if (dept == -1) {
-	    return $.ajax({
-	      url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'",
-	      method: "GET",
-	      headers: {
-	        "Accept": "application/json; odata=verbose"
-	      }
-	    });
-	  }
 	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'&$filter=Department_x0020_Number eq '" + dept + "'&$orderby=Function,Record_x0020_Type",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items?@target='" + hostWebUrl + "'&$filter=Department_x0020_Number eq '" + dept + "'&$orderby=Record_x0020_Type&$top=1000",
 	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
-	  });
-	}
-
-	function updatePendingRecord(row, itemID, dept, func, recType, catID, cat, ret, exc, adminCmts, flag) {
-	  var data = {
-	    "__metadata": {
-	      "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
-	    },
-	    "Department_x0020_Number": dept,
-	    "Function": func,
-	    "Record_x0020_Type": recType,
-	    "Record_x0020_Category_x0020_ID": catID,
-	    "Retention_x0020_Exception": exc,
-	    "Message_x0020_From_x0020_Admin": adminCmts,
-	    "New_x0020_Message": flag
-	  };
-	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + itemID + ")?$top=1000&@target='" + hostWebUrl + "'",
-	    method: "POST",
-	    contentType: "application/json;odata=verbose",
-	    data: JSON.stringify(data),
-	    headers: {
-	      "Accept": "application/json;odata=verbose",
-	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-	      "X-HTTP-Method": "MERGE",
-	      "If-Match": "*"
-	    },
-	    success: function success() {
-	      location.reload();
-	    },
-	    failure: function failure() {
-	      $('#approve-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Please try agai' + 'n.</div>');
-	    }
-	  });
-	}
-
-	function approveRecords(rows, ids) {
-	  var error = 0;
-	  var data = {
-	    "__metadata": {
-	      "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
-	    },
-	    "Status": "Approved"
-	  };
-	  for (var i = 0; i < ids.length; i++) {
-	    $.ajax({
-	      url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + ids[i] + ")?$top=1000&@target='" + hostWebUrl + "'",
-	      method: "POST",
-	      contentType: "application/json;odata=verbose",
-	      data: JSON.stringify(data),
-	      headers: {
-	        "Accept": "application/json;odata=verbose",
-	        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-	        "X-HTTP-Method": "MERGE",
-	        "If-Match": "*"
-	      },
-	      success: function success() {
-	        if (i == ids.length && error == 0) {
-	          location.reload();
-	        }
-	      },
-	      failure: function failure() {
-	        error = 1;
-	        if (i == ids.length - 1 && error == 1) {
-	          $('#approve-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Please try agai' + 'n.</div>');
-	        }
-	      }
-	    });
-	  }
-	}
-
-	function updateRecord(itemID, code, func, type, id, cat, ret, cmts, row, flag) {
-	  var data;
-	  if (flag == 1) {
-	    data = {
-	      "__metadata": {
-	        "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
-	      },
-	      "Code": code,
-	      "Function": func,
-	      "Record_x0020_Type": type,
-	      "Record_x0020_Category_x0020_ID": id,
-	      "Comments": cmts,
-	      "Status": "Pending"
-	    };
-	  } else {
-	    data = {
-	      "__metadata": {
-	        "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
-	      },
-	      "Code": code,
-	      "Function": func,
-	      "Record_x0020_Type": type,
-	      "Record_x0020_Category_x0020_ID": id,
-	      "Comments": cmts
-	    };
-	  }
-
-	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + itemID + ")?$top=1000&@target='" + hostWebUrl + "'",
-	    method: "POST",
-	    contentType: "application/json;odata=verbose",
-	    data: JSON.stringify(data),
-	    headers: {
-	      "Accept": "application/json;odata=verbose",
-	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-	      "X-HTTP-Method": "MERGE",
-	      "If-Match": "*"
-	    },
-	    success: function success() {
-	      row.children()[0].innerText = code;
-	      row.children()[1].innerText = func;
-	      row.children()[2].innerText = type;
-	      row.children()[3].innerText = id;
-	      row.children()[4].innerText = cat;
-	      row.children()[5].innerText = ret;
-	      row.children()[7].innerText = cmts;
-	      if (flag == 1) {
-	        row.children()[10].innerText = 'Pending';
-	      }
-	    }
-	  });
-	}
-
-	function deleteRecord(itemID, row) {
-	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + itemID + ")?$top=1000&@target='" + hostWebUrl + "'",
-	    method: "POST",
-	    headers: {
-	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-	      "X-HTTP-Method": "DELETE",
-	      "If-Match": "*"
-	    },
-	    success: function success() {
-	      row.hide();
-	    }
-	  });
-	}
-
-	function getSizes() {
-	  return $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items?$t" + "op=1000&@target='" + hostWebUrl + "'",
-	    method: "GET",
-	    headers: {
-	      "Accept": "application/json; odata=verbose"
-	    }
+	    headers: { "Accept": "application/json; odata=verbose" }
 	  });
 	}
 
 	function updateSize(itemID, size) {
 	  var data = {
-	    "__metadata": {
-	      "type": "SP.Data.Unique_x0020_CodesListItem"
-	    },
+	    "__metadata": { "type": "SP.Data.Unique_x0020_CodesListItem" },
 	    "Unique_x0020_Code": size
 	  };
 
 	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items(" + itemID + ")?$top=1000&@target='" + hostWebUrl + "'",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
 	    method: "POST",
 	    contentType: "application/json; odata=verbose",
 	    data: JSON.stringify(data),
@@ -10917,16 +10709,255 @@
 	  });
 	}
 
+	function setDRS(id, drsComplete) {
+	  var data = {
+	    "__metadata": { "type": "SP.Data.Department_x0020_CompletenessListItem" },
+	    "DRS_x0020_Completed": drsComplete
+	  };
+
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness')/items(" + id + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "Accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "MERGE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      return;
+	    },
+	    failure: function failure() {
+	      return;
+	    }
+	  });
+	}
+
+	function setReview(id, reviewComplete) {
+	  var data = {
+	    "__metadata": { "type": "SP.Data.Department_x0020_CompletenessListItem" },
+	    "Annual_x0020_Review_x0020_Comple": reviewComplete
+	  };
+
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Completeness')/items(" + id + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "Accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "MERGE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      return;
+	    },
+	    failure: function failure() {
+	      return;
+	    }
+	  });
+	}
+
+	function messageRead(itemID) {
+	  var data = {
+	    "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	    "New_x0020_Message": "No"
+	  };
+
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "Accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "MERGE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      return;
+	    },
+	    failure: function failure() {
+	      return;
+	    }
+	  });
+	}
+
+	function updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential) {
+	  var data;
+	  if (flag == 1) {
+	    data = {
+	      "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	      "Function": newFunc,
+	      "Record_x0020_Type": newType,
+	      "Record_x0020_Category_x0020_ID": newCatID,
+	      "CommentsPlan": newCmtsPlan,
+	      "Message_x0020_To_x0020_Admin": newAdminMsg,
+	      "Status": "Pending",
+	      "Repository": newRepo,
+	      "Archival": archival,
+	      "Vital": vital,
+	      "Highly_x0020_Confidential": highlyConfidential
+	    };
+	  } else {
+	    data = {
+	      "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	      "Function": newFunc,
+	      "Record_x0020_Type": newType,
+	      "Record_x0020_Category_x0020_ID": newCatID,
+	      "CommentsPlan": newCmtsPlan,
+	      "Message_x0020_To_x0020_Admin": newAdminMsg,
+	      "Repository": newRepo,
+	      "Archival": archival,
+	      "Vital": vital,
+	      "Highly_x0020_Confidential": highlyConfidential
+	    };
+	  }
+
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "Accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "MERGE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      location.reload();
+	    },
+	    failure: function failure() {
+	      $('#ret-table-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Record not updated.</div>');
+	    }
+	  });
+	}
+
+	function updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag) {
+	  var data;
+	  if (flag == 1) {
+	    data = {
+	      "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	      "CommentsPlan": newCmtsPlan,
+	      "Message_x0020_To_x0020_Admin": newAdminMsg,
+	      "Repository": newRepo,
+	      "Archival": archival,
+	      "Vital": vital,
+	      "Highly_x0020_Confidential": highlyConfidential,
+	      "Status": "Pending"
+	    };
+	  } else {
+	    data = {
+	      "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	      "CommentsPlan": newCmtsPlan,
+	      "Message_x0020_To_x0020_Admin": newAdminMsg,
+	      "Repository": newRepo,
+	      "Archival": archival,
+	      "Vital": vital,
+	      "Highly_x0020_Confidential": highlyConfidential
+	    };
+	  }
+
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "Accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "MERGE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      location.reload();
+	    },
+	    failure: function failure() {
+	      $('#ret-table-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Record not updated.</div>');
+	    }
+	  });
+	}
+
+	function deleteRecord(row, itemID) {
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    headers: {
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	      "X-HTTP-Method": "DELETE",
+	      "If-Match": "*"
+	    },
+	    success: function success() {
+	      location.reload();
+	    },
+	    failure: function failure() {
+	      $('#ret-table-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Record not deleted.</div>');
+	    }
+	  });
+	}
+
+	function addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo) {
+	  var data = {
+	    "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
+	    "Department_x0020_Number": dept,
+	    "Code": code,
+	    "Function": recFunc,
+	    "Record_x0020_Type": recType,
+	    "Record_x0020_Category_x0020_ID": recCat,
+	    "CommentsPlan": commentsPlan,
+	    "Message_x0020_To_x0020_Admin": adminMsg,
+	    "Highly_x0020_Confidential": highlyConfidential,
+	    "Vital": vital,
+	    "Archival": archival,
+	    "Repository": recRepo,
+	    "Status": "Pending"
+	  };
+	  $.ajax({
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items?@target='" + hostWebUrl + "'",
+	    method: "POST",
+	    contentType: "application/json;odata=verbose",
+	    data: JSON.stringify(data),
+	    headers: {
+	      "accept": "application/json;odata=verbose",
+	      "X-RequestDigest": $("#__REQUESTDIGEST").val()
+	    },
+	    success: function success() {
+	      $('#rec-type').val('');
+	      $('#rec-func').val('Select a function');
+	      $('#rec-cat').val('Select a category');
+	      $('#retention').val('');
+	      $('#adminMsg').val('');
+	      $('#commentsPlan').val('');
+	      $('#confidential-chkbx').prop('checked', false);
+	      $('#vital-chkbx').prop('checked', false);
+	      $('#archival-chkbx').prop('checked', false);
+	      $('#unique-alert').html('</br><div class="alert alert-success" role="alert">Record added!</div>');
+	      setTimeout(function () {
+	        $('#unique-alert').empty();
+	      }, 1500);
+	    },
+	    failure: function failure() {
+	      $('#unique-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Record not added.</div>');
+	      setTimeout(function () {
+	        $('#unique-alert').empty();
+	      }, 2500);
+	    }
+	  });
+	}
+
 	function addSize(dept, size) {
 	  var data = {
-	    "__metadata": {
-	      "type": "SP.Data.Unique_x0020_CodesListItem"
-	    },
+	    "__metadata": { "type": "SP.Data.Unique_x0020_CodesListItem" },
 	    "Department_x0020_Number": dept,
 	    "Unique_x0020_Code": size
 	  };
 	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items?$t" + "op=1000&@target='" + hostWebUrl + "'",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items?@target='" + hostWebUrl + "'",
 	    method: "POST",
 	    contentType: "application/json;odata=verbose",
 	    data: JSON.stringify(data),
@@ -10940,33 +10971,21 @@
 	  });
 	}
 
-	function addRecord(dept, code, recType, recFunc, recCat, userMsg, commentsPlan, archival, vital, highlyConfidential, recRepo) {
-	  var flag;
-	  if (userMsg != '') {
-	    flag = 'Yes';
-	  } else {
-	    flag = 'No';
-	  }
+	function addCommonRecord(dept, rowNum, code, func, type, arch, flag) {
 	  var data = {
-	    "__metadata": {
-	      "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
-	    },
+	    "__metadata": { "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem" },
 	    "Department_x0020_Number": dept,
 	    "Code": code,
-	    "Function": recFunc,
-	    "Record_x0020_Type": recType,
-	    "Record_x0020_Category_x0020_ID": recCat,
-	    "CommentsPlan": commentsPlan,
-	    "Message_x0020_From_x0020_Admin": userMsg,
-	    "Highly_x0020_Confidential": highlyConfidential,
-	    "Vital": vital,
-	    "Archival": archival,
-	    "Repository": recRepo,
+	    "Function": func,
+	    "Record_x0020_Type": type,
+	    "Record_x0020_Category_x0020_ID": 'common',
 	    "Status": "Approved",
-	    "New_x0020_Message": flag
+	    "Archival": arch,
+	    "Vital": "No",
+	    "Highly_x0020_Confidential": "No"
 	  };
 	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items?$top=1000&@target='" + hostWebUrl + "'",
+	    url: appWebUrl + "/_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Schedule')/items?@target='" + hostWebUrl + "'",
 	    method: "POST",
 	    contentType: "application/json;odata=verbose",
 	    data: JSON.stringify(data),
@@ -10975,28 +10994,21 @@
 	      "X-RequestDigest": $("#__REQUESTDIGEST").val()
 	    },
 	    success: function success() {
-	      $('#rec-type').val('');
-	      $('#rec-func').val('Select a function');
-	      $('#rec-cat').val('Select a category');
-	      $('#retention').val('');
-	      $('#msgToUser').val('');
-	      $('#commentsPlan').val('');
-	      $('#confidential-chkbx').prop('checked', false);
-	      $('#vital-chkbx').prop('checked', false);
-	      $('#archival-chkbx').prop('checked', false);
-	      $('#add-alert').html('</br><div class="alert alert-success" role="alert">Record added!</div>');
-	      setTimeout(function () {
-	        $('#add-alert').empty();
-	      }, 1500);
+	      $('#submit-alert').html('</br><div class="alert alert-success" role="alert">Records updated!</div>');
+	      $('#chkbx' + rowNum).attr('disabled', true);
+	      if (flag == 1) {
+	        location.reload();
+	      }
 	    },
 	    failure: function failure() {
-	      $('#add-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Record not adde' + 'd.</div>');
+	      $('#submit-alert').html('</br><div class="alert alert-warning" role="alert">Server error. Records not updated.</div>');
 	      setTimeout(function () {
-	        $('#add-alert').empty();
+	        $('#submit-alert').empty();
 	      }, 2500);
 	    }
 	  });
 	}
+
 	var ADMIN_LIST_NAME = 'Transfer Request Administrators';
 	function searchUserInAdminList(userName) {
 	  return $.ajax({
@@ -11017,11 +11029,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.addRecord = exports.addSize = exports.updateSize = exports.getSizes = exports.getDepts = exports.getRepos = exports.deleteCommonRecord = exports.addCommonRecord = exports.deleteRecord = exports.getDRSCompleteness = exports.updateRecord = exports.updateComment = exports.updatePendingRecord = exports.approveRecords = exports.getCommonRecords = exports.getRecordsByDept = exports.getRecordsByQuery = exports.getPendingRecords = exports.isValidUser = exports.getGeneralRetention = exports.getDepartments = exports.getDeptInfo = exports.getUserName = undefined;
+	exports.getRepos = exports.addSize = exports.updateSize = exports.getSize = exports.addUniqueRecord = exports.addCommonRecord = exports.setReview = exports.setDRS = exports.messageRead = exports.deleteRecord = exports.updateCommonRecord = exports.updateRecord = exports.getCompleteness = exports.getCommonRecords = exports.getRecordsByDept = exports.getGeneralRetention = exports.getDepartments = exports.getAllDepts = exports.getAdmins = exports.getUserName = undefined;
 
 	var getUserName = exports.getUserName = function () {
 	  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-	    var user;
+	    var user, userNameString, userNameArr, userName;
 	    return regeneratorRuntime.wrap(function _callee$(_context) {
 	      while (1) {
 	        switch (_context.prev = _context.next) {
@@ -11031,9 +11043,14 @@
 
 	          case 2:
 	            user = _context.sent;
-	            return _context.abrupt("return", user.d.Title);
+	            userNameString = user.d.LoginName;
+	            userNameArr = userNameString.split('\\');
+	            userName = userNameArr.slice(-1)[0];
+	            // parses the username and returns it
 
-	          case 4:
+	            return _context.abrupt("return", userName);
+
+	          case 7:
 	          case "end":
 	            return _context.stop();
 	        }
@@ -11046,21 +11063,27 @@
 	  };
 	}();
 
-	var getDeptInfo = exports.getDeptInfo = function () {
+	var getAdmins = exports.getAdmins = function () {
 	  var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-	    var deptInfo;
+	    var adminObj, adminList, admins, i;
 	    return regeneratorRuntime.wrap(function _callee2$(_context2) {
 	      while (1) {
 	        switch (_context2.prev = _context2.next) {
 	          case 0:
 	            _context2.next = 2;
-	            return dao.getDeptInfo();
+	            return dao.getAdmins();
 
 	          case 2:
-	            deptInfo = _context2.sent;
-	            return _context2.abrupt("return", deptInfo.d.results);
+	            adminObj = _context2.sent;
+	            adminList = adminObj.d.results;
+	            admins = [];
 
-	          case 4:
+	            for (i = 0; i < adminList.length; i++) {
+	              admins.push(adminList[i]['NetID']);
+	            }
+	            return _context2.abrupt("return", admins);
+
+	          case 7:
 	          case "end":
 	            return _context2.stop();
 	        }
@@ -11068,57 +11091,46 @@
 	    }, _callee2, this);
 	  }));
 
-	  return function getDeptInfo() {
+	  return function getAdmins() {
 	    return _ref2.apply(this, arguments);
 	  };
 	}();
 
-	var getDepartments = exports.getDepartments = function () {
-	  var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(userName) {
-	    var deptObject, results, userDepts, i, deptString;
+	var getAllDepts = exports.getAllDepts = function () {
+	  var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+	    var deptObject, results, userDepts, nameLookup, i, deptNum, deptName;
 	    return regeneratorRuntime.wrap(function _callee3$(_context3) {
 	      while (1) {
 	        switch (_context3.prev = _context3.next) {
 	          case 0:
 	            _context3.next = 2;
-	            return dao.getUserDepartments(userName);
+	            return dao.getAllDepts();
 
 	          case 2:
 	            deptObject = _context3.sent;
 	            results = deptObject.d.results;
-	            // the user isn't assigned to any departments
 
 	            if (!(results.length == 0)) {
-	              _context3.next = 6;
+	              _context3.next = 7;
 	              break;
 	            }
 
-	            return _context3.abrupt("return", "None");
+	            $('#retention-dropdown').prop('disabled', true);
+	            return _context3.abrupt("return", ['None', 'None']);
 
-	          case 6:
-	            // goes through result list and parses all depts, then adds them to userDepts
-	            // array allows for multiple entries of the same person
+	          case 7:
 	            userDepts = [];
+	            nameLookup = {};
 
 	            for (i = 0; i < results.length; i++) {
-	              deptString = results[i]["Department_x0020_Number"];
-	              // removes whitespace from string
+	              deptNum = results[i]['Department_x0020_Number'];
+	              deptName = results[i]['Department_x0020_Name'];
 
-	              deptString = deptString.replace(/\s/g, "");
-	              // adds department to array
-	              userDepts.push(deptString);
+	              userDepts.push(deptNum);
+	              nameLookup[deptNum] = deptName;
 	            }
-	            // converts to list of integers, sorts numbers, converts to list of strings
-	            userDepts = userDepts.map(function (x) {
-	              return parseInt(x, 10);
-	            });
-	            userDepts = userDepts.sort(function (a, b) {
-	              return a - b;
-	            });
-	            userDepts = userDepts.map(function (x) {
-	              return x.toString();
-	            });
-	            return _context3.abrupt("return", userDepts);
+	            userDepts.sort();
+	            return _context3.abrupt("return", [userDepts, nameLookup]);
 
 	          case 12:
 	          case "end":
@@ -11128,36 +11140,53 @@
 	    }, _callee3, this);
 	  }));
 
-	  return function getDepartments(_x) {
+	  return function getAllDepts() {
 	    return _ref3.apply(this, arguments);
 	  };
 	}();
 
-	var getGeneralRetention = exports.getGeneralRetention = function () {
-	  var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
-	    var genRetentionObj, genRetention;
+	var getDepartments = exports.getDepartments = function () {
+	  var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(userName) {
+	    var deptObject, results, noDeptArr, userDepts, nameLookup, i, deptNum, deptName;
 	    return regeneratorRuntime.wrap(function _callee4$(_context4) {
 	      while (1) {
 	        switch (_context4.prev = _context4.next) {
 	          case 0:
 	            _context4.next = 2;
-	            return dao.getGeneralRetention();
+	            return dao.getUserDepartments(userName);
 
 	          case 2:
-	            genRetentionObj = _context4.sent;
-	            genRetention = genRetentionObj.d.results;
+	            deptObject = _context4.sent;
+	            results = deptObject.d.results;
+	            // the user isn't assigned to any departments
 
-	            if (!(genRetention.length == 0)) {
-	              _context4.next = 6;
+	            if (!(results.length == 0)) {
+	              _context4.next = 8;
 	              break;
 	            }
 
-	            return _context4.abrupt("return", "None");
+	            noDeptArr = ['None', 'None'];
 
-	          case 6:
-	            return _context4.abrupt("return", genRetention);
+	            $('#retention-dropdown').prop('disabled', true);
+	            return _context4.abrupt("return", noDeptArr);
 
-	          case 7:
+	          case 8:
+	            // goes through result list and parses all depts, then adds them to userDepts array
+	            // allows for multiple entries of the same person
+	            userDepts = [];
+	            nameLookup = {};
+
+	            for (i = 0; i < results.length; i++) {
+	              deptNum = results[i]['Department_x0020_Number'];
+	              deptName = results[i]['Department_x0020_Name'];
+
+	              userDepts.push(deptNum);
+	              nameLookup[deptNum] = deptName;
+	            }
+	            userDepts.sort();
+	            return _context4.abrupt("return", [userDepts, nameLookup]);
+
+	          case 13:
 	          case "end":
 	            return _context4.stop();
 	        }
@@ -11165,40 +11194,36 @@
 	    }, _callee4, this);
 	  }));
 
-	  return function getGeneralRetention() {
+	  return function getDepartments(_x) {
 	    return _ref4.apply(this, arguments);
 	  };
 	}();
 
-	var isValidUser = exports.isValidUser = function () {
+	var getGeneralRetention = exports.getGeneralRetention = function () {
 	  var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee5() {
-	    var userName, depts;
+	    var genRetentionObj, genRetention;
 	    return regeneratorRuntime.wrap(function _callee5$(_context5) {
 	      while (1) {
 	        switch (_context5.prev = _context5.next) {
 	          case 0:
 	            _context5.next = 2;
-	            return getUserName();
+	            return dao.getGeneralRetention();
 
 	          case 2:
-	            userName = _context5.sent;
-	            _context5.next = 5;
-	            return getDepartments(userName);
+	            genRetentionObj = _context5.sent;
+	            genRetention = genRetentionObj.d.results;
 
-	          case 5:
-	            depts = _context5.sent;
-
-	            if (!(depts == "None")) {
-	              _context5.next = 10;
+	            if (!(genRetention.length == 0)) {
+	              _context5.next = 6;
 	              break;
 	            }
 
-	            return _context5.abrupt("return", false);
+	            return _context5.abrupt("return", 'None');
 
-	          case 10:
-	            return _context5.abrupt("return", true);
+	          case 6:
+	            return _context5.abrupt("return", genRetention);
 
-	          case 11:
+	          case 7:
 	          case "end":
 	            return _context5.stop();
 	        }
@@ -11206,26 +11231,26 @@
 	    }, _callee5, this);
 	  }));
 
-	  return function isValidUser() {
+	  return function getGeneralRetention() {
 	    return _ref5.apply(this, arguments);
 	  };
 	}();
 
-	var getPendingRecords = exports.getPendingRecords = function () {
-	  var _ref6 = _asyncToGenerator(regeneratorRuntime.mark(function _callee6() {
-	    var pendingRecordsObj, pendingRecords;
+	var getRecordsByDept = exports.getRecordsByDept = function () {
+	  var _ref6 = _asyncToGenerator(regeneratorRuntime.mark(function _callee6(dept) {
+	    var deptRecords, recordsList;
 	    return regeneratorRuntime.wrap(function _callee6$(_context6) {
 	      while (1) {
 	        switch (_context6.prev = _context6.next) {
 	          case 0:
 	            _context6.next = 2;
-	            return dao.getPendingRecords();
+	            return dao.getDeptRecords(dept);
 
 	          case 2:
-	            pendingRecordsObj = _context6.sent;
-	            pendingRecords = pendingRecordsObj.d.results;
+	            deptRecords = _context6.sent;
+	            recordsList = deptRecords.d.results;
 
-	            if (!(pendingRecords.length == 0)) {
+	            if (!(recordsList.length == 0)) {
 	              _context6.next = 6;
 	              break;
 	            }
@@ -11233,7 +11258,7 @@
 	            return _context6.abrupt("return", "None");
 
 	          case 6:
-	            return _context6.abrupt("return", pendingRecords);
+	            return _context6.abrupt("return", recordsList);
 
 	          case 7:
 	          case "end":
@@ -11243,88 +11268,36 @@
 	    }, _callee6, this);
 	  }));
 
-	  return function getPendingRecords() {
+	  return function getRecordsByDept(_x2) {
 	    return _ref6.apply(this, arguments);
 	  };
 	}();
 
-	var getRecordsByQuery = exports.getRecordsByQuery = function () {
-	  var _ref7 = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(field, val, flag) {
-	    var resultListObj, resultList, _resultListObj, _resultListObj2;
-
+	var getCommonRecords = exports.getCommonRecords = function () {
+	  var _ref7 = _asyncToGenerator(regeneratorRuntime.mark(function _callee7() {
+	    var commonRecords, recordsList;
 	    return regeneratorRuntime.wrap(function _callee7$(_context7) {
 	      while (1) {
 	        switch (_context7.prev = _context7.next) {
 	          case 0:
-	            if (!(field == "dept")) {
-	              _context7.next = 10;
-	              break;
-	            }
+	            _context7.next = 2;
+	            return dao.getCommonRecords();
 
-	            _context7.next = 3;
-	            return dao.getRecordsByDept(val);
+	          case 2:
+	            commonRecords = _context7.sent;
+	            recordsList = commonRecords.d.results;
 
-	          case 3:
-	            resultListObj = _context7.sent;
-	            resultList = resultListObj.d.results;
-
-	            if (!(resultList.length == 0)) {
-	              _context7.next = 7;
+	            if (!(recordsList.length == 0)) {
+	              _context7.next = 6;
 	              break;
 	            }
 
 	            return _context7.abrupt("return", "None");
+
+	          case 6:
+	            return _context7.abrupt("return", recordsList);
 
 	          case 7:
-	            return _context7.abrupt("return", resultList);
-
-	          case 10:
-	            if (!(field == "cat")) {
-	              _context7.next = 20;
-	              break;
-	            }
-
-	            _context7.next = 13;
-	            return dao.getRecordsByCat(val);
-
-	          case 13:
-	            _resultListObj = _context7.sent;
-	            resultList = _resultListObj.d.results;
-
-	            if (!(resultList.length == 0)) {
-	              _context7.next = 17;
-	              break;
-	            }
-
-	            return _context7.abrupt("return", "None");
-
-	          case 17:
-	            return _context7.abrupt("return", resultList);
-
-	          case 20:
-	            if (!(field == "type")) {
-	              _context7.next = 28;
-	              break;
-	            }
-
-	            _context7.next = 23;
-	            return dao.getRecordsByType(val, flag);
-
-	          case 23:
-	            _resultListObj2 = _context7.sent;
-	            resultList = _resultListObj2.d.results;
-
-	            if (!(resultList.length == 0)) {
-	              _context7.next = 27;
-	              break;
-	            }
-
-	            return _context7.abrupt("return", "None");
-
-	          case 27:
-	            return _context7.abrupt("return", resultList);
-
-	          case 28:
 	          case "end":
 	            return _context7.stop();
 	        }
@@ -11332,36 +11305,27 @@
 	    }, _callee7, this);
 	  }));
 
-	  return function getRecordsByQuery(_x2, _x3, _x4) {
+	  return function getCommonRecords() {
 	    return _ref7.apply(this, arguments);
 	  };
 	}();
 
-	var getRecordsByDept = exports.getRecordsByDept = function () {
-	  var _ref8 = _asyncToGenerator(regeneratorRuntime.mark(function _callee8(dept) {
-	    var deptRecords, recordsList;
+	var getCompleteness = exports.getCompleteness = function () {
+	  var _ref8 = _asyncToGenerator(regeneratorRuntime.mark(function _callee8() {
+	    var completenessObj, completeness;
 	    return regeneratorRuntime.wrap(function _callee8$(_context8) {
 	      while (1) {
 	        switch (_context8.prev = _context8.next) {
 	          case 0:
 	            _context8.next = 2;
-	            return dao.getDeptRecords(dept);
+	            return dao.getCompleteness();
 
 	          case 2:
-	            deptRecords = _context8.sent;
-	            recordsList = deptRecords.d.results;
+	            completenessObj = _context8.sent;
+	            completeness = completenessObj.d.results;
+	            return _context8.abrupt("return", completeness);
 
-	            if (!(recordsList.length == 0)) {
-	              _context8.next = 6;
-	              break;
-	            }
-
-	            return _context8.abrupt("return", "None");
-
-	          case 6:
-	            return _context8.abrupt("return", recordsList);
-
-	          case 7:
+	          case 5:
 	          case "end":
 	            return _context8.stop();
 	        }
@@ -11369,36 +11333,21 @@
 	    }, _callee8, this);
 	  }));
 
-	  return function getRecordsByDept(_x5) {
+	  return function getCompleteness() {
 	    return _ref8.apply(this, arguments);
 	  };
 	}();
 
-	var getCommonRecords = exports.getCommonRecords = function () {
-	  var _ref9 = _asyncToGenerator(regeneratorRuntime.mark(function _callee9() {
-	    var commonRecords, recordsList;
+	var updateRecord = exports.updateRecord = function () {
+	  var _ref9 = _asyncToGenerator(regeneratorRuntime.mark(function _callee9(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential) {
 	    return regeneratorRuntime.wrap(function _callee9$(_context9) {
 	      while (1) {
 	        switch (_context9.prev = _context9.next) {
 	          case 0:
 	            _context9.next = 2;
-	            return dao.getCommonRecords();
+	            return dao.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential);
 
 	          case 2:
-	            commonRecords = _context9.sent;
-	            recordsList = commonRecords.d.results;
-
-	            if (!(recordsList.length == 0)) {
-	              _context9.next = 6;
-	              break;
-	            }
-
-	            return _context9.abrupt("return", "None");
-
-	          case 6:
-	            return _context9.abrupt("return", recordsList);
-
-	          case 7:
 	          case "end":
 	            return _context9.stop();
 	        }
@@ -11406,19 +11355,19 @@
 	    }, _callee9, this);
 	  }));
 
-	  return function getCommonRecords() {
+	  return function updateRecord(_x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15) {
 	    return _ref9.apply(this, arguments);
 	  };
 	}();
 
-	var approveRecords = exports.approveRecords = function () {
-	  var _ref10 = _asyncToGenerator(regeneratorRuntime.mark(function _callee10(rows, ids) {
+	var updateCommonRecord = exports.updateCommonRecord = function () {
+	  var _ref10 = _asyncToGenerator(regeneratorRuntime.mark(function _callee10(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag) {
 	    return regeneratorRuntime.wrap(function _callee10$(_context10) {
 	      while (1) {
 	        switch (_context10.prev = _context10.next) {
 	          case 0:
 	            _context10.next = 2;
-	            return dao.approveRecords(rows, ids);
+	            return dao.updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag);
 
 	          case 2:
 	          case "end":
@@ -11428,19 +11377,19 @@
 	    }, _callee10, this);
 	  }));
 
-	  return function approveRecords(_x6, _x7) {
+	  return function updateCommonRecord(_x16, _x17, _x18, _x19, _x20, _x21, _x22, _x23) {
 	    return _ref10.apply(this, arguments);
 	  };
 	}();
 
-	var updatePendingRecord = exports.updatePendingRecord = function () {
-	  var _ref11 = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag) {
+	var deleteRecord = exports.deleteRecord = function () {
+	  var _ref11 = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(row, id) {
 	    return regeneratorRuntime.wrap(function _callee11$(_context11) {
 	      while (1) {
 	        switch (_context11.prev = _context11.next) {
 	          case 0:
 	            _context11.next = 2;
-	            return dao.updatePendingRecord(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag);
+	            return dao.deleteRecord(row, id);
 
 	          case 2:
 	          case "end":
@@ -11450,19 +11399,19 @@
 	    }, _callee11, this);
 	  }));
 
-	  return function updatePendingRecord(_x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18) {
+	  return function deleteRecord(_x24, _x25) {
 	    return _ref11.apply(this, arguments);
 	  };
 	}();
 
-	var updateComment = exports.updateComment = function () {
-	  var _ref12 = _asyncToGenerator(regeneratorRuntime.mark(function _callee12(itemID, comment, row) {
+	var messageRead = exports.messageRead = function () {
+	  var _ref12 = _asyncToGenerator(regeneratorRuntime.mark(function _callee12(id) {
 	    return regeneratorRuntime.wrap(function _callee12$(_context12) {
 	      while (1) {
 	        switch (_context12.prev = _context12.next) {
 	          case 0:
 	            _context12.next = 2;
-	            return dao.updateComment(itemID, comment, row);
+	            return dao.messageRead(id);
 
 	          case 2:
 	          case "end":
@@ -11472,19 +11421,19 @@
 	    }, _callee12, this);
 	  }));
 
-	  return function updateComment(_x19, _x20, _x21) {
+	  return function messageRead(_x26) {
 	    return _ref12.apply(this, arguments);
 	  };
 	}();
 
-	var updateRecord = exports.updateRecord = function () {
-	  var _ref13 = _asyncToGenerator(regeneratorRuntime.mark(function _callee13(itemID, code, func, type, id, cat, ret, cmts, row) {
+	var setDRS = exports.setDRS = function () {
+	  var _ref13 = _asyncToGenerator(regeneratorRuntime.mark(function _callee13(id, drsComplete) {
 	    return regeneratorRuntime.wrap(function _callee13$(_context13) {
 	      while (1) {
 	        switch (_context13.prev = _context13.next) {
 	          case 0:
 	            _context13.next = 2;
-	            return dao.updateRecord(itemID, code, func, type, id, cat, ret, cmts, row);
+	            return dao.setDRS(id, drsComplete);
 
 	          case 2:
 	          case "end":
@@ -11494,36 +11443,21 @@
 	    }, _callee13, this);
 	  }));
 
-	  return function updateRecord(_x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30) {
+	  return function setDRS(_x27, _x28) {
 	    return _ref13.apply(this, arguments);
 	  };
 	}();
 
-	var getDRSCompleteness = exports.getDRSCompleteness = function () {
-	  var _ref14 = _asyncToGenerator(regeneratorRuntime.mark(function _callee14() {
-	    var resultListObj, resultList;
+	var setReview = exports.setReview = function () {
+	  var _ref14 = _asyncToGenerator(regeneratorRuntime.mark(function _callee14(id, reviewComplete) {
 	    return regeneratorRuntime.wrap(function _callee14$(_context14) {
 	      while (1) {
 	        switch (_context14.prev = _context14.next) {
 	          case 0:
 	            _context14.next = 2;
-	            return dao.getDRSCompleteness();
+	            return dao.setReview(id, reviewComplete);
 
 	          case 2:
-	            resultListObj = _context14.sent;
-	            resultList = resultListObj.d.results;
-
-	            if (!(resultList.length == 0)) {
-	              _context14.next = 6;
-	              break;
-	            }
-
-	            return _context14.abrupt("return", "None");
-
-	          case 6:
-	            return _context14.abrupt("return", resultList);
-
-	          case 7:
 	          case "end":
 	            return _context14.stop();
 	        }
@@ -11531,19 +11465,19 @@
 	    }, _callee14, this);
 	  }));
 
-	  return function getDRSCompleteness() {
+	  return function setReview(_x29, _x30) {
 	    return _ref14.apply(this, arguments);
 	  };
 	}();
 
-	var deleteRecord = exports.deleteRecord = function () {
-	  var _ref15 = _asyncToGenerator(regeneratorRuntime.mark(function _callee15(itemID, row) {
+	var addCommonRecord = exports.addCommonRecord = function () {
+	  var _ref15 = _asyncToGenerator(regeneratorRuntime.mark(function _callee15(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag) {
 	    return regeneratorRuntime.wrap(function _callee15$(_context15) {
 	      while (1) {
 	        switch (_context15.prev = _context15.next) {
 	          case 0:
 	            _context15.next = 2;
-	            return dao.deleteRecord(itemID, row);
+	            return dao.addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag);
 
 	          case 2:
 	          case "end":
@@ -11553,26 +11487,21 @@
 	    }, _callee15, this);
 	  }));
 
-	  return function deleteRecord(_x31, _x32) {
+	  return function addCommonRecord(_x31, _x32, _x33, _x34, _x35, _x36, _x37) {
 	    return _ref15.apply(this, arguments);
 	  };
 	}();
 
-	var addCommonRecord = exports.addCommonRecord = function () {
-	  var _ref16 = _asyncToGenerator(regeneratorRuntime.mark(function _callee16(i, dept, code, func, type, catID) {
-	    var result;
+	var addUniqueRecord = exports.addUniqueRecord = function () {
+	  var _ref16 = _asyncToGenerator(regeneratorRuntime.mark(function _callee16(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo) {
 	    return regeneratorRuntime.wrap(function _callee16$(_context16) {
 	      while (1) {
 	        switch (_context16.prev = _context16.next) {
 	          case 0:
 	            _context16.next = 2;
-	            return dao.addCommonRecord(i, dept, code, func, type, catID);
+	            return dao.addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
 
 	          case 2:
-	            result = _context16.sent;
-	            return _context16.abrupt("return", result);
-
-	          case 4:
 	          case "end":
 	            return _context16.stop();
 	        }
@@ -11580,21 +11509,37 @@
 	    }, _callee16, this);
 	  }));
 
-	  return function addCommonRecord(_x33, _x34, _x35, _x36, _x37, _x38) {
+	  return function addUniqueRecord(_x38, _x39, _x40, _x41, _x42, _x43, _x44, _x45, _x46, _x47, _x48) {
 	    return _ref16.apply(this, arguments);
 	  };
 	}();
 
-	var deleteCommonRecord = exports.deleteCommonRecord = function () {
-	  var _ref17 = _asyncToGenerator(regeneratorRuntime.mark(function _callee17(itemID) {
+	var getSize = exports.getSize = function () {
+	  var _ref17 = _asyncToGenerator(regeneratorRuntime.mark(function _callee17(dept) {
+	    var result, size, itemID;
 	    return regeneratorRuntime.wrap(function _callee17$(_context17) {
 	      while (1) {
 	        switch (_context17.prev = _context17.next) {
 	          case 0:
 	            _context17.next = 2;
-	            return dao.deleteCommonRecord(itemID);
+	            return dao.getSize(dept);
 
 	          case 2:
+	            result = _context17.sent;
+
+	            if (!(result.d.results.length == 0)) {
+	              _context17.next = 7;
+	              break;
+	            }
+
+	            return _context17.abrupt("return", [0, -1]);
+
+	          case 7:
+	            size = parseInt(result.d.results[0]["Unique_x0020_Code"]);
+	            itemID = result.d.results[0]["ID"];
+	            return _context17.abrupt("return", [size, itemID]);
+
+	          case 10:
 	          case "end":
 	            return _context17.stop();
 	        }
@@ -11602,26 +11547,21 @@
 	    }, _callee17, this);
 	  }));
 
-	  return function deleteCommonRecord(_x39) {
+	  return function getSize(_x49) {
 	    return _ref17.apply(this, arguments);
 	  };
 	}();
 
-	var getRepos = exports.getRepos = function () {
-	  var _ref18 = _asyncToGenerator(regeneratorRuntime.mark(function _callee18() {
-	    var result;
+	var updateSize = exports.updateSize = function () {
+	  var _ref18 = _asyncToGenerator(regeneratorRuntime.mark(function _callee18(itemID, size) {
 	    return regeneratorRuntime.wrap(function _callee18$(_context18) {
 	      while (1) {
 	        switch (_context18.prev = _context18.next) {
 	          case 0:
 	            _context18.next = 2;
-	            return dao.getRepos();
+	            return dao.updateSize(itemID, size);
 
 	          case 2:
-	            result = _context18.sent;
-	            return _context18.abrupt("return", result.d.results);
-
-	          case 4:
 	          case "end":
 	            return _context18.stop();
 	        }
@@ -11629,26 +11569,21 @@
 	    }, _callee18, this);
 	  }));
 
-	  return function getRepos() {
+	  return function updateSize(_x50, _x51) {
 	    return _ref18.apply(this, arguments);
 	  };
 	}();
 
-	var getDepts = exports.getDepts = function () {
-	  var _ref19 = _asyncToGenerator(regeneratorRuntime.mark(function _callee19() {
-	    var result;
+	var addSize = exports.addSize = function () {
+	  var _ref19 = _asyncToGenerator(regeneratorRuntime.mark(function _callee19(dept, size) {
 	    return regeneratorRuntime.wrap(function _callee19$(_context19) {
 	      while (1) {
 	        switch (_context19.prev = _context19.next) {
 	          case 0:
 	            _context19.next = 2;
-	            return dao.getDepts();
+	            return dao.addSize(dept, size);
 
 	          case 2:
-	            result = _context19.sent;
-	            return _context19.abrupt("return", result.d.results);
-
-	          case 4:
 	          case "end":
 	            return _context19.stop();
 	        }
@@ -11656,12 +11591,12 @@
 	    }, _callee19, this);
 	  }));
 
-	  return function getDepts() {
+	  return function addSize(_x52, _x53) {
 	    return _ref19.apply(this, arguments);
 	  };
 	}();
 
-	var getSizes = exports.getSizes = function () {
+	var getRepos = exports.getRepos = function () {
 	  var _ref20 = _asyncToGenerator(regeneratorRuntime.mark(function _callee20() {
 	    var result;
 	    return regeneratorRuntime.wrap(function _callee20$(_context20) {
@@ -11669,7 +11604,7 @@
 	        switch (_context20.prev = _context20.next) {
 	          case 0:
 	            _context20.next = 2;
-	            return dao.getSizes();
+	            return dao.getRepos();
 
 	          case 2:
 	            result = _context20.sent;
@@ -11683,74 +11618,8 @@
 	    }, _callee20, this);
 	  }));
 
-	  return function getSizes() {
+	  return function getRepos() {
 	    return _ref20.apply(this, arguments);
-	  };
-	}();
-
-	var updateSize = exports.updateSize = function () {
-	  var _ref21 = _asyncToGenerator(regeneratorRuntime.mark(function _callee21(itemID, size) {
-	    return regeneratorRuntime.wrap(function _callee21$(_context21) {
-	      while (1) {
-	        switch (_context21.prev = _context21.next) {
-	          case 0:
-	            _context21.next = 2;
-	            return dao.updateSize(itemID, size);
-
-	          case 2:
-	          case "end":
-	            return _context21.stop();
-	        }
-	      }
-	    }, _callee21, this);
-	  }));
-
-	  return function updateSize(_x40, _x41) {
-	    return _ref21.apply(this, arguments);
-	  };
-	}();
-
-	var addSize = exports.addSize = function () {
-	  var _ref22 = _asyncToGenerator(regeneratorRuntime.mark(function _callee22(dept, size) {
-	    return regeneratorRuntime.wrap(function _callee22$(_context22) {
-	      while (1) {
-	        switch (_context22.prev = _context22.next) {
-	          case 0:
-	            _context22.next = 2;
-	            return dao.addSize(dept, size);
-
-	          case 2:
-	          case "end":
-	            return _context22.stop();
-	        }
-	      }
-	    }, _callee22, this);
-	  }));
-
-	  return function addSize(_x42, _x43) {
-	    return _ref22.apply(this, arguments);
-	  };
-	}();
-
-	var addRecord = exports.addRecord = function () {
-	  var _ref23 = _asyncToGenerator(regeneratorRuntime.mark(function _callee23(dept, code, recType, recFunc, recCat, userMsg, commentsPlan, archival, vital, highlyConfidential, recRepo) {
-	    return regeneratorRuntime.wrap(function _callee23$(_context23) {
-	      while (1) {
-	        switch (_context23.prev = _context23.next) {
-	          case 0:
-	            _context23.next = 2;
-	            return dao.addRecord(dept, code, recType, recFunc, recCat, userMsg, commentsPlan, archival, vital, highlyConfidential, recRepo);
-
-	          case 2:
-	          case "end":
-	            return _context23.stop();
-	        }
-	      }
-	    }, _callee23, this);
-	  }));
-
-	  return function addRecord(_x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52, _x53, _x54) {
-	    return _ref23.apply(this, arguments);
 	  };
 	}();
 
