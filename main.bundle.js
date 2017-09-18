@@ -9327,6 +9327,7 @@
 	                funcOptions += '</option>';
 	              }
 	              $('#r-func').empty();
+	              $('#r-func').val('');
 	              $('#r-func').append(funcOptions);
 	              var options = '';
 	              for (var i = 0; i < categoryList.length; i++) {
@@ -9366,7 +9367,7 @@
 	              if ($('#r-func').val() == '') {
 	                $('#r-cat').empty();
 	                $('#r-cat').prop('disabled', true);
-	                $('#r-cat').val('');
+	                //  $('#r-cat').val('')
 	                return;
 	              }
 	              $('#r-cat').prop('disabled', false);
