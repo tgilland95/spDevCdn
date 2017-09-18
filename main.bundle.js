@@ -9327,32 +9327,16 @@
 	                funcOptions += '</option>';
 	              }
 	              $('#r-func').append(funcOptions);
-	              if ($('#r-func').val() != 'Select a function' && $('#r-func').val() != '' && $('#r-func').val() != null) {
-	
-	                var catOptions = '<option>Select a category</option>';
-	                for (var i = 0; i < newFunctionLookup[tempRowData.function].length; i++) {
-	                  if (newFunctionLookup[tempRowData.function][i].substring(0, 5) == tempRowData.code) {
-	                    catOptions += '<options selected="selected">';
-	                  } else {
-	                    catOptions += '<option>';
-	                  }
-	                  catOptions += newFunctionLookup[tempRowData.function][i];
-	                  catOptions += '</option>';
-	                }
-	                $('#r-cat').empty();
-	                $('#r-cat').append(catOptions);
-	              }
-	
 	              var options = '';
-	              for (var i = 0; i < categoryList.length; i++) {
-	                if (tempRowData.code == categoryList[i].substring(0, 5)) {
-	                  options += '<option selected="selected">';
-	                } else {
-	                  options += '<option>';
-	                }
-	                options += categoryList[i];
-	                options += '</option>';
-	              }
+	              // for (var i = 0; i < categoryList.length; i++) {
+	              //   if (tempRowData.code == categoryList[i].substring(0, 5)) {
+	              //     options += '<option selected="selected">'
+	              //   } else {
+	              //     options += '<option>'
+	              //   }
+	              //   options += categoryList[i]
+	              //   options += '</option>'
+	              // }
 	              $('#r-cat').append(options);
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
