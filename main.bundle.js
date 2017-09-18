@@ -9371,6 +9371,7 @@
 	              }
 	              $('#r-cat').prop('disabled', false);
 	              var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
+
 	              for (var i = 0; i < newFunctionLookup[$('#r-func').val()].length; i++) {
 	                catOptions += '<option>';
 	                catOptions += newFunctionLookup[$('#r-func').val()][i];
@@ -9385,9 +9386,11 @@
 	              var newDept = $('#r-dept').val();
 	              var newFunc = $('#r-func').val();
 	              var newType = $('#r-type').val();
-	              if (tempRowData.recordCategory !== ' - ') {
-	                var newCatID = $('#r-cat').val().substring(0, 5);
-	                var newCat = $('#r-cat').val().substring(8);
+	              var newCatID;
+	              var newCat;
+	              if ($('#r-cat').val() !== null) {
+	                newCatID = $('#r-cat').val().substring(0, 5);
+	                newCat = $('#r-cat').val().substring(8);
 	              }
 	              var newRet = $('#r-ret').val();
 	              var newExc = $('#r-exc').val();
