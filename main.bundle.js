@@ -9337,7 +9337,7 @@
 	                options += categoryList[i];
 	                options += '</option>';
 	              }
-	              $('#r-cat').val(options);
+	              $('#r-cat').val(funcOptions);
 	              $('#r-dept').val(tempRowData.depNumber);
 	              $('#r-code').val(tempRowData.code);
 	              $('#r-type').val(tempRowData.recordType);
