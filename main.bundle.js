@@ -9326,7 +9326,7 @@
 	                funcOptions += funcList[i];
 	                funcOptions += '</option>';
 	              }
-	              $('#r-func').append(funcOptions);
+	              $('#r-func').val(funcOptions);
 	              var options = '';
 	              for (var i = 0; i < categoryList.length; i++) {
 	                if (tempRowData.code == categoryList[i].substring(0, 5)) {
