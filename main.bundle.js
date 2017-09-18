@@ -9301,7 +9301,7 @@
 	              $('#r-ret').prop('disabled', true);
 	              $('#r-exc').prop('disabled', false);
 	              $('#user-cmts').prop('disabled', false);
-	              $('#admi-cmts').prop('disabled', false);
+	              $('#admin-cmts').prop('disabled', false);
 
 	              $('#ret-table-alert').empty();
 
