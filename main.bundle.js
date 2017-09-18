@@ -9326,6 +9326,7 @@
 	                funcOptions += funcList[i];
 	                funcOptions += '</option>';
 	              }
+	              $('#r-func').empty();
 	              $('#r-func').append(funcOptions);
 	              var options = '';
 	              for (var i = 0; i < categoryList.length; i++) {
