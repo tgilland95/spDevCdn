@@ -9291,7 +9291,7 @@
 	              //this is to prevent state issues when getting the data
 	              var thisRow = $(this).parent().parent()[0].cells;
 	              //this function returns an object with all of the record data
-	              var tempRowData = CurrentRow.getRowData(thisRow);
+	              tempRowData = CurrentRow.getRowData(thisRow);
 
 	              //log the returned object
 	              console.table(tempRowData);
@@ -9871,6 +9871,7 @@
 	var depts = void 0;
 	var initialCmt = void 0;
 	var adminStatus = void 0;
+	var tempRowData = void 0;
 
 
 	function populateAdminTabs() {
