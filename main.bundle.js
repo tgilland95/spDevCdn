@@ -10173,6 +10173,7 @@
 	   value: true
 	});
 	exports.getRowData = getRowData;
+	exports.getNewRowData = getNewRowData;
 	function getRowData(src) {
 	   var i = 0;
 	   var d = [];
@@ -10187,8 +10188,30 @@
 	      'code': d[2],
 	      'recordType': d[3],
 	      'function': d[4],
-	      'retentionCategory': d[5] + ' - ' + d[6],
+	      'recordCategory': d[5] + ' - ' + d[6],
 	      'retentionSchedule': d[7]
+	   };
+	}
+	
+	function getNewRowData(src) {
+	   var i = 0;
+	   var d = [];
+	   var modifiedForm = $('#modform')[0];
+	   while (i < 8) {
+	      d.push(src[i].innerHTML);
+	      i++;
+	   }
+	
+	   return d = {
+	      'depNumber': modifiedForm[0].value,
+	      'code': modifedForm[1].value,
+	      'recordType': modifiedForm[2],
+	      'function': modifiedForm[3],
+	      'recordCategory': modifiedForm[4].value,
+	      'retentionSchedule': modifedForm[5].value,
+	      'exception': modifiedForm[6].value,
+	      'messageFromUser': modifiedForm[7].value,
+	      'messageToUser': modifiedForm[8].value
 	   };
 	}
 
