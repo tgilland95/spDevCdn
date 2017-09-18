@@ -9351,9 +9351,9 @@
 	                  break;
 	                }
 	              }
-	              $('#r-exc').val(temp_record['Retention_x0020_Exception']);
-	              $('#user-cmts').val(temp_record['Message_x0020_To_x0020_Admin']);
-	              $('#admin-cmts').val(temp_record['Message_x0020_From_x0020_Admin']);
+	              // $('#r-exc').val(temp_record['Retention_x0020_Exception'])
+	              // $('#user-cmts').val(temp_record['Message_x0020_To_x0020_Admin'])
+	              // $('#admin-cmts').val(temp_record['Message_x0020_From_x0020_Admin'])
 	              initialCmt = $('#admin-cmts').val();
 	              if ($('#r-code').val()[0] === 'U') {
 	                $('#r-func').prop('disabled', false);
