@@ -9471,12 +9471,12 @@
 	                            var newType = $('#r-type').val();
 	                            var newCatID;
 	                            var newCat;
-	                            if ($('#r-cat option disabled selected').val() == 'Select a category' || $('#r-cat option:selected').val() == '' || $('#r-cat option:selected').val() == undefined) {
+	                            if ($('#r-cat option disabled selected').val() == 'Select a category' || $('#r-cat option disabled selected').val() == '' || $('#r-cat option disabled selected').val() == undefined) {
 	                                newCatID = '';
 	                                newCat = '';
 	                            } else {
-	                                newCatID = $('#r-cat option:selected').val().substring(0, 5);
-	                                newCat = $('#r-cat option:selected').val().substring(8);
+	                                newCatID = $('#r-cat option diabled selected').val().substring(0, 5);
+	                                newCat = $('#r-cat option disabled selected').val().substring(8);
 	                            }
 	                            var newRet = $('#r-ret').val();
 	                            var newCmtsPlan = $('#cmts-plan').val();
