@@ -10553,7 +10553,7 @@
 	  };
 
 	  $.ajax({
-	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items(" + itemID + ")?$top=1000&@target='" + hostWebUrl + "'",
+	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Unique Codes')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
 	    method: "POST",
 	    contentType: "application/json; odata=verbose",
 	    data: JSON.stringify(data),
