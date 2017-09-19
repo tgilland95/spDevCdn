@@ -9499,8 +9499,8 @@
 	                            var notifyAdmin = 0;
 	                            if (newAdminMsg !== initialUserCmts) {
 	                                if (newAdminMsg === "") {
-	
 	                                    notifyAdmin = 0;
+	                                    return;
 	                                }
 	                                notifyAdmin = 1;
 	                            }
