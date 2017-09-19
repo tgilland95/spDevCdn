@@ -9380,7 +9380,7 @@
 	              $('#r-cat').append(catOptions);
 	            });
 	            $('#saveRecord').on('click', function () {
-	              dept_code = tempRowData.code;
+	              dept_code = tempRowData.depNumber + tempRowData.code;
 	              var itemID = itemIDLookup[dept_code];
 	              var newDept = $('#r-dept').val();
 	              var newFunc = $('#r-func').val();
