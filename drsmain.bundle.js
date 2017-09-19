@@ -9467,21 +9467,21 @@
 	                        $('#saveRecord').click(function () {
 	                            // retrieves all new values from dialog
 	                            var itemID = itemIDLookup[$('#r-code').val()];
-	                            var newFunc = $('#r-func').val();
+	                            var newFunc = $('#r-func option:selected').val();
 	                            var newType = $('#r-type').val();
 	                            var newCatID;
 	                            var newCat;
-	                            if ($('#r-cat').val() == 'Select a category' || $('#r-cat').val() == '' || $('#r-cat').val() == undefined) {
+	                            if ($('#r-cat option:selected').val() == 'Select a category' || $('#r-cat option:selected').val() == '' || $('#r-cat option:selected').val() == undefined) {
 	                                newCatID = '';
 	                                newCat = '';
 	                            } else {
-	                                newCatID = $('#r-cat').val().substring(0, 5);
-	                                newCat = $('#r-cat').val().substring(8);
+	                                newCatID = $('#r-cat option:selected').val().substring(0, 5);
+	                                newCat = $('#r-cat option:selected').val().substring(8);
 	                            }
 	                            var newRet = $('#r-ret').val();
 	                            var newCmtsPlan = $('#cmts-plan').val();
 	                            var newAdminMsg = $('#admin-msg').val();
-	                            var newRepo = $('#r-repo').val();
+	                            var newRepo = $('#r-repo option:selected').val();
 	                            var archival = 'No';
 	                            var vital = 'No';
 	                            var highlyConfidential = 'No';
@@ -9497,11 +9497,7 @@
 	
 	                            // if user added new message to admin, Status will be set to 'Pending'
 	                            var notifyAdmin = 0;
-	                            if (newAdminMsg !== initialUserCmts) {
-	                                if (newAdminMsg === "") {
-	                                    notifyAdmin = 0;
-	                                    return;
-	                                }
+	                            if (newAdminMsg != initialUserCmts) {
 	                                notifyAdmin = 1;
 	                            }
 	
