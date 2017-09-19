@@ -10410,7 +10410,7 @@
 	    "Record_x0020_Category_x0020_ID": catID,
 	    "Retention_x0020_Exception": exc,
 	    "Message_x0020_From_x0020_Admin": adminCmts,
-	    "Message_x0020_From_x0020_User": userCmts,
+	    "Message_x0020_To_x0020_Admin": userCmts,
 	    "New_x0020_Message": flag
 
 	  };
@@ -10595,7 +10595,7 @@
 	  });
 	}
 
-	function addRecord(dept, code, recType, recFunc, recCat, userMsg, commentsPlan, archival, vital, highlyConfidential, recRepo) {
+	function addRecord(dept, code, recType, recFunc, recCat, Msg, commentsPlan, archival, vital, highlyConfidential, recRepo) {
 	  var flag;
 	  if (userMsg != '') {
 	    flag = 'Yes';
