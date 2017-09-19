@@ -9396,6 +9396,7 @@
 	              var newRet = $('#r-ret').val();
 	              var newExc = $('#r-exc').val();
 	              var newAdminCmts = $('#admin-cmts').val();
+	              var newUserCmts = $('#user-cmts').val();
 	              var flag;
 	              if (newAdminCmts === initialCmt || newAdminCmts === '') {
 	                flag = 'No';
@@ -9408,7 +9409,7 @@
 	                delete itemIDLookup[dept_code];
 	                itemIDLookup[new_dept_code] = itemID;
 	              }
-	              update(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag);
+	              update(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, newUserCmts, flag);
 	              $('#myModal').modal('hide');
 
 	              $('#approve-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
@@ -9686,7 +9687,7 @@
 	        switch (_context7.prev = _context7.next) {
 	          case 0:
 	            _context7.next = 2;
-	            return util.updatePendingRecord(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag);
+	            return util.updatePendingRecord(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, newUserCmts, flag);
 
 	          case 2:
 	          case 'end':
@@ -10241,6 +10242,9 @@
 	exports.addSize = addSize;
 	exports.addRecord = addRecord;
 	exports.searchUserInAdminList = searchUserInAdminList;
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var hostWebUrl = '';
 	var appWebUrl = '';
 
@@ -10398,8 +10402,8 @@
 	  });
 	}
 
-	function updatePendingRecord(row, itemID, dept, func, recType, catID, cat, ret, exc, adminCmts, flag) {
-	  var data = {
+	function updatePendingRecord(row, itemID, dept, func, recType, catID, cat, ret, exc, adminCmts, userCmts, flag) {
+	  var data = _defineProperty({
 	    "__metadata": {
 	      "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
 	    },
@@ -10409,8 +10413,8 @@
 	    "Record_x0020_Category_x0020_ID": catID,
 	    "Retention_x0020_Exception": exc,
 	    "Message_x0020_From_x0020_Admin": adminCmts,
-	    "New_x0020_Message": flag
-	  };
+	    "New_x0020_Message": userCmts
+	  }, 'New_x0020_Message', flag);
 	  $.ajax({
 	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
 	    method: "POST",
