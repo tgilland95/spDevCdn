@@ -10242,9 +10242,6 @@
 	exports.addSize = addSize;
 	exports.addRecord = addRecord;
 	exports.searchUserInAdminList = searchUserInAdminList;
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	var hostWebUrl = '';
 	var appWebUrl = '';
 
@@ -10403,7 +10400,7 @@
 	}
 
 	function updatePendingRecord(row, itemID, dept, func, recType, catID, cat, ret, exc, adminCmts, userCmts, flag) {
-	  var data = _defineProperty({
+	  var data = {
 	    "__metadata": {
 	      "type": "SP.Data.Department_x0020_Retention_x0020_ScheduleListItem"
 	    },
@@ -10413,8 +10410,10 @@
 	    "Record_x0020_Category_x0020_ID": catID,
 	    "Retention_x0020_Exception": exc,
 	    "Message_x0020_From_x0020_Admin": adminCmts,
-	    "New_x0020_Message": userCmts
-	  }, 'New_x0020_Message', flag);
+	    "Message_x0020_From_x0020_User": userCmts,
+	    "New_x0020_Message": flag
+
+	  };
 	  $.ajax({
 	    url: "../_api/SP.AppContextSite(@target)/web/lists/getbytitle('Department Retention Sc" + "hedule')/items(" + itemID + ")?@target='" + hostWebUrl + "'",
 	    method: "POST",
