@@ -10406,7 +10406,7 @@
 	        }
 	        if ($(cells)[13].innerText == 'Yes') {
 	            isConf = true;
-	            if (hasComments || hasRepo || isVital) {
+	            if (hasComment || hasRepo || isVital) {
 	                comments += '\n';
 	            }
 	            comments += 'Highly Confidential';
