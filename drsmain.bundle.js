@@ -9497,7 +9497,7 @@
 	
 	                            // if user added new message to admin, Status will be set to 'Pending'
 	                            var notifyAdmin = 0;
-	                            if (newAdminMsg !== initialUserCmts && newAdminMsg !== '') {
+	                            if (newAdminMsg !== (initialUserCmts || '' || null)) {
 	                                notifyAdmin = 1;
 	                            }
 	
