@@ -9380,7 +9380,7 @@
 	              $('#r-cat').append(catOptions);
 	            });
 	            $('#saveRecord').on('click', function () {
-	              dept_code = row.children()[0].innerHTML + row.children()[2].innerHTML;
+	              dept_code = tempRowData.code;
 	              var itemID = itemIDLookup[dept_code];
 	              var newDept = $('#r-dept').val();
 	              var newFunc = $('#r-func').val();
@@ -10189,7 +10189,7 @@
 	   var i = 0;
 	   var d = [];
 	   var modifiedForm = $('#modform')[0];
-	   while (i < 8) {
+	   while (i < 9) {
 	      d.push(src[i].innerHTML);
 	      i++;
 	   }
