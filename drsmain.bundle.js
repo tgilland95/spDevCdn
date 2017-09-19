@@ -9471,7 +9471,7 @@
 	                            var newType = $('#r-type').val();
 	                            var newCatID;
 	                            var newCat;
-	                            if ($('#r-cat option:selected').val() == 'Select a category' || $('#r-cat option:selected').val() == '' || $('#r-cat option:selected').val() == undefined) {
+	                            if ($('#r-cat option disabled selected').val() == 'Select a category' || $('#r-cat option:selected').val() == '' || $('#r-cat option:selected').val() == undefined) {
 	                                newCatID = '';
 	                                newCat = '';
 	                            } else {
