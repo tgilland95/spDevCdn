@@ -11096,7 +11096,7 @@
 	        switch (_context11.prev = _context11.next) {
 	          case 0:
 	            _context11.next = 2;
-	            return dao.updatePendingRecord(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag);
+	            return dao.updatePendingRecord(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, newUserCmts, flag);
 
 	          case 2:
 	          case "end":
