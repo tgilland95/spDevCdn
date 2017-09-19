@@ -10167,7 +10167,7 @@
 	   var i = 0;
 	   var d = [];
 
-	   while (i < 8) {
+	   while (i < 13) {
 	      d.push(src[i].innerHTML);
 	      i++;
 	   }
