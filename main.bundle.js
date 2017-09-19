@@ -11090,7 +11090,7 @@
 	}();
 
 	var updatePendingRecord = exports.updatePendingRecord = function () {
-	  var _ref11 = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag) {
+	  var _ref11 = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, newUserCmts, flag) {
 	    return regeneratorRuntime.wrap(function _callee11$(_context11) {
 	      while (1) {
 	        switch (_context11.prev = _context11.next) {
@@ -11106,7 +11106,7 @@
 	    }, _callee11, this);
 	  }));
 
-	  return function updatePendingRecord(_x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18) {
+	  return function updatePendingRecord(_x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19) {
 	    return _ref11.apply(this, arguments);
 	  };
 	}();
@@ -11128,7 +11128,7 @@
 	    }, _callee12, this);
 	  }));
 
-	  return function updateComment(_x19, _x20, _x21) {
+	  return function updateComment(_x20, _x21, _x22) {
 	    return _ref12.apply(this, arguments);
 	  };
 	}();
@@ -11150,7 +11150,7 @@
 	    }, _callee13, this);
 	  }));
 
-	  return function updateRecord(_x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30) {
+	  return function updateRecord(_x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31) {
 	    return _ref13.apply(this, arguments);
 	  };
 	}();
@@ -11209,7 +11209,7 @@
 	    }, _callee15, this);
 	  }));
 
-	  return function deleteRecord(_x31, _x32) {
+	  return function deleteRecord(_x32, _x33) {
 	    return _ref15.apply(this, arguments);
 	  };
 	}();
@@ -11236,7 +11236,7 @@
 	    }, _callee16, this);
 	  }));
 
-	  return function addCommonRecord(_x33, _x34, _x35, _x36, _x37, _x38) {
+	  return function addCommonRecord(_x34, _x35, _x36, _x37, _x38, _x39) {
 	    return _ref16.apply(this, arguments);
 	  };
 	}();
@@ -11258,7 +11258,7 @@
 	    }, _callee17, this);
 	  }));
 
-	  return function deleteCommonRecord(_x39) {
+	  return function deleteCommonRecord(_x40) {
 	    return _ref17.apply(this, arguments);
 	  };
 	}();
@@ -11361,7 +11361,7 @@
 	    }, _callee21, this);
 	  }));
 
-	  return function updateSize(_x40, _x41) {
+	  return function updateSize(_x41, _x42) {
 	    return _ref21.apply(this, arguments);
 	  };
 	}();
@@ -11383,7 +11383,7 @@
 	    }, _callee22, this);
 	  }));
 
-	  return function addSize(_x42, _x43) {
+	  return function addSize(_x43, _x44) {
 	    return _ref22.apply(this, arguments);
 	  };
 	}();
@@ -11405,7 +11405,7 @@
 	    }, _callee23, this);
 	  }));
 
-	  return function addRecord(_x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52, _x53, _x54) {
+	  return function addRecord(_x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52, _x53, _x54, _x55) {
 	    return _ref23.apply(this, arguments);
 	  };
 	}();
