@@ -9397,7 +9397,7 @@
 	              var newExc = $('#r-exc').val();
 	              var newAdminCmts = $('#admin-cmts').val();
 	              var flag;
-	              if (newAdminCmts == initialCmt) {
+	              if (newAdminCmts === initialCmt || newAdminCmts === '') {
 	                flag = 'No';
 	              } else {
 	                flag = 'Yes';
