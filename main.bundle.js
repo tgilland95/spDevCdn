@@ -9681,7 +9681,7 @@
 	}();
 
 	var update = function () {
-	  var _ref7 = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, flag) {
+	  var _ref7 = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(row, itemID, newDept, newFunc, newType, newCatID, newCat, newRet, newExc, newAdminCmts, newUserCmts, flag) {
 	    return regeneratorRuntime.wrap(function _callee7$(_context7) {
 	      while (1) {
 	        switch (_context7.prev = _context7.next) {
@@ -9697,7 +9697,7 @@
 	    }, _callee7, this);
 	  }));
 
-	  return function update(_x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20) {
+	  return function update(_x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20, _x21) {
 	    return _ref7.apply(this, arguments);
 	  };
 	}();
@@ -9794,7 +9794,7 @@
 	    }, _callee11, this);
 	  }));
 
-	  return function addRecord(_x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31) {
+	  return function addRecord(_x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31, _x32) {
 	    return _ref11.apply(this, arguments);
 	  };
 	}();
@@ -9816,7 +9816,7 @@
 	    }, _callee12, this);
 	  }));
 
-	  return function addSize(_x32, _x33) {
+	  return function addSize(_x33, _x34) {
 	    return _ref12.apply(this, arguments);
 	  };
 	}();
@@ -9838,7 +9838,7 @@
 	    }, _callee13, this);
 	  }));
 
-	  return function updateSize(_x34, _x35) {
+	  return function updateSize(_x35, _x36) {
 	    return _ref13.apply(this, arguments);
 	  };
 	}();
