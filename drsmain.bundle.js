@@ -9467,7 +9467,7 @@
 	                        $('#saveRecord').click(function () {
 	                            // retrieves all new values from dialog
 	                            var itemID = itemIDLookup[$('#r-code').val()];
-	                            var newFunc = $('#r-func option:selected').val();
+	                            // var newFunc = $('#r-func option:selected').val()
 	                            var newType = $('#r-type').val();
 	                            var newCatID;
 	                            var newCat;
