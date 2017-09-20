@@ -9499,7 +9499,7 @@
 	                            var notifyAdmin = 0;
 	                            if (newAdminMsg !== initialUserCmts) {
 	                                console.log(newAdminMsg.trim());
-	                                if (newAdminMsg.trim() === '') {
+	                                if (newAdminMsg.trim() !== '') {
 	                                    notifyAdmin = 1;
 	                                }
 	                            }
