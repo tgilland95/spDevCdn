@@ -9854,7 +9854,7 @@
 	                            var newRet = $("#r-ret").val();
 	                            var newCmtsPlan = $("#cmts-plan").val();
 	                            var newAdminMsg = $("#admin-msg").val();
-	                            var notifyAdmin = 1;
+	                            var notifyAdmin = 0;
 	                            var newRepo = $("#r-repo option:selected").val();
 	                            var archival = "No";
 	                            var vital = "No";
