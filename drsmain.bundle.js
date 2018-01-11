@@ -9793,9 +9793,9 @@
 	                            $("#admin-cmts").val(temp_record["Message_x0020_From_x0020_Admin"]);
 	
 	                            // uses these values to check if Status needs to be set ot 'Pending'
-	                            // initialCat = $("#r-cat").val()
-	                            // initialUserCmts = $("#admin-msg").val()
-	                            // initialFunc = $("#r-func").val()
+	                            initialCat = $("#r-cat").val();
+	                            initialUserCmts = $("#admin-msg").val();
+	                            initialFunc = $("#r-func").val();
 	
 	                            // if common record, don't allow user to change Record Type, Category, or
 	                            // Function
