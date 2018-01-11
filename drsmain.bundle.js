@@ -9959,7 +9959,7 @@
 	                switch (_context4.prev = _context4.next) {
 	                    case 0:
 	                        _context4.next = 2;
-	                        return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential);
+	                        return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, 1, newRepo, archival, vital, highlyConfidential);
 	
 	                    case 2:
 	                    case "end":
