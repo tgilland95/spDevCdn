@@ -9854,7 +9854,7 @@
 	                            var newRet = $("#r-ret").val();
 	                            var newCmtsPlan = $("#cmts-plan").val();
 	                            var newAdminMsg = $("#admin-msg").val();
-	                            var notifyAdmin = 0;
+	                            var notifyAdmin = 1;
 	                            var newRepo = $("#r-repo option:selected").val();
 	                            var archival = "No";
 	                            var vital = "No";
@@ -9868,9 +9868,6 @@
 	                            if ($("#confidential").is(":checked")) {
 	                                highlyConfidential = "Yes";
 	                            }
-	
-	                            // if user added new message to admin, Status will be set to 'Pending'
-	
 	
 	                            // checks if record is common
 	                            if ($("#r-code").val().charAt(0) == "C") {
