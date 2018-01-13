@@ -10664,7 +10664,7 @@
 	                                    </form> \
 	                                    </div> \
 	                                  <div class="modal-footer"> \
-	                                    <button type="button" disbaled class="btn btn-default" id="saveRecord">Save</button> \
+	                                    <button type="button" disabled class="btn btn-default" id="saveRecord">Save</button> \
 	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
 	                                  </div> \
 	               </div> \
