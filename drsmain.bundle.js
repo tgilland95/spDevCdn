@@ -9244,6 +9244,7 @@
 	Makes lookup objects for later use
 	Calls 'populateTabs' to continue script
 	*/
+	
 	var run = exports.run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
@@ -9359,9 +9360,9 @@
 	                            break;
 	                        }
 	
-	                        $("#dept-retention").html('</br><div class="alert alert-info" role="alert">You are not a part of any depart' + "ment</div>");
-	                        $("#common-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any depart' + "ment</div>");
-	                        $("#unique-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any depart' + "ment</div>");
+	                        $("#dept-retention").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
+	                        $("#common-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
+	                        $("#unique-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
 	                        return _context.abrupt("return");
 	
 	                    case 46:
@@ -9478,10 +9479,7 @@
 	                        }
 	
 	                        $("#dept-ret-table").empty();
-	                        $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified ' + "for this department. \
-	                                                         " + '                       Please select the "Add Common Records" tab first to selec' + "t \
-	                                                                            " + "    records found in your department. Then add records unique to your \
-	        " + "                                                                        departme" + 'nt by selecting the "Add Unique Records" tab.</div>');
+	                        $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
 	                        return _context2.abrupt("return");
 	
 	                    case 22:
@@ -9597,11 +9595,11 @@
 	                        tableRows += "<td>" + exception + "</td>";
 	                        tableRows += "<td>" + commentsPlan + "</td>";
 	                        if (newMessage == "Yes") {
-	                            tableRows += '<td><button type="button" class="btn-xs btn-success editDetails">New Message</bu' + "tton></td>";
+	                            tableRows += '<td><button type="button" class="btn-xs btn-success editDetails">New Message</button></td>';
 	                        } else {
-	                            tableRows += '<td><button type="button" class="btn-xs btn-primary editDetails">Edit</button></' + "td>";
+	                            tableRows += '<td><button type="button" class="btn-xs btn-primary editDetails">Edit</button></td>';
 	                        }
-	                        tableRows += '<td><button type="button" class="btn-xs btn-primary deleteRecord">Delete</button' + "></td>";
+	                        tableRows += '<td><button type="button" class="btn-xs btn-primary deleteRecord">Delete</button></td>';
 	                        tableRows += "<td>" + status + "</td>";
 	                        tableRows += '<td style="display:none">' + archival + "</td>";
 	                        tableRows += '<td style="display:none">' + vital + "</td>";
@@ -9617,10 +9615,10 @@
 	
 	                        // defines HTML table and columns, and adds rows defined above
 	                        $("#dept-ret-table").html("</br>");
-	                        tableStr = '<div style="overflow-x:scroll" width="1500px"><table class="table table-striped"' + ' id="pendingTable" style="width:100%"><thead><tr><th style="display:none">Code</' + 'th><th style="display:none">Function</th> \
-	                  <th>Record Type</t' + 'h><th style="display:none">Category ID</th><th style="display:none">Record Categ' + 'ory</th><th><div style="width:10em">Retention</div></th> \
-	                  <th' + '><div style="width:10em">Exception</div></th><th><div style="width:10em">Comment' + 's / Plan</div></th><th></th><th></th><th>Status</th><th style="display:none">Arc' + 'hival</th> \
-	                  <th style="display:none">Vital</th><th style="dis' + 'play:none">Highly Confidential</th><th style="display:none">Repository</th></tr>' + "</thead><tbody>" + tableRows + "</tbody></table></br></div>";
+	                        tableStr = '<div style="overflow-x:scroll" width="1500px"><table class="table table-striped" id="pendingTable" style="width:100%"><thead><tr><th style="display:none">Code</th><th style="display:none">Function</th> \
+	                  <th>Record Type</th><th style="display:none">Category ID</th><th style="display:none">Record Category</th><th><div style="width:10em">Retention</div></th> \
+	                  <th><div style="width:10em">Exception</div></th><th><div style="width:10em">Comments / Plan</div></th><th></th><th></th><th>Status</th><th style="display:none">Archival</th> \
+	                  <th style="display:none">Vital</th><th style="display:none">Highly Confidential</th><th style="display:none">Repository</th></tr>' + "</thead><tbody>" + tableRows + "</tbody></table></br></div>";
 	
 	                        // adds table to div defined above, and adds download button below table
 	
@@ -10075,7 +10073,7 @@
 	}();
 	
 	/*
-	*/
+	 */
 	
 	
 	var populateCommonRecordsTab = function () {
@@ -10096,7 +10094,7 @@
 	                            if ($("#retention-dropdown option:selected").text() != "Select a department") {
 	                                addCommonRecordsTable(deptParam);
 	                            } else {
-	                                $("#common-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above' + "</div>");
+	                                $("#common-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
 	                            }
 	                        } else {
 	                            addCommonRecordsTable(deptParam);
@@ -10156,7 +10154,7 @@
 	                        }
 	                        // adds table to Common Records tab
 	                        $("#common-table").empty();
-	                        $("#common-table").html('</br><table class="table table-striped" id="common-table"><thead><tr><th style="' + 'display:none">Code</th><th>Select</th><th>Function</th><th>Record Type</th> \
+	                        $("#common-table").html('</br><table class="table table-striped" id="common-table"><thead><tr><th style="display:none">Code</th><th>Select</th><th>Function</th><th>Record Type</th> \
 	  ' + "                              <th>Retention Description</th><th>Archival</th></t" + "r></thead><tbody>" + tableRows + "</tbody></table>");
 	                        // adds buttons below
 	                        addCommonSubmitButton(deptRecords, deptIDList, commonRecordsList.length, idLookup, dept);
@@ -10235,70 +10233,70 @@
 	                        }
 	
 	                        $("#unique-fields").append('</br></br><form class="form-horizontal"> \
-	                                <div ' + 'class="form-group"> \
-	                                  <label class="control-la' + 'bel col-sm-2" for="rec-type">Record Type: <span id="red-ast">*</span></label> \
-	' + '                                  <div class="col-sm-8"> \
-	                     ' + '               <input type="text" class="form-control" id="rec-type" placeholder' + '="Enter record type"> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-type">Record Type: <span id="red-ast">*</span></label> \
+	                                  <div class="col-sm-8"> \
+	                                    <input type="text" class="form-control" id="rec-type" placeholder="Enter record type"> \
 	                                  </div> \
-	             ' + '                   </div> \
-	                                <div class="form-gro' + 'up"> \
-	                                  <label class="control-label col-sm-2" f' + 'or="rec-func">Proposed Function:</label> \
-	                                  <di' + 'v class="col-sm-8"> \
-	                                    <select class="form-co' + 'ntrol" id="rec-func"> \
+	                                </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-func">Proposed Function:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <select class="form-control" id="rec-func"> \
 	                                      ' + options + " \
 	                                    </select> \
 	                             " + "     </div> \
 	                                </div> \
 	                         " + '       <div class="form-group"> \
-	                                  <label class' + '="control-label col-sm-2" for="rec-cat">Proposed Category:</label> \
-	           ' + '                       <div class="col-sm-8"> \
-	                                ' + '    <select class="form-control" id="rec-cat" disabled> \
-	                      ' + "              </select> \
-	                                  </div> \
-	           " + '                     </div> \
-	                                <div class="form-g' + 'roup"> \
-	                                  <label class="control-label col-sm-2"' + ' for="retention">Proposed Retention:</label> \
-	                                 ' + ' <div class="col-sm-8"> \
-	                                    <textarea class="f' + 'orm-control" id="retention" rows="2" style="resize:none" disabled></textarea> \
-	' + "                                  </div> \
-	                                </div" + '> \
-	                                <div class="form-group"> \
-	                 ' + '                 <label class="control-label col-sm-2" for="adminMsg">Message to' + ' Administrator:</label> \
-	                                  <div class="col-sm-8' + '"> \
-	                                    <textarea class="form-control" id="admi' + 'nMsg" rows="3" style="resize:none" placeholder="Type your message"></textarea> ' + "\
-	                                  </div> \
-	                                </d" + 'iv> \
-	                                <div class="form-group"> \
-	               ' + '                   <label class="control-label col-sm-2" for="commentsPlan">Comm' + 'ents / Plan:</label> \
-	                                  <div class="col-sm-8"> ' + '\
-	                                    <textarea class="form-control" id="comment' + 'sPlan" rows="3" style="resize:none" placeholder="Type your comment"></textarea> ' + "\
-	                                  </div> \
-	                                </d" + 'iv> \
-	                                <div class="form-group"> \
-	               ' + '                   <label class="control-label col-sm-2" for="rec-repo">Reposito' + 'ry: </label> \
+	                                  <label class="control-label col-sm-2" for="rec-cat">Proposed Category:</label> \
 	                                  <div class="col-sm-8"> \
-	      ' + '                              <select class="form-control" id="rec-repo"> \
+	                                  <select class="form-control" id="rec-cat" disabled> \
+	                                  </select> \
+	                                                        </div> \
+	                                 </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="retention">Proposed Retention:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="retention" rows="2" style="resize:none" disabled></textarea> \
+	        </div> \
+	                                </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="adminMsg">Message to Administrator:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="adminMsg" rows="3" style="resize:none" placeholder="Type your message"></textarea> \
+	                                    </div> \
+	                                </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="commentsPlan">Comments / Plan:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="commentsPlan" rows="3" style="resize:none" placeholder="Type your comment"></textarea> ' + "\
+	                                  </div> \
+	                                </d" + 'iv> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-repo">Repository: </label> \
+	                                  <div class="col-sm-8"> \
+	                                    <select class="form-control" id="rec-repo"> \
 	    ' + "                                  " + repoOptions + " \
 	                                    </select> \
 	                             " + "     </div> \
 	                                </div> \
 	                         " + '       <div class="form-group"> \
-	                                  <div style="' + 'padding-left: 15em"> \
-	                                    <label><input type="c' + 'heckbox" value="" id="archival-chkbx"> Archival</label> \
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="archival-chkbx"> Archival</label> \
 	                      ' + "            </div> \
 	                                </div> \
 	                  " + '              <div class="form-group"> \
-	                                  <div ' + 'style="padding-left: 15em"> \
-	                                    <label><input ' + 'type="checkbox" value="" id="vital-chkbx"> Vital</label> \
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="vital-chkbx"> Vital</label> \
 	                     ' + "             </div> \
 	                                </div> \
 	                 " + '               <div class="form-group"> \
-	                                  <div' + ' style="padding-left: 15em"> \
-	                                    <label><input' + ' type="checkbox" value="" id="confidential-chkbx"> Highly Confidential</label> ' + "\
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="confidential-chkbx"> Highly Confidential</label> ' + "\
 	                                  </div> \
 	                                </d" + 'iv> \
 	                                <div class="form-group"> \
-	               ' + '                   <div style="padding-left: 8em"><span display="inline-block" i' + 'd="red-ast">*</span> means required field</div> \
+	                                  <div style="padding-left: 8em"><span display="inline-block" id="red-ast">*</span> means required field</div> \
 	                              ' + "  </div> \
 	                              </form>");
 	
@@ -10447,24 +10445,24 @@
 	
 	
 	// global vars
-	var deptParam = void 0;
-	var depts = void 0;
-	var deptNameLookup = void 0;
-	var generalRetentionLookup = void 0;
-	var genRetention = void 0;
-	var generalFunctionLookup = void 0;
-	var deptRecords = void 0;
-	var itemIDLookup = void 0;
-	var row = void 0;
-	var initialCat = void 0;
-	var initialUserCmts = void 0;
-	var initialFunc = void 0;
-	var repos = void 0;
-	var commonRecordsList = void 0;
-	var commonRetentionLookup = void 0;
-	var commonFunctionLookup = void 0;
-	var isAdmin = void 0;
-	var completeness = void 0;function populateTabs() {
+	var deptParam = void 0,
+	    depts = void 0,
+	    deptNameLookup = void 0,
+	    generalRetentionLookup = void 0,
+	    genRetention = void 0,
+	    generalFunctionLookup = void 0,
+	    deptRecords = void 0,
+	    itemIDLookup = void 0,
+	    row = void 0,
+	    initialCat = void 0,
+	    initialUserCmts = void 0,
+	    initialFunc = void 0,
+	    repos = void 0,
+	    commonRecordsList = void 0,
+	    commonRetentionLookup = void 0,
+	    commonFunctionLookup = void 0,
+	    isAdmin = void 0,
+	    completeness = void 0;function populateTabs() {
 	    // function to populate the first tab seen by user
 	    populateDeptRetentionTab();
 	
@@ -10515,7 +10513,7 @@
 	        if ($("#retention-dropdown option:selected").text() != "Select a department") {
 	            loadRetentionSchedule(deptParam);
 	        } else {
-	            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above' + "</div>");
+	            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
 	        }
 	
 	        // when user selects dept, retention schedule is loaded for selected dept, and
@@ -10551,7 +10549,7 @@
 	        if ($("#retention-dropdown option:selected").text() != "Select a department") {
 	            loadRetentionSchedule(deptParam);
 	        } else {
-	            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above' + "</div>");
+	            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
 	        }
 	
 	        // when user selects dept, retention schedule is loaded for selected dept, and
@@ -10574,122 +10572,124 @@
 	function setModals() {
 	    // the 'Edit Details' dialog box is formatted
 	    $("#dept-retention").append('<div id="myModal" class="modal fade" role="dialog"> \
-	                          ' + '    <div class="modal-dialog"> \
-	                                <div class="mod' + 'al-content"> \
+	                          <div class="modal-dialog"> \
+	                                <div class="modal-content"> \
 	                                  <div class="modal-header"> \
-	  ' + '                                  <h4 class="modal-title">Edit</h4> \
-	          ' + '                        </div> \
-	                                  <div class="m' + 'odal-body"> \
-	                                    <form class="form-horizontal">' + ' \
-	                                      <div class="form-group" style="display:' + 'none"> \
-	                                        <label class="control-label col' + '-sm-3" for="r-code">Code: </label> \
-	                                        <di' + 'v class="col-sm-7"> \
-	                                          <input type="tex' + 't" class="form-control" id="r-code" disabled> \
-	                                ' + "        </div> \
-	                                      </div> \
-	                " + '                      <div class="form-group"> \
-	                               ' + '         <label class="control-label col-sm-3" for="r-type">Record Type: </label' + '> \
-	                                        <div class="col-sm-7"> \
-	           ' + '                               <input type="text" class="form-control" id="r-typ' + 'e"> \
-	                                        </div> \
-	                         ' + '             </div> \
-	                                      <div class="form-gro' + 'up"> \
-	                                        <label class="control-label col-s' + 'm-3" for="r-func">Function: </label> \
-	                                        <' + 'div class="col-sm-7"> \
-	                                          <select class=' + '"form-control" id="r-func"></select> \
-	                                        <' + "/div> \
-	                                      </div> \
-	                         " + '             <div class="form-group"> \
-	                                        ' + '<label class="control-label col-sm-3" for="r-cat">Record Category: </label> \
-	  ' + '                                      <div class="col-sm-7"> \
-	                 ' + '                         <select class="form-control" id="r-cat" disabled></sele' + "ct> \
-	                                        </div> \
-	                         " + '             </div> \
-	                                      <div class="form-gro' + 'up"> \
-	                                        <label class="control-label col-s' + 'm-3" for="r-ret">Retention: </label> \
-	                                        <' + 'div class="col-sm-7"> \
-	                                          <textarea styl' + 'e="resize:none" class="form-control" id="r-ret" disabled></textarea> \
-	         ' + "                               </div> \
-	                                      </" + 'div> \
-	                                      <div class="form-group"> \
-	        ' + '                                <label class="control-label col-sm-3" for="r-exc' + '">Exception: </label> \
-	                                        <div class="col-' + 'sm-7"> \
-	                                          <textarea style="resize:none"' + ' class="form-control" id="r-exc" disabled></textarea> \
-	                        ' + "                </div> \
-	                                      </div> \
-	        " + '                              <div class="form-group"> \
-	                       ' + '                 <label class="control-label col-sm-3" for="cmts-plan">Comments ' + '/ Plan: </label> \
-	                                        <div class="col-sm-7"' + '> \
-	                                          <textarea style="resize:none" clas' + 's="form-control" id="cmts-plan"></textarea> \
-	                                  ' + "      </div> \
-	                                      </div> \
-	                  " + '                    <div class="form-group"> \
-	                                 ' + '       <label class="control-label col-sm-3" for="admin-msg">Message to Administ' + 'rator: </label> \
-	                                        <div class="col-sm-7">' + ' \
-	                                          <textarea style="resize:none" class' + '="form-control" id="admin-msg"></textarea> \
-	                                   ' + "     </div> \
-	                                      </div> \
-	                   " + '                   <div class="form-group"> \
-	                                  ' + '      <label class="control-label col-sm-3" for="admin-cmts">Message from Admini' + 'strator: </label> \
-	                                        <div class="col-sm-7' + '"> \
-	                                          <textarea style="resize:none" cla' + 'ss="form-control" id="admin-cmts" disabled></textarea> \
-	                       ' + "                 </div> \
-	                                      </div> \
-	       " + '                               <div class="form-group"> \
-	                      ' + '                  <label class="control-label col-sm-3" for="r-repo">Repository:' + ' </label> \
-	                                        <div class="col-sm-7"> \
-	   ' + '                                       <select class="form-control" id="r-repo">' + "</select> \
-	                                        </div> \
-	                   " + '                   </div> \
-	                                      <div class="fo' + 'rm-group"> \
-	                                        <div style="padding-left: 1' + '1em"> \
-	                                          <label><input type="checkbox" ' + 'value="" id="archival"> Archival</label> \
-	                                     ' + "   </div> \
-	                                      </div> \
-	                     " + '                 <div class="form-group"> \
-	                                    ' + '    <div style="padding-left: 11em"> \
-	                                         ' + ' <label><input type="checkbox" value="" id="vital"> Vital</label> \
-	            ' + "                            </div> \
-	                                      </div" + '> \
-	                                      <div class="form-group"> \
-	           ' + '                             <div style="padding-left: 11em"> \
-	                ' + '                          <label><input type="checkbox" value="" id="confidentia' + 'l"> Highly Confidential</label> \
-	                                        </div>' + " \
-	                                      </div> \
-	                              " + '        <div class="form-group"> \
-	                                        <labe' + 'l class="control-label col-sm-3" for="blank"></label> \
-	                        ' + '                <div class="col-sm-7"> \
-	                                       ' + '   <span style="font-size: .75em; color:gray">*Changing function, category, or u' + "ser comments to admin will set the record as pending and will require admin appr" + "oval.</span>\
-	                                        </div> \
-	                 " + "                     </div> \
-	                                    </form> \
-	    " + "                              </div> \
-	                                  <div cl" + 'ass="modal-footer"> \
-	                                    <button type="button" ' + 'class="btn btn-default" id="saveRecord">Save</button> \
-	                        ' + '            <button type="button" class="btn btn-default" data-dismiss="modal">C' + "lose</button> \
+	                                    <h4 class="modal-title">Edit</h4> \
 	                                  </div> \
-	                     " + "           </div> \
+	                                  <div class="modal-body"> \
+	                                    <form class="form-horizontal"> \
+	                                      <div class="form-group" style="display:none"> \
+	                                        <label class="control-label col-sm-3" for="r-code">Code: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <input type="text" class="form-control" id="r-code" disabled> \
+	                                        </div> \
+	                                      </div> \
+	                          <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-type">Record Type: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <input type="text" class="form-control" id="r-type"> \
+	                                        </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-func">Function: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-func"></select> \
+	                                        </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-cat">Record Category: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-cat" disabled></select> \
+	                                        </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-ret">Retention: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="r-ret" disabled></textarea> \
+	                                    </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                <label class="control-label col-sm-3" for="r-exc">Exception: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="r-exc" disabled></textarea> \
+	                                        </div> \
+	                                      </div> \
+	                               <div class="form-group"> \
+	                 <label class="control-label col-sm-3" for="cmts-plan">Comments / Plan: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="cmts-plan"></textarea> \
+	          </div> \
+	                                      </div> \
+	                    <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="admin-msg">Message to Administrator: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="admin-msg"></textarea> \
+	         </div> \
+	                                      </div> \
+	          <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="admin-cmts">Message from Administrator: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="admin-cmts" disabled></textarea> \
+	                 </div> \
+	                                      </div> \
+	                           <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-repo">Repository: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-repo">\
+	                                          </select> \
+	                                        </div> \
+									</div> \
+	                                      <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="archival"> Archival</label> \
+	                                          </div> \
+	                                      </div> \
+	                                        <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="vital"> Vital</label> \
+	                                          </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="confidential"> Highly Confidential</label> \
+	                                        </div>\
+	                                        </div> \
+	                                        <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="blank"></label> \
+	                                        <div class="col-sm-7"> \
+	                                          <span style="font-size: .75em; color:gray">*Changing function, category, or user comments to admin will set the record as pending and will require admin approval.</span>\
+	                                        </div> \
+	                                        </div> \
+	                                    </form> \
+	                                    </div> \
+	                                  <div class="modal-footer"> \
+	                                    <button type="button" disbaled class="btn btn-default" id="saveRecord">Save</button> \
+	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
+	                                  </div> \
+	               </div> \
 	                              </div> \
-	                     " + "       </div>");
+	           </div>');
 	
 	    // the 'Delete' dialog box is formatted
 	    $("#dept-retention").append('<div id="delete-modal" class="modal fade" role="dialog"> \
-	                     ' + '         <div class="modal-dialog"> \
-	                                <div class' + '="modal-content"> \
-	                                  <div class="modal-header">' + ' \
-	                                    <h4 class="modal-title">Delete Record</h4' + "> \
+	                              <div class="modal-dialog"> \
+	                                <div class="modal-content"> \
+	                                  <div class="modal-header"> \
+	                                    <h4 class="modal-title">Delete Record</h4> \
 	                                  </div> \
-	                                 " + ' <div class="modal-body"> \
-	                                    <h3>Are you sure' + " you want to delete this record?</h3> \
-	                                    </br" + "><h5>All user comments will be lost.</p> \
-	                                  </d" + 'iv> \
+	    <div class="modal-body"> \
+	                                    <h3>Are you sure you want to delete this record?</h3> \
+	                                    </br>\
+	                                    <h5>All user comments will be lost.</p> \
+	                                  </div> \
 	                                  <div class="modal-footer"> \
-	           ' + '                         <button type="button" class="btn btn-default" id="ok-de' + 'lete">OK</button> \
-	                                    <button type="button" cl' + 'ass="btn btn-default" data-dismiss="modal">Cancel</button> \
-	                   ' + "               </div> \
+	                                    <button type="button" class="btn btn-default" id="ok-delete">OK</button> \
+	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> \
+	                                    </div> \
 	                                </div> \
-	               " + "               </div> \
-	                            </div>");
+	                                </div> \
+	                            </div>');
 	}function makePDF() {
 	    // creates title, headers, and a heading for the PDF
 	    var titleString = "\nDepartment Retention Schedule for Dept# " + deptParam + " - " + deptNameLookup[deptParam];
@@ -10844,7 +10844,7 @@
 	    // adds buttons to Common Records tab below table
 	    $("#common-buttons").empty();
 	    $("#common-buttons").append('<div id="submit-alert"></div></br>');
-	    $("#common-buttons").append('<div class="btn-group"><button type="button" class="btn btn-primary" id="common-' + 'submit">Submit</button></div>');
+	    $("#common-buttons").append('<div class="btn-group"><button type="button" class="btn btn-primary" id="common-submit">Submit</button></div>');
 	    // adds events to button clicks
 	    $("#common-submit").click(function () {
 	        $("#submit-alert").html("");
@@ -10877,7 +10877,7 @@
 	                }
 	            }
 	        } else {
-	            $("#submit-alert").html('<div class="alert alert-info" role="alert">There were no records selected to be ' + "added.</div>");
+	            $("#submit-alert").html('<div class="alert alert-info" role="alert">There were no records selected to be added.</div>');
 	        }
 	    });
 	}
@@ -10893,7 +10893,7 @@
 	        if ($("#retention-dropdown option:selected").text() != "Select a department") {
 	            addUniqueFields(deptParam);
 	        } else {
-	            $("#unique-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above' + "</div>");
+	            $("#unique-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
 	        }
 	    } else {
 	        addUniqueFields(deptParam);
@@ -10902,14 +10902,14 @@
 	
 	function addUniqueSubmit(dept, size, itemID) {
 	    $("#unique-buttons").empty();
-	    $("#unique-buttons").append('<div align="center"><button type="button" class="btn btn-primary" id="unique-sub' + 'mit">Submit</button> \
-	    &ensp;<button type="button" class="btn btn-primary" i' + 'd="finished" disabled>Finished</button></div>');
+	    $("#unique-buttons").append('<div align="center"><button type="button" class="btn btn-primary" id="unique-submit">Submit</button> \
+	    &ensp;<button type="button" class="btn btn-primary" id="finished" disabled>Finished</button></div>');
 	    $("#unique-buttons").append("\n\n\n\n\n");
 	    // adds event handlers to buttons
 	    $("#unique-submit").click(function () {
 	        $("#unique-alert").empty();
 	        if ($("#rec-type").val() == "") {
-	            $("#unique-alert").html('</br><div class="alert alert-warning" role="alert">Record Type cannot be left bl' + "ank</div>");
+	            $("#unique-alert").html('</br><div class="alert alert-warning" role="alert">Record Type cannot be left blank</div>');
 	            setTimeout(function () {
 	                $("#unique-alert").empty();
 	            }, 5000);
