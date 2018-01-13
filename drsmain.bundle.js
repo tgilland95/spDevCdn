@@ -9448,6 +9448,7 @@
 	                        // allows user to check/uncheck boxes
 	                        $("#DRS-complete-chkbx").attr("disabled", false);
 	                        $("#review-complete-chkbx").attr("disabled", false);
+	                        $("#review-complete-chkbx").attr("disabled", false);
 	
 	                        // adds on-click event to set DRS Complete in Completeness list
 	                        $("#DRS-complete-chkbx").click(function () {
@@ -9474,7 +9475,7 @@
 	                        // alerts user if no records have been submitted for given department
 	
 	                        if (!(deptRecords == "None")) {
-	                            _context2.next = 22;
+	                            _context2.next = 23;
 	                            break;
 	                        }
 	
@@ -9482,7 +9483,7 @@
 	                        $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
 	                        return _context2.abrupt("return");
 	
-	                    case 22:
+	                    case 23:
 	
 	                        // department has at least one record
 	                        $("#ret-table-alert").empty();
@@ -9494,9 +9495,9 @@
 	                        itemIDLookup = {};
 	                        i = 0;
 	
-	                    case 26:
+	                    case 27:
 	                        if (!(i < deptRecords.length)) {
-	                            _context2.next = 72;
+	                            _context2.next = 73;
 	                            break;
 	                        }
 	
@@ -9513,35 +9514,35 @@
 	                        recCatID = deptRecords[i]["Record_x0020_Category_x0020_ID"];
 	                        j = 0;
 	
-	                    case 32:
+	                    case 33:
 	                        if (!(j < genRetention.length)) {
-	                            _context2.next = 41;
+	                            _context2.next = 42;
 	                            break;
 	                        }
 	
 	                        if (!isCommon) {
-	                            _context2.next = 35;
+	                            _context2.next = 36;
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt("break", 41);
+	                        return _context2.abrupt("break", 42);
 	
-	                    case 35:
+	                    case 36:
 	                        tempGenRec = genRetention[j];
 	
 	                        if (!(tempGenRec["Record_x0020_Category_x0020_ID"] == recCatID)) {
-	                            _context2.next = 38;
+	                            _context2.next = 39;
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt("break", 41);
+	                        return _context2.abrupt("break", 42);
 	
-	                    case 38:
+	                    case 39:
 	                        j++;
-	                        _context2.next = 32;
+	                        _context2.next = 33;
 	                        break;
 	
-	                    case 41:
+	                    case 42:
 	                        itemIDLookup[code] = deptRecords[i]["ID"];
 	                        recordType = deptRecords[i]["Record_x0020_Type"];
 	
@@ -9606,12 +9607,12 @@
 	                        tableRows += '<td style="display:none">' + highlyConfidential + "</td>";
 	                        tableRows += '<td style="display:none">' + repository + "</td></tr>";
 	
-	                    case 69:
+	                    case 70:
 	                        i++;
-	                        _context2.next = 26;
+	                        _context2.next = 27;
 	                        break;
 	
-	                    case 72:
+	                    case 73:
 	
 	                        // defines HTML table and columns, and adds rows defined above
 	                        $("#dept-ret-table").html("</br>");
@@ -9833,6 +9834,7 @@
 	                            }
 	                            $("#r-cat").append(catOptions);
 	                        });
+	                        $("#saveRecord").attr("disabled", true);
 	
 	                        // adds on-click event to Save button on dialog box
 	                        $("#saveRecord").click(function () {
@@ -9903,7 +9905,7 @@
 	                            $("#delete-modal").modal("hide");
 	                        });
 	
-	                    case 85:
+	                    case 87:
 	                    case "end":
 	                        return _context2.stop();
 	                }
@@ -10664,7 +10666,7 @@
 	                                    </form> \
 	                                    </div> \
 	                                  <div class="modal-footer"> \
-	                                    <button type="button" disabled class="btn btn-default" id="saveRecord">Save</button> \
+	                                    <button type="button"  class="btn btn-default" id="saveRecord">Save</button> \
 	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
 	                                  </div> \
 	               </div> \
