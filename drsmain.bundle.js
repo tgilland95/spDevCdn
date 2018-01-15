@@ -9826,7 +9826,7 @@
 	              console.log(state);
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              $('#saveRecord').prop('disabled', canSave);
+	              $('#saveRecord').prop('disabled', !canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
@@ -9865,7 +9865,6 @@
 	              }
 	              $('#r-cat').append(catOptions);
 	            });
-	            $('#saveRecord').attr('disabled', true);
 	
 	            // adds on-click event to Save button on dialog box
 	            $('#saveRecord').click(function () {
@@ -9933,7 +9932,7 @@
 	              $('#delete-modal').modal('hide');
 	            });
 	
-	          case 87:
+	          case 86:
 	          case 'end':
 	            return _context2.stop();
 	        }
