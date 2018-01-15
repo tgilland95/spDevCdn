@@ -9619,7 +9619,8 @@
 	            tableStr = '<div style="overflow-x:scroll" width="1500px"><table class="table table-striped" id="pendingTable" style="width:100%"><thead><tr><th style="display:none">Code</th><th style="display:none">Function</th> \
 	                  <th>Record Type</th><th style="display:none">Category ID</th><th style="display:none">Record Category</th><th><div style="width:10em">Retention</div></th> \
 	                  <th><div style="width:10em">Exception</div></th><th><div style="width:10em">Comments / Plan</div></th><th></th><th></th><th>Status</th><th style="display:none">Archival</th> \
-	                  <th style="display:none">Vital</th><th style="display:none">Highly Confidential</th><th style="display:none">Repository</th></tr>' + '</thead><tbody>' + tableRows + '</tbody></table></br></div>';
+	                  <th style="display:none">Vital</th><th style="display:none">Highly Confidential</th><th style="display:none">Repository</th></tr> \
+	    </thead><tbody>' + tableRows + '</tbody></table></br></div>';
 	
 	            // adds table to div defined above, and adds download button below table
 	
@@ -9637,6 +9638,7 @@
 	            $('#r-cat').on('change', function () {
 	              // extracts Record Category ID from #r-cat to find associated record in General
 	              // Retention Schedule
+	              $('#saveRecord').attr('disabled', false);
 	              var newCatID = $(this).val().substring(0, 5);
 	              var tempRecord;
 	              for (var i = 0; i < genRetention.length; i++) {
