@@ -9410,28 +9410,32 @@
 	
 	          case 2:
 	            deptRecords = _context2.sent;
+	
+	            console.log(deptRecords);
+	            // searches through completeness list to find correct record based on Dept
+	            // Number
 	            i = 0;
 	
-	          case 4:
+	          case 5:
 	            if (!(i < completeness.length)) {
-	              _context2.next = 11;
+	              _context2.next = 12;
 	              break;
 	            }
 	
 	            if (!(completeness[i]['Department_x0020_Number'] == dept)) {
-	              _context2.next = 8;
+	              _context2.next = 9;
 	              break;
 	            }
 	
 	            element = i;
-	            return _context2.abrupt('break', 11);
+	            return _context2.abrupt('break', 12);
 	
-	          case 8:
+	          case 9:
 	            i++;
-	            _context2.next = 4;
+	            _context2.next = 5;
 	            break;
 	
-	          case 11:
+	          case 12:
 	
 	            // list id number of completeness record used to update record
 	            theID = completeness[element]['ID'];
@@ -9475,7 +9479,7 @@
 	            // alerts user if no records have been submitted for given department
 	
 	            if (!(deptRecords == 'None')) {
-	              _context2.next = 23;
+	              _context2.next = 24;
 	              break;
 	            }
 	
@@ -9483,7 +9487,7 @@
 	            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
 	            return _context2.abrupt('return');
 	
-	          case 23:
+	          case 24:
 	
 	            // department has at least one record
 	            $('#ret-table-alert').empty();
@@ -9495,9 +9499,9 @@
 	            itemIDLookup = {};
 	            i = 0;
 	
-	          case 27:
+	          case 28:
 	            if (!(i < deptRecords.length)) {
-	              _context2.next = 73;
+	              _context2.next = 74;
 	              break;
 	            }
 	
@@ -9514,35 +9518,35 @@
 	            recCatID = deptRecords[i]['Record_x0020_Category_x0020_ID'];
 	            j = 0;
 	
-	          case 33:
+	          case 34:
 	            if (!(j < genRetention.length)) {
-	              _context2.next = 42;
+	              _context2.next = 43;
 	              break;
 	            }
 	
 	            if (!isCommon) {
-	              _context2.next = 36;
+	              _context2.next = 37;
 	              break;
 	            }
 	
-	            return _context2.abrupt('break', 42);
+	            return _context2.abrupt('break', 43);
 	
-	          case 36:
+	          case 37:
 	            tempGenRec = genRetention[j];
 	
 	            if (!(tempGenRec['Record_x0020_Category_x0020_ID'] == recCatID)) {
-	              _context2.next = 39;
+	              _context2.next = 40;
 	              break;
 	            }
 	
-	            return _context2.abrupt('break', 42);
+	            return _context2.abrupt('break', 43);
 	
-	          case 39:
+	          case 40:
 	            j++;
-	            _context2.next = 33;
+	            _context2.next = 34;
 	            break;
 	
-	          case 42:
+	          case 43:
 	            itemIDLookup[code] = deptRecords[i]['ID'];
 	            recordType = deptRecords[i]['Record_x0020_Type'];
 	
@@ -9607,12 +9611,12 @@
 	            tableRows += '<td style="display:none">' + highlyConfidential + '</td>';
 	            tableRows += '<td style="display:none">' + repository + '</td></tr>';
 	
-	          case 70:
+	          case 71:
 	            i++;
-	            _context2.next = 27;
+	            _context2.next = 28;
 	            break;
 	
-	          case 73:
+	          case 74:
 	
 	            // defines HTML table and columns, and adds rows defined above
 	            $('#dept-ret-table').html('</br>');
@@ -9921,7 +9925,7 @@
 	              $('#delete-modal').modal('hide');
 	            });
 	
-	          case 87:
+	          case 88:
 	          case 'end':
 	            return _context2.stop();
 	        }
