@@ -9826,6 +9826,7 @@
 	              console.log(state);
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
+	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
