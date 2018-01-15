@@ -9812,9 +9812,9 @@
 	                s_repo: $('#r-repo').val(),
 	                s_code: $('#r-code').val(),
 	                s_retention: $('#r-ret').val(),
-	                s_archival: $('#archival').val(),
-	                s_vital: $('#vital').val(),
-	                s_confidential: $('#confidential').val()
+	                s_archival: $('#archival').is(':checked'),
+	                s_vital: $('#vital').is(':checked'),
+	                s_confidential: $('#confidential').is(':checked')
 	
 	              };
 	              console.log(state);
