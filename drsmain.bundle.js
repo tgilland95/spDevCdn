@@ -9675,9 +9675,10 @@
 	                $(this).addClass('btn-primary');
 	                $(this)[0].innerText = 'Edit';
 	              }
+	
 	              console.log(deptRecords);
 	              var state = {
-	                s_recordType: $('#r-type').innerText,
+	                s_recordType: deptRecords[0].Record_x0020_Type,
 	                s_function: $('#r-func').val(),
 	                s_recordCategory: $('#r-cat').val(),
 	                s_repo: $('#r-repo').val(),
