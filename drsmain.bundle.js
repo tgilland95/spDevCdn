@@ -9638,7 +9638,7 @@
 	            $('#r-cat').on('change', function () {
 	              // extracts Record Category ID from #r-cat to find associated record in General
 	              // Retention Schedule
-	              $('#saveRecord').attr('disabled', false);
+	              $('#saveRecord').prop('disabled', false);
 	              var newCatID = $(this).val().substring(0, 5);
 	              var tempRecord;
 	              for (var i = 0; i < genRetention.length; i++) {
