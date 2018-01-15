@@ -9826,8 +9826,8 @@
 	              console.log(state);
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              console.log('-----------------------------1--------------------------------');
-	              $('#saveRecord').prop('disabled', !canSave);
+	              console.log('-----------------------------2--------------------------------');
+	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
@@ -10608,7 +10608,7 @@
 	                                    <h4 class="modal-title">Edit</h4> \
 	                                  </div> \
 	                                  <div class="modal-body"> \
-	                                    <form class="form-horizontal"> \
+	                                    <form id="editForm" class="form-horizontal"> \
 	                                      <div class="form-group" style="display:none"> \
 	                                        <label class="control-label col-sm-3" for="r-code">Code: </label> \
 	                                        <div class="col-sm-7"> \
