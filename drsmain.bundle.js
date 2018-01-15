@@ -9410,32 +9410,28 @@
 	
 	          case 2:
 	            deptRecords = _context2.sent;
-	
-	            console.log(deptRecords);
-	            // searches through completeness list to find correct record based on Dept
-	            // Number
 	            i = 0;
 	
-	          case 5:
+	          case 4:
 	            if (!(i < completeness.length)) {
-	              _context2.next = 12;
+	              _context2.next = 11;
 	              break;
 	            }
 	
 	            if (!(completeness[i]['Department_x0020_Number'] == dept)) {
-	              _context2.next = 9;
+	              _context2.next = 8;
 	              break;
 	            }
 	
 	            element = i;
-	            return _context2.abrupt('break', 12);
+	            return _context2.abrupt('break', 11);
 	
-	          case 9:
+	          case 8:
 	            i++;
-	            _context2.next = 5;
+	            _context2.next = 4;
 	            break;
 	
-	          case 12:
+	          case 11:
 	
 	            // list id number of completeness record used to update record
 	            theID = completeness[element]['ID'];
@@ -9479,7 +9475,7 @@
 	            // alerts user if no records have been submitted for given department
 	
 	            if (!(deptRecords == 'None')) {
-	              _context2.next = 24;
+	              _context2.next = 23;
 	              break;
 	            }
 	
@@ -9487,7 +9483,7 @@
 	            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
 	            return _context2.abrupt('return');
 	
-	          case 24:
+	          case 23:
 	
 	            // department has at least one record
 	            $('#ret-table-alert').empty();
@@ -9499,9 +9495,9 @@
 	            itemIDLookup = {};
 	            i = 0;
 	
-	          case 28:
+	          case 27:
 	            if (!(i < deptRecords.length)) {
-	              _context2.next = 74;
+	              _context2.next = 73;
 	              break;
 	            }
 	
@@ -9518,35 +9514,35 @@
 	            recCatID = deptRecords[i]['Record_x0020_Category_x0020_ID'];
 	            j = 0;
 	
-	          case 34:
+	          case 33:
 	            if (!(j < genRetention.length)) {
-	              _context2.next = 43;
+	              _context2.next = 42;
 	              break;
 	            }
 	
 	            if (!isCommon) {
-	              _context2.next = 37;
+	              _context2.next = 36;
 	              break;
 	            }
 	
-	            return _context2.abrupt('break', 43);
+	            return _context2.abrupt('break', 42);
 	
-	          case 37:
+	          case 36:
 	            tempGenRec = genRetention[j];
 	
 	            if (!(tempGenRec['Record_x0020_Category_x0020_ID'] == recCatID)) {
-	              _context2.next = 40;
+	              _context2.next = 39;
 	              break;
 	            }
 	
-	            return _context2.abrupt('break', 43);
+	            return _context2.abrupt('break', 42);
 	
-	          case 40:
+	          case 39:
 	            j++;
-	            _context2.next = 34;
+	            _context2.next = 33;
 	            break;
 	
-	          case 43:
+	          case 42:
 	            itemIDLookup[code] = deptRecords[i]['ID'];
 	            recordType = deptRecords[i]['Record_x0020_Type'];
 	
@@ -9611,12 +9607,12 @@
 	            tableRows += '<td style="display:none">' + highlyConfidential + '</td>';
 	            tableRows += '<td style="display:none">' + repository + '</td></tr>';
 	
-	          case 71:
+	          case 70:
 	            i++;
-	            _context2.next = 28;
+	            _context2.next = 27;
 	            break;
 	
-	          case 74:
+	          case 73:
 	
 	            // defines HTML table and columns, and adds rows defined above
 	            $('#dept-ret-table').html('</br>');
@@ -9675,8 +9671,18 @@
 	                $(this).addClass('btn-primary');
 	                $(this)[0].innerText = 'Edit';
 	              }
-	
-	              console.log(deptRecords);
+	              var getCurrentState = function getCurrentState() {
+	                return {
+	                  s_recordType: $('#r-type').val(),
+	                  s_function: $('#r-func').val(),
+	                  s_recordCategory: $('#r-cat').val(),
+	                  s_repo: $('#r-repo').val(),
+	                  s_code: $('#r-code').val(),
+	                  s_retention: $('#r-ret').val(),
+	                  s_archival: $('#archival').is(':checked'),
+	                  s_vital: $('#vital').is(':checked'),
+	                  s_confidential: $('#confidential').is(':checked') };
+	              };
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
@@ -9818,7 +9824,8 @@
 	
 	              };
 	              console.log(state);
-	
+	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
+	              console.log(canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
@@ -9904,9 +9911,6 @@
 	              // calls function to update unique record and close modal
 	              $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
 	              //           itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential
-	              /**
-	               *   FIXME:
-	               */
 	
 	              updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, notifyAdmin, newRepo, archival, vital, highlyConfidential);
 	              $('#myModal').modal('hide');
@@ -9928,7 +9932,7 @@
 	              $('#delete-modal').modal('hide');
 	            });
 	
-	          case 88:
+	          case 87:
 	          case 'end':
 	            return _context2.stop();
 	        }
