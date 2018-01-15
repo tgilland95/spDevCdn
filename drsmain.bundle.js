@@ -9672,7 +9672,7 @@
 	                $(this)[0].innerText = 'Edit';
 	              }
 	              var state = {
-	                s_recordType: $('#r-type').val(),
+	                s_recordType: $('#r-type').value,
 	                s_function: $('#r-func').val(),
 	                s_recordCategory: $('#r-cat').val(),
 	                s_repo: $('#r-repo').val(),
