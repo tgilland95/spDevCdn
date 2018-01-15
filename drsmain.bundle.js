@@ -9671,7 +9671,19 @@
 	                $(this).addClass('btn-primary');
 	                $(this)[0].innerText = 'Edit';
 	              }
+	              var state = {
+	                s_recordType: $('#r-type').val(),
+	                s_function: $('#r-func').val(),
+	                s_recordCategory: $('#r-cat').val(),
+	                s_repo: $('#r-repo').val(),
+	                s_code: $('#r-code').val(),
+	                s_retention: $('#r-ret').val(),
+	                s_archival: $('#archival').val(),
+	                s_vital: $('#vital').val(),
+	                s_confidential: $('#confidential').val()
 	
+	              };
+	              console.log(state);
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
