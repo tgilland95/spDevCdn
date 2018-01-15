@@ -9677,19 +9677,6 @@
 	              }
 	
 	              console.log(deptRecords);
-	              var state = {
-	                s_recordType: deptRecords[0].Record_x0020_Type,
-	                s_function: $('#r-func').val(),
-	                s_recordCategory: $('#r-cat').val(),
-	                s_repo: $('#r-repo').val(),
-	                s_code: $('#r-code').val(),
-	                s_retention: $('#r-ret').val(),
-	                s_archival: $('#archival').val(),
-	                s_vital: $('#vital').val(),
-	                s_confidential: $('#confidential').val()
-	
-	              };
-	              console.log(state);
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
@@ -9817,6 +9804,20 @@
 	              initialCat = $('#r-cat').val();
 	              initialUserCmts = $('#admin-msg').val();
 	              initialFunc = $('#r-func').val();
+	
+	              var state = {
+	                s_recordType: deptRecords[0].Record_x0020_Type,
+	                s_function: $('#r-func').val(),
+	                s_recordCategory: $('#r-cat').val(),
+	                s_repo: $('#r-repo').val(),
+	                s_code: $('#r-code').val(),
+	                s_retention: $('#r-ret').val(),
+	                s_archival: $('#archival').val(),
+	                s_vital: $('#vital').val(),
+	                s_confidential: $('#confidential').val()
+	
+	              };
+	              console.log(state);
 	
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
