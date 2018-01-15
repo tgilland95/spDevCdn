@@ -9806,7 +9806,7 @@
 	              initialFunc = $('#r-func').val();
 	
 	              var state = {
-	                s_recordType: deptRecords[0].Record_x0020_Type,
+	                s_recordType: $('#r-type').val(),
 	                s_function: $('#r-func').val(),
 	                s_recordCategory: $('#r-cat').val(),
 	                s_repo: $('#r-repo').val(),
