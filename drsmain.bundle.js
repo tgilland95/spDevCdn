@@ -9639,8 +9639,7 @@
 	            $('#r-cat').on('change', function () {
 	              // extracts Record Category ID from #r-cat to find associated record in General
 	              // Retention Schedule
-	              //   FIXME: delete this
-	              console.log('here');
+	
 	              $('#saveRecord').prop('disabled', false);
 	              var newCatID = $(this).val().substring(0, 5);
 	              var tempRecord;
