@@ -9675,6 +9675,7 @@
 	                $(this).addClass('btn-primary');
 	                $(this)[0].innerText = 'Edit';
 	              }
+	              console.log(deptRecords);
 	              var state = {
 	                s_recordType: $('#r-type').innerText,
 	                s_function: $('#r-func').val(),
