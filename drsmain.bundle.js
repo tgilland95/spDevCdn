@@ -9687,7 +9687,7 @@
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(function () {
 	                var latestState = getCurrentState();
-	                if (latestState[1] === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[3] === "" || latestState[3] === "Select a category") {
+	                if (latestState[1] === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
 	                  return;
 	                }
 	                $('#saveRecord').prop('disabled', false);
