@@ -9806,18 +9806,8 @@
 	              initialUserCmts = $('#admin-msg').val();
 	              initialFunc = $('#r-func').val();
 	
-	              var state = {
-	                s_recordType: $('#r-type').val(),
-	                s_function: $('#r-func').val(),
-	                s_recordCategory: $('#r-cat').val(),
-	                s_repo: $('#r-repo').val(),
-	                s_code: $('#r-code').val(),
-	                s_retention: $('#r-ret').val(),
-	                s_archival: $('#archival').is(':checked'),
-	                s_vital: $('#vital').is(':checked'),
-	                s_confidential: $('#confidential').is(':checked')
+	              var state = getCurrentState();
 	
-	              };
 	              console.log('state: ----> ' + Object.values(state));
 	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
