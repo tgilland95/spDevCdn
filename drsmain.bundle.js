@@ -9677,7 +9677,9 @@
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
-	
+	              $('#editForm').change(function () {
+	                return console.log('changed');
+	              });
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
@@ -9811,7 +9813,7 @@
 	              var canSave = state.toString() === getCurrentState().toString();
 	              console.log(canSave);
 	              // FIXME: delete
-	              console.log('revision', '\n ------------------------- \n \t 11');
+	              console.log('revision', '\n ------------------------- \n \t 12');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
