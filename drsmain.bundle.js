@@ -9687,7 +9687,7 @@
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(function () {
 	                var latestState = getCurrentState();
-	                if (latestState[1] === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
+	                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
 	                  $('#saveRecord').prop('disabled', true);
 	                  return;
 	                }
@@ -9715,6 +9715,7 @@
 	
 	              // creates list of categories and category IDs for the dropdown, and sorts them
 	              var categoryList = [];
+	              window.cl = categoryList;
 	              for (var i = 0; i < genRetention.length; i++) {
 	                categoryList.push(genRetention[i]['Record_x0020_Category_x0020_ID'] + ' - ' + genRetention[i]['Record_x0020_Category']);
 	              }
