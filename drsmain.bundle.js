@@ -9668,9 +9668,9 @@
 	              $('#saveRecord').prop('disabled', true);
 	
 	              // changes color and text of button if there is a message from the Admin
-	              var state = {};
-	              state = getCurrentState();
-	              window.state = state;
+	              var initialState = {};
+	              initialState = getCurrentState();
+	              window.initialState = initialState;
 	              if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
 	                $(this).removeClass('btn-success');
 	                $(this).addClass('btn-primary');
