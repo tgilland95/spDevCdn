@@ -9672,14 +9672,12 @@
 	                $(this)[0].innerText = 'Edit';
 	              }
 	              var getCurrentState = function getCurrentState() {
-	                return Object.entries(document.getElementById('editForm').elements).map(function (inp) {
-	                  return inp.value ? inp.value : inp.checked ? inp.checked : '';
+	                return Object.entries(document.getElementById("editForm").elements).map(function (inp) {
+	                  return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : "";
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
 	
-	              // changes global variable to row which was selected
-	              // changes global variable to row which was selected
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
