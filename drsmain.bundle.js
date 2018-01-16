@@ -9679,10 +9679,11 @@
 	              window.getCurrentState = getCurrentState;
 	
 	              // changes global variable to row which was selected
+	              // changes global variable to row which was selected
+	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
 	              // empties out textboxes/drop-downs and disables drop-downs just in case the
-	
 	              // record is common
 	              $('#r-cat').empty();
 	              $('#r-repo').empty();
