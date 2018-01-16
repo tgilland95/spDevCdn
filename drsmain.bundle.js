@@ -9665,10 +9665,12 @@
 	            // adds on-click function to 'Edit Details', populates it with associated table
 	            // data, and adds buttons to Save or Cancel
 	            $('.editDetails').click(function () {
+	              $('#saveRecord').prop('disabled', true);
+	
 	              // changes color and text of button if there is a message from the Admin
 	              var state = {};
 	              state = getCurrentState();
-	
+	              window.state = state;
 	              if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
 	                $(this).removeClass('btn-success');
 	                $(this).addClass('btn-primary');
@@ -9814,9 +9816,8 @@
 	              initialUserCmts = $('#admin-msg').val();
 	              initialFunc = $('#r-func').val();
 	
-	              console.log(canSave);
 	              // FIXME: delete
-	              console.log('revision', '\n ------------------------- \n \t 004');
+	              console.log('revision', '\n ------------------------- \n \t 005');
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
