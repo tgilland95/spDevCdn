@@ -9682,7 +9682,9 @@
 	                state.toString() === getCurrentState().toString();
 	              }
 	              window.getCurrentState = getCurrentState;
-	              $('#editForm').change(canSave());
+	              $('#editForm').change(function () {
+	                $('#saveRecord').prop('disabled'(!canSave()));
+	              });
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
