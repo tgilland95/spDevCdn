@@ -9672,7 +9672,7 @@
 	                $(this)[0].innerText = 'Edit';
 	              }
 	              var getCurrentState = function getCurrentState() {
-	                return Object.values(document.getElementById("editForm").elements).map(function (inp) {
+	                return document.getElementById("editForm").elements.map(function (inp) {
 	                  return inp.value ? inp.value : inp.checked ? inp.checked : "";
 	                });
 	              };
@@ -9808,8 +9808,6 @@
 	
 	              var state = getCurrentState();
 	
-	              console.log('state: ----> ' + Object.values(state));
-	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
 	              // FIXME: delete
