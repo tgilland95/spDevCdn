@@ -9676,6 +9676,7 @@
 	                  return inp.value ? inp.value : inp.checked;
 	                });
 	              };
+	              window.getCurrentState = getCurrentState;
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
@@ -9820,7 +9821,7 @@
 	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              console.log('revision', '\n ------------------------- \n \t 6');
+	              console.log('revision', '\n ------------------------- \n \t 7');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
