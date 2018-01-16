@@ -9816,8 +9816,6 @@
 	              initialUserCmts = $('#admin-msg').val();
 	              initialFunc = $('#r-func').val();
 	
-	              // FIXME: delete
-	              console.log('revision', '\n ------------------------- \n \t 005');
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
 	              if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
