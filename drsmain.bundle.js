@@ -9816,7 +9816,7 @@
 	                s_confidential: $('#confidential').is(':checked')
 	
 	              };
-	              console.log('state: ----> ' + OBJECT.values(state));
+	              console.log('state: ----> ' + Object.values(state));
 	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
