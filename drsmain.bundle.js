@@ -9686,6 +9686,10 @@
 	              }
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(function () {
+	                var latestState = getCurrentState();
+	                if (latestState[1] === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[3] === "" || latestState[3] === "Select a category") {
+	                  return;
+	                }
 	                $('#saveRecord').prop('disabled', false);
 	              });
 	              // changes global variable to row which was selected
