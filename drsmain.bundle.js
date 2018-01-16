@@ -9683,7 +9683,7 @@
 	              }
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(function () {
-	                $('#saveRecord').prop('disabled', !canSave());
+	                $('#saveRecord').prop('disabled', canSave());
 	              });
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
@@ -9815,8 +9815,8 @@
 	
 	              console.log(canSave);
 	              // FIXME: delete
-	              console.log('revision', '\n ------------------------- \n \t 003');
-	              $('#saveRecord').prop('disabled', canSave);
+	              console.log('revision', '\n ------------------------- \n \t 004');
+	              $('#saveRecord').prop('disabled', canSave());
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // if common record, don't allow user to change Record Type, Category, or
