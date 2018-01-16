@@ -9816,11 +9816,11 @@
 	                s_confidential: $('#confidential').is(':checked')
 	
 	              };
-	              console.log('state: ----> ' + state);
+	              console.log('state: ----> ' + JSON.stringify(state));
 	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              console.log('-----------------------------3--------------------------------');
+	              console.log('-----------------------------4--------------------------------');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
