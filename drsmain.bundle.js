@@ -9677,9 +9677,7 @@
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
-	              $('#editForm').change(function () {
-	                return !canSave();
-	              });
+	              $('#editForm').change(canSave());
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
