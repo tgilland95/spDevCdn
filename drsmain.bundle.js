@@ -9672,8 +9672,8 @@
 	                $(this)[0].innerText = 'Edit';
 	              }
 	              var getCurrentState = function getCurrentState() {
-	                return document.getElementById("editForm").elements.map(function (inp) {
-	                  return inp.value ? inp.value : inp.checked ? inp.checked : "";
+	                return Object.entries(document.getElementById('editForm').elements).map(function (inp) {
+	                  return inp.value ? inp.value : inp.checked ? inp.checked : '';
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
@@ -9682,6 +9682,7 @@
 	              row = $(this).closest('tr');
 	
 	              // empties out textboxes/drop-downs and disables drop-downs just in case the
+	
 	              // record is common
 	              $('#r-cat').empty();
 	              $('#r-repo').empty();
