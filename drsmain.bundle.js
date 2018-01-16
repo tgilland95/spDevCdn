@@ -9672,16 +9672,9 @@
 	                $(this)[0].innerText = 'Edit';
 	              }
 	              var getCurrentState = function getCurrentState() {
-	                return {
-	                  s_recordType: $('#r-type').val(),
-	                  s_function: $('#r-func').val(),
-	                  s_recordCategory: $('#r-cat').val(),
-	                  s_repo: $('#r-repo').val(),
-	                  s_code: $('#r-code').val(),
-	                  s_retention: $('#r-ret').val(),
-	                  s_archival: $('#archival').is(':checked'),
-	                  s_vital: $('#vital').is(':checked'),
-	                  s_confidential: $('#confidential').is(':checked') };
+	                return Object.values(document.getElementById("editForm").elements).map(function (inp) {
+	                  return inp.value ? inp.value : inp.checked;
+	                });
 	              };
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
@@ -9823,10 +9816,11 @@
 	                s_confidential: $('#confidential').is(':checked')
 	
 	              };
-	              console.log(state);
+	              console.log('state: ----> ' + state);
+	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              console.log('-----------------------------2--------------------------------');
+	              console.log('-----------------------------3--------------------------------');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
