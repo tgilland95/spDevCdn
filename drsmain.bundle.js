@@ -9677,6 +9677,7 @@
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
+	
 	              // changes global variable to row which was selected
 	              row = $(this).closest('tr');
 	
