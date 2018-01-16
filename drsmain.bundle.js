@@ -9795,6 +9795,7 @@
 	                  catOptions += generalFunctionLookup[temp_func][i];
 	                  catOptions += '</option>';
 	                }
+	                window.co = catOptions;
 	                $('#r-cat').empty();
 	                $('#r-cat').append(catOptions);
 	              }
