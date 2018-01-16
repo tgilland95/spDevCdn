@@ -9676,6 +9676,10 @@
 	                  return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : "";
 	                });
 	              };
+	              var canSave = function canSave() {
+	                return state.toString() === getCurrentState().toString();
+	              };
+	
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(canSave());
 	              // changes global variable to row which was selected
@@ -9808,9 +9812,6 @@
 	
 	              var state = getCurrentState();
 	
-	              var canSave = function canSave() {
-	                return state.toString() === getCurrentState().toString();
-	              };
 	              console.log(canSave);
 	              // FIXME: delete
 	              console.log('revision', '\n ------------------------- \n \t 001');
