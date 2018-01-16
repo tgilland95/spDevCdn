@@ -9666,7 +9666,8 @@
 	            // data, and adds buttons to Save or Cancel
 	            $('.editDetails').click(function () {
 	              // changes color and text of button if there is a message from the Admin
-	              var state = getCurrentState();
+	              var state = {};
+	              state = getCurrentState();
 	
 	              if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
 	                $(this).removeClass('btn-success');
