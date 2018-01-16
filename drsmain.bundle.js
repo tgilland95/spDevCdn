@@ -9666,20 +9666,21 @@
 	            // data, and adds buttons to Save or Cancel
 	            $('.editDetails').click(function () {
 	              // changes color and text of button if there is a message from the Admin
+	              var state = getCurrentState();
+	
 	              if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
 	                $(this).removeClass('btn-success');
 	                $(this).addClass('btn-primary');
 	                $(this)[0].innerText = 'Edit';
 	              }
-	              var getCurrentState = function getCurrentState() {
-	                return Object.entries(document.getElementById("editForm").elements).map(function (inp) {
-	                  return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : "";
+	              function getCurrentState() {
+	                return Object.entries(document.getElementById('editForm').elements).map(function (inp) {
+	                  return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : '';
 	                });
-	              };
-	              var canSave = function canSave() {
-	                return state.toString() === getCurrentState().toString();
-	              };
-	
+	              }
+	              function canSave() {
+	                state.toString() === getCurrentState().toString();
+	              }
 	              window.getCurrentState = getCurrentState;
 	              $('#editForm').change(canSave());
 	              // changes global variable to row which was selected
@@ -9809,8 +9810,6 @@
 	              initialCat = $('#r-cat').val();
 	              initialUserCmts = $('#admin-msg').val();
 	              initialFunc = $('#r-func').val();
-	
-	              var state = getCurrentState();
 	
 	              console.log(canSave);
 	              // FIXME: delete
