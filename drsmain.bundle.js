@@ -9646,7 +9646,8 @@
 	              // Retention Schedule
 	
 	              $('#saveRecord').prop('disabled', false);
-	              var newCatID = $(this).val().substring(0, 7);
+	              var newCatID = $(this).val().split(' ')[0];
+	
 	              var tempRecord;
 	              for (var i = 0; i < genRetention.length; i++) {
 	                tempRecord = genRetention[i];
