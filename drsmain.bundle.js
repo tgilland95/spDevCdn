@@ -9673,7 +9673,7 @@
 	              }
 	              var getCurrentState = function getCurrentState() {
 	                return Object.values(document.getElementById("editForm").elements).map(function (inp) {
-	                  return inp.value ? inp.value : inp.checked;
+	                  return inp.value ? inp.value : inp.checked ? inp.checked : "";
 	                });
 	              };
 	              window.getCurrentState = getCurrentState;
@@ -9821,8 +9821,7 @@
 	              console.log('current: ----> ' + getCurrentState());
 	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
 	              console.log(canSave);
-	              console.log('revision', '\n ------------------------- \n \t 7');
-	
+	              console.log('revision', '\n ------------------------- \n \t 8');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
