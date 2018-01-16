@@ -9808,10 +9808,10 @@
 	
 	              var state = getCurrentState();
 	
-	              var canSave = Object.values(state).toString() === Object.values(getCurrentState()).toString();
+	              var canSave = state.toString() === getCurrentState().toString();
 	              console.log(canSave);
 	              // FIXME: delete
-	              console.log('revision', '\n ------------------------- \n \t 10');
+	              console.log('revision', '\n ------------------------- \n \t 11');
 	              $('#saveRecord').prop('disabled', canSave);
 	              // if common record, don't allow user to change Record Type, Category, or
 	              // Function
