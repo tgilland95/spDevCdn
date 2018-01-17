@@ -9794,6 +9794,9 @@
 	                var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
 	                console.log(catOptions);
 	                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
+	                  console.log(generalFunctionLookup[temp_func][i] == temp_id);
+	                  console.log(temp_id);
+	                  console.log(generalFunctionLookup[temp_func][i]);
 	                  if (generalFunctionLookup[temp_func][i] == temp_id) {
 	                    catOptions += '<option selected="selected">';
 	                  } else {
