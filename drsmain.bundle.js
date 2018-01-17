@@ -9792,8 +9792,9 @@
 	              if ($('#r-func').val() != 'Select a function' && $('#r-func').val() != '' && $('#r-func').val() != null) {
 	                $('#r-cat').prop('disabled', false);
 	                var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
+	                console.log(catOptions);
 	                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
-	                  if (generalFunctionLookup[temp_func][i].val().split(' ')[0] == temp_id) {
+	                  if (generalFunctionLookup[temp_func][i] == temp_id) {
 	                    catOptions += '<option selected="selected">';
 	                  } else {
 	                    catOptions += '<option>';
