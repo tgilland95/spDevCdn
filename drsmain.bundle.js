@@ -9795,11 +9795,8 @@
 	                console.log(catOptions);
 	                console.log(generalFunctionLookup[temp_func][i] == temp_id);
 	                console.log(temp_id);
-	                console.log(generalFunctionLookup[temp_func][i]);
+	                console.log(generalFunctionLookup[temp_func][i].split(' ')[0]);
 	                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
-	                  console.log(generalFunctionLookup[temp_func][i] == temp_id);
-	                  console.log(temp_id);
-	                  console.log(generalFunctionLookup[temp_func][i].split(' ')[0]);
 	                  if (generalFunctionLookup[temp_func][i] == temp_id) {
 	                    catOptions += '<option selected="selected">';
 	                  } else {
