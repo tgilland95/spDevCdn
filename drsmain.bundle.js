@@ -9881,8 +9881,8 @@
 	                newCatID = '';
 	                newCat = '';
 	              } else {
-	                newCatID = $('#r-cat option:selected').val().substring(0, 5);
-	                newCat = $('#r-cat option:selected').val().substring(8);
+	                newCatID = $('#r-cat option:selected').val().split(' ')[0];
+	                newCat = $('#r-cat option:selected').val().split(' ')[0];
 	              }
 	              var newRet = $('#r-ret').val();
 	              var newCmtsPlan = $('#cmts-plan').val();
@@ -10960,7 +10960,7 @@
 	    if ($('#rec-cat option:selected').val() == '' || $('#rec-cat option:selected').val() == null) {
 	      recCat = '';
 	    } else {
-	      recCat = $('#rec-cat option:selected').val().substring(0, 5);
+	      recCat = $('#rec-cat option:selected').val().split(' ')[0];
 	    }
 	    var adminMsg = $('#adminMsg').val();
 	    var commentsPlan = $('#commentsPlan').val();
