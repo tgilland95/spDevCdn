@@ -9793,6 +9793,9 @@
 	                $('#r-cat').prop('disabled', false);
 	                var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
 	                console.log(catOptions);
+	                console.log(generalFunctionLookup[temp_func][i] == temp_id);
+	                console.log(temp_id);
+	                console.log(generalFunctionLookup[temp_func][i]);
 	                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
 	                  console.log(generalFunctionLookup[temp_func][i] == temp_id);
 	                  console.log(temp_id);
