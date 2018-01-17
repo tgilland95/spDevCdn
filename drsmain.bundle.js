@@ -10360,7 +10360,7 @@
 	
 	            $('#rec-cat').change(function () {
 	              var index = $('#rec-cat').val().indexOf('-');
-	              var category = $('#rec-cat').val().substring(index + 2);
+	              var category = $('#rec-cat').val().split(' ')[0];
 	              $('#retention').val(generalRetentionLookup[category]);
 	            });
 	
