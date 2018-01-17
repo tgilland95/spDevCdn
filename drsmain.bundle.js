@@ -9735,7 +9735,7 @@
 	              // loads values in dialog (if present in table)
 	              $('#r-code').val($(this).closest('tr').children()[0].innerText);
 	              $('#r-type').val($(this).closest('tr').children()[2].innerText);
-	              $('#r-ret').val($(this).closest('tr').children()[5].innerText);
+	              $('#r-ret').val($(this).closest('tr').children().innerText);
 	
 	              // creates options for function drop-down, and loads value in drop-down if
 	              // record has a function defined
@@ -9793,7 +9793,7 @@
 	                $('#r-cat').prop('disabled', false);
 	                var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
 	                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
-	                  if (generalFunctionLookup[temp_func][i].substring(0, 5) == temp_id) {
+	                  if ($("#r-cat").val().split(' ')[0] == temp_id) {
 	                    catOptions += '<option selected="selected">';
 	                  } else {
 	                    catOptions += '<option>';
