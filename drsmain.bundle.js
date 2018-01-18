@@ -9237,14 +9237,6 @@
 	});
 	exports.run = undefined;
 	
-	/*
-	Initial function called by main.js
-	Tests to see if user is admin or not
-	Gets data from various lists
-	Makes lookup objects for later use
-	Calls 'populateTabs' to continue script
-	*/
-	
 	var run = exports.run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
@@ -10358,6 +10350,7 @@
 	                            var category = $('#rec-cat').val().substring($('#rec-cat').val().indexOf('-') + 2);
 	                            $('#retention').val(generalRetentionLookup[category]);
 	                        });
+	                        // FIXME:
 	
 	                        addUniqueSubmit(dept, size, itemID);
 	
@@ -10496,7 +10489,17 @@
 	    commonRetentionLookup = void 0,
 	    commonFunctionLookup = void 0,
 	    isAdmin = void 0,
-	    completeness = void 0;function populateTabs() {
+	    completeness = void 0;
+	
+	/*
+	Initial function called by main.js
+	Tests to see if user is admin or not
+	Gets data from various lists
+	Makes lookup objects for later use
+	Calls 'populateTabs' to continue script
+	*/
+	window.genret = generalRetentionLookup;
+	function populateTabs() {
 	    // function to populate the first tab seen by user
 	    populateDeptRetentionTab();
 	
