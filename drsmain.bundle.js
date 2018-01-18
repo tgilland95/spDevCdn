@@ -10258,7 +10258,7 @@
 	                            repoOptions += '<option>' + repos[i]['Repository'] + '</option>';
 	                        }
 	
-	                        $('#unique-fields').append('</br></br><form class="form-horizontal"> \
+	                        $('#unique-fields').append('</br></br><form id="uniqueRecordsForm" class="form-horizontal"> \
 	                                <div class="form-group"> \
 	                                  <label class="control-label col-sm-2" for="rec-type">Record Type: <span id="red-ast">*</span></label> \
 	                                  <div class="col-sm-8"> \
@@ -10350,7 +10350,6 @@
 	                            var category = $('#rec-cat').val().substring($('#rec-cat').val().indexOf('-') + 2);
 	                            $('#retention').val(generalRetentionLookup[category]);
 	                        });
-	                        // FIXME:
 	
 	                        addUniqueSubmit(dept, size, itemID);
 	
