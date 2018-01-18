@@ -9800,7 +9800,7 @@
 	                  } else {
 	                    catOptions += '<option>';
 	                  }
-	                  catOptions += generalFunctionLookup[temp_func][i].split(' ')[0];
+	                  catOptions += generalFunctionLookup[temp_func][i];
 	                  catOptions += '</option>';
 	                }
 	                window.co = catOptions;
