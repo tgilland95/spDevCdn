@@ -10354,9 +10354,8 @@
 	                        });
 	
 	                        $('#rec-cat').change(function () {
-	                            var index = $('#rec-cat').val().split('-').reverse()[0].trim();
 	
-	                            var category = $('#rec-cat').val().substring(index + 2);
+	                            var category = $('#rec-cat').val().split('-').reverse()[0].trim();
 	                            $('#retention').val(generalRetentionLookup[category]);
 	                        });
 	
