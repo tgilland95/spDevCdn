@@ -10486,7 +10486,8 @@
 	var commonRetentionLookup = void 0;
 	var commonFunctionLookup = void 0;
 	var isAdmin = void 0;
-	var completeness = void 0;function populateTabs() {
+	var completeness = void 0;
+	var initialCmtsPlan = void 0;function populateTabs() {
 	    // function to populate the first tab seen by user
 	    populateDeptRetentionTab();
 	
