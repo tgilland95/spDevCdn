@@ -9233,12 +9233,14 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.run = undefined;
-	
-	var run = exports.run = function () {
+	/*
+	Initial function called by main.js
+	Tests to see if user is admin or not
+	Gets data from various lists
+	Makes lookup objects for later use
+	Calls 'populateTabs' to continue script
+	*/
+	var run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
 	
@@ -9318,7 +9320,6 @@
 	                        completeness = _context.sent;
 	
 	
-	                        window.uo = util;
 	                        // maps used for value lookup
 	                        generalRetentionLookup = {};
 	                        generalFunctionLookup = {};
@@ -9350,7 +9351,7 @@
 	                        // tab and end script
 	
 	                        if (!(depts == 'None')) {
-	                            _context.next = 47;
+	                            _context.next = 46;
 	                            break;
 	                        }
 	
@@ -9359,12 +9360,12 @@
 	                        $('#unique-records').html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
 	                        return _context.abrupt('return');
 	
-	                    case 47:
+	                    case 46:
 	
 	                        // like the name indicates, the tabs are populated
 	                        populateTabs();
 	
-	                    case 48:
+	                    case 47:
 	                    case 'end':
 	                        return _context.stop();
 	                }
@@ -9404,32 +9405,28 @@
 	
 	                    case 2:
 	                        deptRecords = _context2.sent;
-	
-	                        // searches through completeness list to find correct record based on Dept
-	                        // Number
-	                        window.drs = deptRecords;
 	                        i = 0;
 	
-	                    case 5:
+	                    case 4:
 	                        if (!(i < completeness.length)) {
-	                            _context2.next = 12;
+	                            _context2.next = 11;
 	                            break;
 	                        }
 	
 	                        if (!(completeness[i]['Department_x0020_Number'] == dept)) {
-	                            _context2.next = 9;
+	                            _context2.next = 8;
 	                            break;
 	                        }
 	
 	                        element = i;
-	                        return _context2.abrupt('break', 12);
+	                        return _context2.abrupt('break', 11);
 	
-	                    case 9:
+	                    case 8:
 	                        i++;
-	                        _context2.next = 5;
+	                        _context2.next = 4;
 	                        break;
 	
-	                    case 12:
+	                    case 11:
 	
 	                        // list id number of completeness record used to update record
 	                        theID = completeness[element]['ID'];
@@ -9473,7 +9470,7 @@
 	                        // alerts user if no records have been submitted for given department
 	
 	                        if (!(deptRecords == 'None')) {
-	                            _context2.next = 24;
+	                            _context2.next = 23;
 	                            break;
 	                        }
 	
@@ -9481,7 +9478,7 @@
 	                        $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
 	                        return _context2.abrupt('return');
 	
-	                    case 24:
+	                    case 23:
 	
 	                        // department has at least one record
 	                        $('#ret-table-alert').empty();
@@ -9493,9 +9490,9 @@
 	                        itemIDLookup = {};
 	                        i = 0;
 	
-	                    case 28:
+	                    case 27:
 	                        if (!(i < deptRecords.length)) {
-	                            _context2.next = 74;
+	                            _context2.next = 73;
 	                            break;
 	                        }
 	
@@ -9512,35 +9509,35 @@
 	                        recCatID = deptRecords[i]['Record_x0020_Category_x0020_ID'];
 	                        j = 0;
 	
-	                    case 34:
+	                    case 33:
 	                        if (!(j < genRetention.length)) {
-	                            _context2.next = 43;
+	                            _context2.next = 42;
 	                            break;
 	                        }
 	
 	                        if (!isCommon) {
-	                            _context2.next = 37;
+	                            _context2.next = 36;
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt('break', 43);
+	                        return _context2.abrupt('break', 42);
 	
-	                    case 37:
+	                    case 36:
 	                        tempGenRec = genRetention[j];
 	
 	                        if (!(tempGenRec['Record_x0020_Category_x0020_ID'] == recCatID)) {
-	                            _context2.next = 40;
+	                            _context2.next = 39;
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt('break', 43);
+	                        return _context2.abrupt('break', 42);
 	
-	                    case 40:
+	                    case 39:
 	                        j++;
-	                        _context2.next = 34;
+	                        _context2.next = 33;
 	                        break;
 	
-	                    case 43:
+	                    case 42:
 	                        itemIDLookup[code] = deptRecords[i]['ID'];
 	                        recordType = deptRecords[i]['Record_x0020_Type'];
 	
@@ -9605,12 +9602,12 @@
 	                        tableRows += '<td style="display:none">' + highlyConfidential + '</td>';
 	                        tableRows += '<td style="display:none">' + repository + '</td></tr>';
 	
-	                    case 71:
+	                    case 70:
 	                        i++;
-	                        _context2.next = 28;
+	                        _context2.next = 27;
 	                        break;
 	
-	                    case 74:
+	                    case 73:
 	
 	                        // defines HTML table and columns, and adds rows defined above
 	                        $('#dept-ret-table').html('</br>');
@@ -9669,7 +9666,6 @@
 	                            // changes color and text of button if there is a message from the Admin
 	                            var initialState = {};
 	                            initialState = getCurrentState();
-	                            window.initialState = initialState;
 	                            if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
 	                                $(this).removeClass('btn-success');
 	                                $(this).addClass('btn-primary');
@@ -9683,14 +9679,7 @@
 	                            function canSave() {
 	                                state.toString() === getCurrentState().toString();
 	                            }
-	                            window.getCurrentState = getCurrentState;
 	                            $('#editForm').change(function (e) {
-	                                console.log(e);
-	                                if (editStartingState === '') {
-	                                    console.log(e.currentTarget.map(function (el) {
-	                                        return el.value;
-	                                    }));
-	                                }
 	                                var latestState = getCurrentState();
 	                                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
 	                                    $('#saveRecord').prop('disabled', false);
@@ -9720,7 +9709,6 @@
 	
 	                            // creates list of categories and category IDs for the dropdown, and sorts them
 	                            var categoryList = [];
-	                            window.cl = categoryList;
 	                            for (var i = 0; i < genRetention.length; i++) {
 	                                categoryList.push(genRetention[i]['Record_x0020_Category_x0020_ID'] + ' - ' + genRetention[i]['Record_x0020_Category']);
 	                            }
@@ -9791,7 +9779,6 @@
 	                            if ($('#r-func').val() != 'Select a function' && $('#r-func').val() != '' && $('#r-func').val() != null) {
 	                                $('#r-cat').prop('disabled', false);
 	                                var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
-	                                console.log(temp_func);
 	
 	                                for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
 	                                    if (generalFunctionLookup[temp_func][i].split(' ')[0] == temp_id) {
@@ -9802,7 +9789,6 @@
 	                                    catOptions += generalFunctionLookup[temp_func][i];
 	                                    catOptions += '</option>';
 	                                }
-	                                window.co = catOptions;
 	                                $('#r-cat').empty();
 	                                $('#r-cat').append(catOptions);
 	                            }
@@ -9937,7 +9923,7 @@
 	                            $('#delete-modal').modal('hide');
 	                        });
 	
-	                    case 87:
+	                    case 86:
 	                    case 'end':
 	                        return _context2.stop();
 	                }
@@ -10498,17 +10484,7 @@
 	    commonFunctionLookup = void 0,
 	    isAdmin = void 0,
 	    completeness = void 0,
-	    editStartingState = void 0;
-	
-	/*
-	Initial function called by main.js
-	Tests to see if user is admin or not
-	Gets data from various lists
-	Makes lookup objects for later use
-	Calls 'populateTabs' to continue script
-	*/
-	window.genret = generalRetentionLookup;
-	function populateTabs() {
+	    editStartingState = void 0;function populateTabs() {
 	    // function to populate the first tab seen by user
 	    populateDeptRetentionTab();
 	
