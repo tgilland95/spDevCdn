@@ -9684,7 +9684,8 @@
 	                                state.toString() === getCurrentState().toString();
 	                            }
 	                            window.getCurrentState = getCurrentState;
-	                            $('#editForm').change(function () {
+	                            $('#editForm').change(function (e) {
+	                                console.log(e);
 	                                var latestState = getCurrentState();
 	                                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
 	                                    $('#saveRecord').prop('disabled', true);
@@ -10346,9 +10347,6 @@
 	                                $('#rec-cat').prop('disabled', false);
 	                            }
 	                        });
-	                        $('#cmts-plan').change(function () {
-	                            console.log($('#cmts-plan').val());
-	                        });
 	
 	                        $('#rec-cat').change(function () {
 	                            var index = $('#rec-cat').val().indexOf('-');
@@ -10358,7 +10356,7 @@
 	
 	                        addUniqueSubmit(dept, size, itemID);
 	
-	                    case 23:
+	                    case 22:
 	                    case 'end':
 	                        return _context12.stop();
 	                }
