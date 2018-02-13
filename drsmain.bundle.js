@@ -9191,7 +9191,7 @@
 /* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var _IndexPage = __webpack_require__(329);
 	
@@ -9204,9 +9204,9 @@
 	ExecuteOrDelayUntilScriptLoaded(init, "sp.js");
 	
 	// global vars
-	var hostWebUrl = '';
-	var appWebUrl = '';
-	var deptParam = '';
+	var hostWebUrl = "";
+	var appWebUrl = "";
+	var deptParam = "";
 	
 	function init() {
 	    // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
@@ -9218,7 +9218,7 @@
 	        // deptParam used so that reload of page shows same dept already selected
 	        if (deptParam == "undefined") {
 	            // main function that drives page - no dept was selected
-	            indexPage.run(hostWebUrl, appWebUrl, '');
+	            indexPage.run(hostWebUrl, appWebUrl, "");
 	        } else {
 	            // main function that drives page - a dept was already selected
 	            indexPage.run(hostWebUrl, appWebUrl, deptParam);
@@ -9230,7 +9230,12 @@
 /* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.run = undefined;
 	
 	/*
 	Initial function called by main.js
@@ -9239,7 +9244,7 @@
 	Makes lookup objects for later use
 	Calls 'populateTabs' to continue script
 	*/
-	var run = function () {
+	var run = exports.run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
 	
@@ -9357,7 +9362,7 @@
 	                        $("#dept-retention").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
 	                        $("#common-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
 	                        $("#unique-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
-	                        return _context.abrupt('return');
+	                        return _context.abrupt("return");
 	
 	                    case 46:
 	
@@ -9365,7 +9370,7 @@
 	                        populateTabs();
 	
 	                    case 47:
-	                    case 'end':
+	                    case "end":
 	                        return _context.stop();
 	                }
 	            }
@@ -9418,7 +9423,7 @@
 	                        }
 	
 	                        element = i;
-	                        return _context2.abrupt('break', 11);
+	                        return _context2.abrupt("break", 11);
 	
 	                    case 8:
 	                        i++;
@@ -9475,7 +9480,7 @@
 	
 	                        $("#dept-ret-table").empty();
 	                        $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
-	                        return _context2.abrupt('return');
+	                        return _context2.abrupt("return");
 	
 	                    case 23:
 	
@@ -9519,7 +9524,7 @@
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt('break', 42);
+	                        return _context2.abrupt("break", 42);
 	
 	                    case 36:
 	                        tempGenRec = genRetention[j];
@@ -9529,7 +9534,7 @@
 	                            break;
 	                        }
 	
-	                        return _context2.abrupt('break', 42);
+	                        return _context2.abrupt("break", 42);
 	
 	                    case 39:
 	                        j++;
@@ -9923,7 +9928,7 @@
 	                        });
 	
 	                    case 86:
-	                    case 'end':
+	                    case "end":
 	                        return _context2.stop();
 	                }
 	            }
@@ -9954,7 +9959,7 @@
 	                        return util.deleteRecord(row, id);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context3.stop();
 	                }
 	            }
@@ -9979,7 +9984,7 @@
 	                        return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, 1, newRepo, archival, vital, highlyConfidential);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context4.stop();
 	                }
 	            }
@@ -10004,7 +10009,7 @@
 	                        return util.updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context5.stop();
 	                }
 	            }
@@ -10029,7 +10034,7 @@
 	                        return util.messageRead(itemID);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context6.stop();
 	                }
 	            }
@@ -10054,7 +10059,7 @@
 	                        return util.setDRS(id, drsComplete);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context7.stop();
 	                }
 	            }
@@ -10079,7 +10084,7 @@
 	                        return util.setReview(id, reviewComplete);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context8.stop();
 	                }
 	            }
@@ -10120,7 +10125,7 @@
 	                        }
 	
 	                    case 7:
-	                    case 'end':
+	                    case "end":
 	                        return _context9.stop();
 	                }
 	            }
@@ -10179,7 +10184,7 @@
 	                        addCommonSubmitButton(deptRecords, deptIDList, commonRecordsList.length, idLookup, dept);
 	
 	                    case 11:
-	                    case 'end':
+	                    case "end":
 	                        return _context10.stop();
 	                }
 	            }
@@ -10201,7 +10206,7 @@
 	                        return util.addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context11.stop();
 	                }
 	            }
@@ -10347,7 +10352,7 @@
 	                        addUniqueSubmit(dept, size, itemID);
 	
 	                    case 22:
-	                    case 'end':
+	                    case "end":
 	                        return _context12.stop();
 	                }
 	            }
@@ -10369,10 +10374,10 @@
 	                        return util.getSize(dept);
 	
 	                    case 2:
-	                        return _context13.abrupt('return', _context13.sent);
+	                        return _context13.abrupt("return", _context13.sent);
 	
 	                    case 3:
-	                    case 'end':
+	                    case "end":
 	                        return _context13.stop();
 	                }
 	            }
@@ -10394,7 +10399,7 @@
 	                        return util.updateSize(itemID, size);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context14.stop();
 	                }
 	            }
@@ -10416,7 +10421,7 @@
 	                        return util.addSize(dept, size);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context15.stop();
 	                }
 	            }
@@ -10438,7 +10443,7 @@
 	                        return util.addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
 	
 	                    case 2:
-	                    case 'end':
+	                    case "end":
 	                        return _context16.stop();
 	                }
 	            }
@@ -10464,26 +10469,24 @@
 	
 	
 	// global vars
-	var deptParam = void 0,
-	    depts = void 0,
-	    deptNameLookup = void 0,
-	    generalRetentionLookup = void 0,
-	    genRetention = void 0,
-	    generalFunctionLookup = void 0,
-	    deptRecords = void 0,
-	    itemIDLookup = void 0,
-	    row = void 0,
-	    initialCat = void 0,
-	    initialUserCmts = void 0,
-	    initialFunc = void 0,
-	    initialCmtsPlan = void 0,
-	    repos = void 0,
-	    commonRecordsList = void 0,
-	    commonRetentionLookup = void 0,
-	    commonFunctionLookup = void 0,
-	    isAdmin = void 0,
-	    completeness = void 0,
-	    editStartingState = void 0;function populateTabs() {
+	var deptParam = void 0;
+	var depts = void 0;
+	var deptNameLookup = void 0;
+	var generalRetentionLookup = void 0;
+	var genRetention = void 0;
+	var generalFunctionLookup = void 0;
+	var deptRecords = void 0;
+	var itemIDLookup = void 0;
+	var row = void 0;
+	var initialCat = void 0;
+	var initialUserCmts = void 0;
+	var initialFunc = void 0;
+	var repos = void 0;
+	var commonRecordsList = void 0;
+	var commonRetentionLookup = void 0;
+	var commonFunctionLookup = void 0;
+	var isAdmin = void 0;
+	var completeness = void 0;function populateTabs() {
 	    // function to populate the first tab seen by user
 	    populateDeptRetentionTab();
 	
