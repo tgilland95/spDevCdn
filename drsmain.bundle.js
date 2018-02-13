@@ -9211,7 +9211,7 @@
 	function init() {
 	    // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
 	    $(document).ready(function () {
-	        console.log('123');
+	        console.log('2');
 	        // parses hostweb and appweb URLs from page URL
 	        hostWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPHostUrl"));
 	        appWebUrl = decodeURIComponent((0, _Utils.getQueryStringParameter)("SPAppWebUrl"));
@@ -9686,7 +9686,7 @@
 	                            window.getCurrentState = getCurrentState;
 	                            $('#editForm').change(function (e) {
 	                                console.log(e);
-	                                if (!editStartingState) {
+	                                if (editStartingState === '') {
 	                                    console.log(e.currentTarget.map(function (el) {
 	                                        return el.value;
 	                                    }));
