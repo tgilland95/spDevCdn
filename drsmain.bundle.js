@@ -10861,7 +10861,7 @@ var run = function () {
                         $("#dept-retention").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
                         $("#common-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
                         $("#unique-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
-                        return _context.abrupt("return");
+                        return _context.abrupt('return');
 
                     case 46:
 
@@ -10869,7 +10869,7 @@ var run = function () {
                         populateTabs();
 
                     case 47:
-                    case "end":
+                    case 'end':
                         return _context.stop();
                 }
             }
@@ -10922,7 +10922,7 @@ var loadRetentionSchedule = function () {
                         }
 
                         element = i;
-                        return _context2.abrupt("break", 11);
+                        return _context2.abrupt('break', 11);
 
                     case 8:
                         i++;
@@ -10979,7 +10979,7 @@ var loadRetentionSchedule = function () {
 
                         $("#dept-ret-table").empty();
                         $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
-                        return _context2.abrupt("return");
+                        return _context2.abrupt('return');
 
                     case 23:
 
@@ -11023,7 +11023,7 @@ var loadRetentionSchedule = function () {
                             break;
                         }
 
-                        return _context2.abrupt("break", 42);
+                        return _context2.abrupt('break', 42);
 
                     case 36:
                         tempGenRec = genRetention[j];
@@ -11033,7 +11033,7 @@ var loadRetentionSchedule = function () {
                             break;
                         }
 
-                        return _context2.abrupt("break", 42);
+                        return _context2.abrupt('break', 42);
 
                     case 39:
                         j++;
@@ -11427,7 +11427,7 @@ var loadRetentionSchedule = function () {
                         });
 
                     case 86:
-                    case "end":
+                    case 'end':
                         return _context2.stop();
                 }
             }
@@ -11458,7 +11458,7 @@ var deleteRecord = function () {
                         return util.deleteRecord(row, id);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context3.stop();
                 }
             }
@@ -11483,7 +11483,7 @@ var updateRecord = function () {
                         return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, 1, newRepo, archival, vital, highlyConfidential);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context4.stop();
                 }
             }
@@ -11508,7 +11508,7 @@ var updateCommonRecord = function () {
                         return util.updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context5.stop();
                 }
             }
@@ -11533,7 +11533,7 @@ var messageRead = function () {
                         return util.messageRead(itemID);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context6.stop();
                 }
             }
@@ -11558,7 +11558,7 @@ var setDRS = function () {
                         return util.setDRS(id, drsComplete);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context7.stop();
                 }
             }
@@ -11583,7 +11583,7 @@ var setReview = function () {
                         return util.setReview(id, reviewComplete);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context8.stop();
                 }
             }
@@ -11624,7 +11624,7 @@ var populateCommonRecordsTab = function () {
                         }
 
                     case 7:
-                    case "end":
+                    case 'end':
                         return _context9.stop();
                 }
             }
@@ -11683,7 +11683,7 @@ var addCommonRecordsTable = function () {
                         addCommonSubmitButton(deptRecords, deptIDList, commonRecordsList.length, idLookup, dept);
 
                     case 11:
-                    case "end":
+                    case 'end':
                         return _context10.stop();
                 }
             }
@@ -11705,7 +11705,7 @@ var addCommonRecord = function () {
                         return util.addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context11.stop();
                 }
             }
@@ -11851,7 +11851,7 @@ var addUniqueFields = function () {
                         addUniqueSubmit(dept, size, itemID);
 
                     case 22:
-                    case "end":
+                    case 'end':
                         return _context12.stop();
                 }
             }
@@ -11873,10 +11873,10 @@ var getSize = function () {
                         return util.getSize(dept);
 
                     case 2:
-                        return _context13.abrupt("return", _context13.sent);
+                        return _context13.abrupt('return', _context13.sent);
 
                     case 3:
-                    case "end":
+                    case 'end':
                         return _context13.stop();
                 }
             }
@@ -11898,7 +11898,7 @@ var updateSize = function () {
                         return util.updateSize(itemID, size);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context14.stop();
                 }
             }
@@ -11920,7 +11920,7 @@ var addSize = function () {
                         return util.addSize(dept, size);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context15.stop();
                 }
             }
@@ -11942,7 +11942,7 @@ var addUniqueRecord = function () {
                         return util.addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
 
                     case 2:
-                    case "end":
+                    case 'end':
                         return _context16.stop();
                 }
             }
@@ -11986,8 +11986,7 @@ var deptParam = void 0,
     commonRetentionLookup = void 0,
     commonFunctionLookup = void 0,
     isAdmin = void 0,
-    completeness = void 0,
-    editStartingState = void 0;function populateTabs() {
+    completeness = void 0;function populateTabs() {
     // function to populate the first tab seen by user
     populateDeptRetentionTab();
 
