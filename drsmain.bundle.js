@@ -9686,6 +9686,11 @@
 	                            window.getCurrentState = getCurrentState;
 	                            $('#editForm').change(function (e) {
 	                                console.log(e);
+	                                if (!editStartingState) {
+	                                    console.log(e.currentTarget.map(function (el) {
+	                                        return el.value;
+	                                    }));
+	                                }
 	                                var latestState = getCurrentState();
 	                                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
 	                                    $('#saveRecord').prop('disabled', false);
@@ -10492,7 +10497,8 @@
 	    commonRetentionLookup = void 0,
 	    commonFunctionLookup = void 0,
 	    isAdmin = void 0,
-	    completeness = void 0;
+	    completeness = void 0,
+	    editStartingState = void 0;
 	
 	/*
 	Initial function called by main.js
