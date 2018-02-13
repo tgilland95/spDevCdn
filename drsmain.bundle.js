@@ -10832,36 +10832,36 @@ var run = function () {
                         // creates objects used to lookup values and populate drop-down lists when user
                         // submits unique record and updates unique record in 'Edit Details' dialog box
                         for (i = 0; i < genRetention.length; i++) {
-                            generalRetentionLookup[genRetention[i]['Record_x0020_Category']] = genRetention[i]['Retention_x0020_Description'];
+                            generalRetentionLookup[genRetention[i]["Record_x0020_Category"]] = genRetention[i]["Retention_x0020_Description"];
 
-                            if (genRetention[i]['Function'] in generalFunctionLookup) {
-                                tempList = generalFunctionLookup[genRetention[i]['Function']];
+                            if (genRetention[i]["Function"] in generalFunctionLookup) {
+                                tempList = generalFunctionLookup[genRetention[i]["Function"]];
                             } else {
                                 tempList = [];
                             }
-                            tempList.push(genRetention[i]['Record_x0020_Category_x0020_ID'] + ' - ' + genRetention[i]['Record_x0020_Category']);
+                            tempList.push(genRetention[i]["Record_x0020_Category_x0020_ID"] + " - " + genRetention[i]["Record_x0020_Category"]);
                             tempList.sort();
-                            generalFunctionLookup[genRetention[i]['Function']] = tempList;
+                            generalFunctionLookup[genRetention[i]["Function"]] = tempList;
                         }
 
                         // creates objects used to lookup values when user adds common records
                         for (i = 0; i < commonRecordsList.length; i++) {
-                            commonRetentionLookup[commonRecordsList[i]['Code']] = commonRecordsList[i]['Retention_x0020_Description'];
-                            commonFunctionLookup[commonRecordsList[i]['Code']] = commonRecordsList[i]['Function'];
+                            commonRetentionLookup[commonRecordsList[i]["Code"]] = commonRecordsList[i]["Retention_x0020_Description"];
+                            commonFunctionLookup[commonRecordsList[i]["Code"]] = commonRecordsList[i]["Function"];
                         }
 
                         // if user is not listed as Dept Liaison for any dept, print out alert on each
                         // tab and end script
 
-                        if (!(depts == 'None')) {
+                        if (!(depts == "None")) {
                             _context.next = 46;
                             break;
                         }
 
-                        $('#dept-retention').html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
-                        $('#common-records').html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
-                        $('#unique-records').html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
-                        return _context.abrupt('return');
+                        $("#dept-retention").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
+                        $("#common-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
+                        $("#unique-records").html('</br><div class="alert alert-info" role="alert">You are not a part of any department</div>');
+                        return _context.abrupt("return");
 
                     case 46:
 
@@ -10869,7 +10869,7 @@ var run = function () {
                         populateTabs();
 
                     case 47:
-                    case 'end':
+                    case "end":
                         return _context.stop();
                 }
             }
@@ -10916,13 +10916,13 @@ var loadRetentionSchedule = function () {
                             break;
                         }
 
-                        if (!(completeness[i]['Department_x0020_Number'] == dept)) {
+                        if (!(completeness[i]["Department_x0020_Number"] == dept)) {
                             _context2.next = 8;
                             break;
                         }
 
                         element = i;
-                        return _context2.abrupt('break', 11);
+                        return _context2.abrupt("break", 11);
 
                     case 8:
                         i++;
@@ -10932,63 +10932,63 @@ var loadRetentionSchedule = function () {
                     case 11:
 
                         // list id number of completeness record used to update record
-                        theID = completeness[element]['ID'];
+                        theID = completeness[element]["ID"];
 
                         // checks DRS Complete / Annual Review Complete based on list data
 
-                        if (completeness[element]['DRS_x0020_Completed'] == 'Yes') {
-                            $('#DRS-complete-chkbx').prop('checked', true);
+                        if (completeness[element]["DRS_x0020_Completed"] == "Yes") {
+                            $("#DRS-complete-chkbx").prop("checked", true);
                         }
-                        if (completeness[element]['Annual_x0020_Review_x0020_Comple'] == 'Yes') {
-                            $('#review-complete-chkbx').prop('checked', true);
+                        if (completeness[element]["Annual_x0020_Review_x0020_Comple"] == "Yes") {
+                            $("#review-complete-chkbx").prop("checked", true);
                         }
 
                         // allows user to check/uncheck boxes
-                        $('#DRS-complete-chkbx').attr('disabled', false);
-                        $('#review-complete-chkbx').attr('disabled', false);
-                        $('#review-complete-chkbx').attr('disabled', false);
+                        $("#DRS-complete-chkbx").attr("disabled", false);
+                        $("#review-complete-chkbx").attr("disabled", false);
+                        $("#review-complete-chkbx").attr("disabled", false);
 
                         // adds on-click event to set DRS Complete in Completeness list
-                        $('#DRS-complete-chkbx').click(function () {
+                        $("#DRS-complete-chkbx").click(function () {
                             var drsComplete;
-                            if ($(this).is(':checked')) {
-                                drsComplete = 'Yes';
+                            if ($(this).is(":checked")) {
+                                drsComplete = "Yes";
                             } else {
-                                drsComplete = 'No';
+                                drsComplete = "No";
                             }
                             setDRS(theID, drsComplete);
                         });
 
                         // adds on-click event to set Annual Review Complete in Completeness list
-                        $('#review-complete-chkbx').click(function () {
+                        $("#review-complete-chkbx").click(function () {
                             var reviewComplete;
-                            if ($(this).is(':checked')) {
-                                reviewComplete = 'Yes';
+                            if ($(this).is(":checked")) {
+                                reviewComplete = "Yes";
                             } else {
-                                reviewComplete = 'No';
+                                reviewComplete = "No";
                             }
                             setReview(theID, reviewComplete);
                         });
 
                         // alerts user if no records have been submitted for given department
 
-                        if (!(deptRecords == 'None')) {
+                        if (!(deptRecords == "None")) {
                             _context2.next = 23;
                             break;
                         }
 
-                        $('#dept-ret-table').empty();
-                        $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
-                        return _context2.abrupt('return');
+                        $("#dept-ret-table").empty();
+                        $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">No records have been identified for this department. Please select the "Add Common Records" tab first to select records found in your department. Then add unique your department by selecting the "Add Unique Records" tab.</div>');
+                        return _context2.abrupt("return");
 
                     case 23:
 
                         // department has at least one record
-                        $('#ret-table-alert').empty();
+                        $("#ret-table-alert").empty();
 
                         // retreives list data row by row from Dept Retention Schedule and adds each
                         // attribute to a new HTML row
-                        tableRows = '';
+                        tableRows = "";
 
                         itemIDLookup = {};
                         i = 0;
@@ -11000,16 +11000,16 @@ var loadRetentionSchedule = function () {
                         }
 
                         // unique ID we use to distinguish all records
-                        code = deptRecords[i]['Code'];
+                        code = deptRecords[i]["Code"];
 
                         // common record codes begin with C - flag to know if record is common or not
 
                         isCommon = false;
 
-                        if (code.charAt(0) == 'C') {
+                        if (code.charAt(0) == "C") {
                             isCommon = true;
                         }
-                        recCatID = deptRecords[i]['Record_x0020_Category_x0020_ID'];
+                        recCatID = deptRecords[i]["Record_x0020_Category_x0020_ID"];
                         j = 0;
 
                     case 33:
@@ -11023,17 +11023,17 @@ var loadRetentionSchedule = function () {
                             break;
                         }
 
-                        return _context2.abrupt('break', 42);
+                        return _context2.abrupt("break", 42);
 
                     case 36:
                         tempGenRec = genRetention[j];
 
-                        if (!(tempGenRec['Record_x0020_Category_x0020_ID'] == recCatID)) {
+                        if (!(tempGenRec["Record_x0020_Category_x0020_ID"] == recCatID)) {
                             _context2.next = 39;
                             break;
                         }
 
-                        return _context2.abrupt('break', 42);
+                        return _context2.abrupt("break", 42);
 
                     case 39:
                         j++;
@@ -11041,69 +11041,69 @@ var loadRetentionSchedule = function () {
                         break;
 
                     case 42:
-                        itemIDLookup[code] = deptRecords[i]['ID'];
-                        recordType = deptRecords[i]['Record_x0020_Type'];
+                        itemIDLookup[code] = deptRecords[i]["ID"];
+                        recordType = deptRecords[i]["Record_x0020_Type"];
 
 
                         // set vars to empty if no Record Category was chosen
                         if (recCatID == null) {
-                            recCatID = '';
-                            recordFunction = '';
-                            recordCategory = '';
-                            retention = '';
+                            recCatID = "";
+                            recordFunction = "";
+                            recordCategory = "";
+                            retention = "";
                         } else {
                             // look up values from Common Records list if record is common
-                            if (code.charAt(0) == 'C') {
+                            if (code.charAt(0) == "C") {
                                 retention = commonRetentionLookup[code];
                                 recordFunction = commonFunctionLookup[code];
                                 recordCategory = // look up values from General Retention list if record is unique
-                                '';
+                                "";
                             } else {
-                                retention = tempGenRec['Retention_x0020_Description'];
-                                recordCategory = tempGenRec['Record_x0020_Category'];
-                                recordFunction = tempGenRec['Function'];
+                                retention = tempGenRec["Retention_x0020_Description"];
+                                recordCategory = tempGenRec["Record_x0020_Category"];
+                                recordFunction = tempGenRec["Function"];
                             }
                         }
 
                         // retreives other values from Department Retention Schedule
-                        exception = deptRecords[i]['Retention_x0020_Exception'];
+                        exception = deptRecords[i]["Retention_x0020_Exception"];
 
                         if (exception == null) {
-                            exception = '';
+                            exception = "";
                         }
-                        commentsPlan = deptRecords[i]['CommentsPlan'];
+                        commentsPlan = deptRecords[i]["CommentsPlan"];
 
                         if (commentsPlan == null) {
-                            commentsPlan = '';
+                            commentsPlan = "";
                         }
-                        status = deptRecords[i]['Status'];
-                        archival = deptRecords[i]['Archival'];
-                        vital = deptRecords[i]['Vital'];
-                        highlyConfidential = deptRecords[i]['Highly_x0020_Confidential'];
-                        repository = deptRecords[i]['Repository'];
-                        newMessage = deptRecords[i]['New_x0020_Message'];
+                        status = deptRecords[i]["Status"];
+                        archival = deptRecords[i]["Archival"];
+                        vital = deptRecords[i]["Vital"];
+                        highlyConfidential = deptRecords[i]["Highly_x0020_Confidential"];
+                        repository = deptRecords[i]["Repository"];
+                        newMessage = deptRecords[i]["New_x0020_Message"];
 
                         // formats HTML rows to add to Dept Retention table
 
-                        tableRows += '<tr><td style="display:none">' + code + '</td>';
-                        tableRows += '<td style="display:none">' + recordFunction + '</td>';
-                        tableRows += '<td>' + recordType + '</td>';
-                        tableRows += '<td style="display:none">' + recCatID + '</td>';
-                        tableRows += '<td style="display:none">' + recordCategory + '</td>';
-                        tableRows += '<td>' + retention + '</td>';
-                        tableRows += '<td>' + exception + '</td>';
-                        tableRows += '<td>' + commentsPlan + '</td>';
-                        if (newMessage == 'Yes') {
+                        tableRows += '<tr><td style="display:none">' + code + "</td>";
+                        tableRows += '<td style="display:none">' + recordFunction + "</td>";
+                        tableRows += "<td>" + recordType + "</td>";
+                        tableRows += '<td style="display:none">' + recCatID + "</td>";
+                        tableRows += '<td style="display:none">' + recordCategory + "</td>";
+                        tableRows += "<td>" + retention + "</td>";
+                        tableRows += "<td>" + exception + "</td>";
+                        tableRows += "<td>" + commentsPlan + "</td>";
+                        if (newMessage == "Yes") {
                             tableRows += '<td><button type="button" class="btn-xs btn-success editDetails">New Message</button></td>';
                         } else {
                             tableRows += '<td><button type="button" class="btn-xs btn-primary editDetails">Edit</button></td>';
                         }
                         tableRows += '<td><button type="button" class="btn-xs btn-primary deleteRecord">Delete</button></td>';
-                        tableRows += '<td>' + status + '</td>';
-                        tableRows += '<td style="display:none">' + archival + '</td>';
-                        tableRows += '<td style="display:none">' + vital + '</td>';
-                        tableRows += '<td style="display:none">' + highlyConfidential + '</td>';
-                        tableRows += '<td style="display:none">' + repository + '</td></tr>';
+                        tableRows += "<td>" + status + "</td>";
+                        tableRows += '<td style="display:none">' + archival + "</td>";
+                        tableRows += '<td style="display:none">' + vital + "</td>";
+                        tableRows += '<td style="display:none">' + highlyConfidential + "</td>";
+                        tableRows += '<td style="display:none">' + repository + "</td></tr>";
 
                     case 70:
                         i++;
@@ -11113,321 +11113,321 @@ var loadRetentionSchedule = function () {
                     case 73:
 
                         // defines HTML table and columns, and adds rows defined above
-                        $('#dept-ret-table').html('</br>');
+                        $("#dept-ret-table").html("</br>");
                         tableStr = '<div style="overflow-x:scroll" width="1500px"><table class="table table-striped" id="pendingTable" style="width:100%"><thead><tr><th style="display:none">Code</th><th style="display:none">Function</th> \
                   <th>Record Type</th><th style="display:none">Category ID</th><th style="display:none">Record Category</th><th><div style="width:10em">Retention</div></th> \
                   <th><div style="width:10em">Exception</div></th><th><div style="width:10em">Comments / Plan</div></th><th></th><th></th><th>Status</th><th style="display:none">Archival</th> \
                   <th style="display:none">Vital</th><th style="display:none">Highly Confidential</th><th style="display:none">Repository</th></tr> \
-    </thead><tbody>' + tableRows + '</tbody></table></br></div>';
+    </thead><tbody>' + tableRows + "</tbody></table></br></div>";
 
                         // adds table to div defined above, and adds download button below table
 
-                        $('#dept-ret-table').append(tableStr);
-                        $('#dept-ret-table').append('</br></br>');
-                        $('#dept-ret-buttons').empty();
-                        $('#dept-ret-buttons').append('<button type="button" class="btn-sm btn-primary pdf">Download</button>');
+                        $("#dept-ret-table").append(tableStr);
+                        $("#dept-ret-table").append("</br></br>");
+                        $("#dept-ret-buttons").empty();
+                        $("#dept-ret-buttons").append('<button type="button" class="btn-sm btn-primary pdf">Download</button>');
 
                         // adds on-click event to Download button which creates PDF
-                        $('.pdf').click(function () {
+                        $(".pdf").click(function () {
                             makePDF();
                         });
 
                         // adds on-change event to #r-cat value in 'Edit Details' dialog box
 
-                        $('#r-cat').on('change', function () {
+                        $("#r-cat").on("change", function () {
                             // extracts Record Category ID from #r-cat to find associated record in General
                             // Retention Schedule
 
-                            $('#saveRecord').prop('disabled', false);
-                            var newCatID = $(this).val().split(' ')[0];
+                            $("#saveRecord").prop("disabled", false);
+                            var newCatID = $(this).val().split(" ")[0];
 
                             var tempRecord;
                             for (var i = 0; i < genRetention.length; i++) {
                                 tempRecord = genRetention[i];
-                                if (newCatID == tempRecord['Record_x0020_Category_x0020_ID']) {
+                                if (newCatID == tempRecord["Record_x0020_Category_x0020_ID"]) {
                                     break;
                                 }
                             }
 
                             // if the Record Category changes to empty string, set function and retention to
                             // empty string
-                            if ($('#r-cat').val() == '' || $('#r-cat').val() == null) {
-                                $('#r-func').val('');
-                                $('#r-ret').val(''); // else, get the associated Function and Retention and add them to the
+                            if ($("#r-cat").val() == "" || $("#r-cat").val() == null) {
+                                $("#r-func").val("");
+                                $("#r-ret").val(""); // else, get the associated Function and Retention and add them to the
                                 // associated textboxes
                             } else {
-                                $('#r-func').val(tempRecord['Function']);
-                                $('#r-ret').val(tempRecord['Retention_x0020_Description']);
+                                $("#r-func").val(tempRecord["Function"]);
+                                $("#r-ret").val(tempRecord["Retention_x0020_Description"]);
                             }
                         });
 
                         // adds on-click function to 'Edit Details', populates it with associated table
                         // data, and adds buttons to Save or Cancel
-                        $('.editDetails').click(function () {
-                            $('#saveRecord').prop('disabled', true);
+                        $(".editDetails").click(function () {
+                            $("#saveRecord").prop("disabled", true);
 
                             // changes color and text of button if there is a message from the Admin
                             var initialState = {};
                             initialState = getCurrentState();
-                            if ($(this).attr('class') == 'btn-xs btn-success editDetails') {
-                                $(this).removeClass('btn-success');
-                                $(this).addClass('btn-primary');
-                                $(this)[0].innerText = 'Edit';
+                            if ($(this).attr("class") == "btn-xs btn-success editDetails") {
+                                $(this).removeClass("btn-success");
+                                $(this).addClass("btn-primary");
+                                $(this)[0].innerText = "Edit";
                             }
                             function getCurrentState() {
-                                return Object.entries(document.getElementById('editForm').elements).map(function (inp) {
-                                    return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : '';
+                                return Object.entries(document.getElementById("editForm").elements).map(function (inp) {
+                                    return inp[1].value ? inp[1].value : inp[1].checked ? inp[1].checked : "";
                                 });
                             }
                             function canSave() {
                                 state.toString() === getCurrentState().toString();
                             }
-                            $('#editForm').change(function (e) {
+                            $("#editForm").change(function (e) {
                                 var latestState = getCurrentState();
                                 if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
-                                    $('#saveRecord').prop('disabled', false);
+                                    $("#saveRecord").prop("disabled", false);
                                     return;
                                 }
-                                $('#saveRecord').prop('disabled', false);
+                                $("#saveRecord").prop("disabled", false);
                             });
                             // changes global variable to row which was selected
-                            row = $(this).closest('tr');
+                            row = $(this).closest("tr");
 
                             // empties out textboxes/drop-downs and disables drop-downs just in case the
                             // record is common
-                            $('#r-cat').empty();
-                            $('#r-repo').empty();
-                            $('#r-func').empty();
-                            $('#r-code').empty();
-                            $('#r-type').empty();
-                            $('#r-ret').empty();
-                            $('#r-cat').prop('disabled', 'disabled');
-                            $('#archival').prop('checked', false);
-                            $('#vital').prop('checked', false);
-                            $('#confidential').prop('checked', false);
+                            $("#r-cat").empty();
+                            $("#r-repo").empty();
+                            $("#r-func").empty();
+                            $("#r-code").empty();
+                            $("#r-type").empty();
+                            $("#r-ret").empty();
+                            $("#r-cat").prop("disabled", "disabled");
+                            $("#archival").prop("checked", false);
+                            $("#vital").prop("checked", false);
+                            $("#confidential").prop("checked", false);
 
                             // removes alert if there is one, and displays dialog box
-                            $('#ret-table-alert').empty();
-                            $('#myModal').modal('show');
+                            $("#ret-table-alert").empty();
+                            $("#myModal").modal("show");
 
                             // creates list of categories and category IDs for the dropdown, and sorts them
                             var categoryList = [];
                             for (var i = 0; i < genRetention.length; i++) {
-                                categoryList.push(genRetention[i]['Record_x0020_Category_x0020_ID'] + ' - ' + genRetention[i]['Record_x0020_Category']);
+                                categoryList.push(genRetention[i]["Record_x0020_Category_x0020_ID"] + " - " + genRetention[i]["Record_x0020_Category"]);
                             }
                             categoryList.sort();
 
                             // saves variables from table to compare with updated values upon submit
-                            var temp_id = $(this).closest('tr').children()[3].innerText;
-                            var temp_func = $(this).closest('tr').children()[1].innerText;
-                            var temp_repo = $(this).closest('tr').children()[14].innerText;
+                            var temp_id = $(this).closest("tr").children()[3].innerText;
+                            var temp_func = $(this).closest("tr").children()[1].innerText;
+                            var temp_repo = $(this).closest("tr").children()[14].innerText;
 
                             // loads values in dialog (if present in table)
-                            $('#r-code').val($(this).closest('tr').children()[0].innerText);
-                            $('#r-type').val($(this).closest('tr').children()[2].innerText);
-                            $('#r-ret').val($(this).closest('tr').children().innerText);
+                            $("#r-code").val($(this).closest("tr").children()[0].innerText);
+                            $("#r-type").val($(this).closest("tr").children()[2].innerText);
+                            $("#r-ret").val($(this).closest("tr").children().innerText);
 
                             // creates options for function drop-down, and loads value in drop-down if
                             // record has a function defined
-                            var funcOptions = '';
+                            var funcOptions = "";
                             funcOptions += '<option disabled selected="selected">Select a function</option>';
-                            funcOptions += '<option></option>';
+                            funcOptions += "<option></option>";
                             var funcList = Object.keys(generalFunctionLookup);
                             funcList.sort();
                             for (var i = 0; i < funcList.length; i++) {
                                 if (temp_func == funcList[i]) {
                                     funcOptions += '<option selected="selected">';
                                 } else {
-                                    funcOptions += '<option>';
+                                    funcOptions += "<option>";
                                 }
                                 funcOptions += funcList[i];
-                                funcOptions += '</option>';
+                                funcOptions += "</option>";
                             }
-                            $('#r-func').empty();
-                            $('#r-func').append(funcOptions);
+                            $("#r-func").empty();
+                            $("#r-func").append(funcOptions);
 
                             // creates options for repo drop-down, and loads value in drop-down if record
                             // has a repo defined
-                            var repoOptions = '';
+                            var repoOptions = "";
                             repoOptions += '<option disabled selected="selected">Select a repository</option>';
                             for (var i = 0; i < repos.length; i++) {
-                                if (temp_repo == repos[i]['Repository']) {
+                                if (temp_repo == repos[i]["Repository"]) {
                                     repoOptions += '<option selected="selected">';
                                 } else {
-                                    repoOptions += '<option>';
+                                    repoOptions += "<option>";
                                 }
-                                repoOptions += repos[i]['Repository'];
-                                repoOptions += '</option>';
+                                repoOptions += repos[i]["Repository"];
+                                repoOptions += "</option>";
                             }
-                            $('#r-repo').empty();
-                            $('#r-repo').append(repoOptions);
+                            $("#r-repo").empty();
+                            $("#r-repo").append(repoOptions);
 
                             // checks table for archival, vital, and highly confidential - checks
                             // corresponding boxes accordingly
-                            var archival = $(this).closest('tr').children()[11].innerText;
-                            var vital = $(this).closest('tr').children()[12].innerText;
-                            var highlyConfidential = $(this).closest('tr').children()[13].innerText;
-                            if (archival == 'Yes') {
-                                $('#archival').prop('checked', true);
+                            var archival = $(this).closest("tr").children()[11].innerText;
+                            var vital = $(this).closest("tr").children()[12].innerText;
+                            var highlyConfidential = $(this).closest("tr").children()[13].innerText;
+                            if (archival == "Yes") {
+                                $("#archival").prop("checked", true);
                             }
-                            if (vital == 'Yes') {
-                                $('#vital').prop('checked', true);
+                            if (vital == "Yes") {
+                                $("#vital").prop("checked", true);
                             }
-                            if (highlyConfidential == 'Yes') {
-                                $('#confidential').prop('checked', true);
+                            if (highlyConfidential == "Yes") {
+                                $("#confidential").prop("checked", true);
                             }
 
                             // enables Record Category drop-down and populates it if Function has been
                             // selected
-                            if ($('#r-func').val() != 'Select a function' && $('#r-func').val() != '' && $('#r-func').val() != null) {
-                                $('#r-cat').prop('disabled', false);
+                            if ($("#r-func").val() != "Select a function" && $("#r-func").val() != "" && $("#r-func").val() != null) {
+                                $("#r-cat").prop("disabled", false);
                                 var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
 
                                 for (var i = 0; i < generalFunctionLookup[temp_func].length; i++) {
-                                    if (generalFunctionLookup[temp_func][i].split(' ')[0] == temp_id) {
+                                    if (generalFunctionLookup[temp_func][i].split(" ")[0] == temp_id) {
                                         catOptions += '<option selected="selected">';
                                     } else {
-                                        catOptions += '<option>';
+                                        catOptions += "<option>";
                                     }
                                     catOptions += generalFunctionLookup[temp_func][i];
-                                    catOptions += '</option>';
+                                    catOptions += "</option>";
                                 }
-                                $('#r-cat').empty();
-                                $('#r-cat').append(catOptions);
+                                $("#r-cat").empty();
+                                $("#r-cat").append(catOptions);
                             }
 
                             // unsets flag used to notify user of admin message
-                            messageRead(itemIDLookup[$('#r-code').val()]);
+                            messageRead(itemIDLookup[$("#r-code").val()]);
 
                             // iterates through dept retention schedule for selected record
                             var temp_record;
                             for (var i = 0; i < deptRecords.length; i++) {
                                 temp_record = deptRecords[i];
-                                if (temp_record['Code'] == $('#r-code').val()) {
+                                if (temp_record["Code"] == $("#r-code").val()) {
                                     break;
                                 }
                             }
 
                             // uses metadata from selected record to populate fields
-                            $('#r-exc').val(temp_record['Retention_x0020_Exception']);
-                            $('#cmts-plan').val(temp_record['CommentsPlan']);
-                            $('#admin-msg').val(temp_record['Message_x0020_To_x0020_Admin']);
-                            $('#admin-cmts').val(temp_record['Message_x0020_From_x0020_Admin']);
+                            $("#r-exc").val(temp_record["Retention_x0020_Exception"]);
+                            $("#cmts-plan").val(temp_record["CommentsPlan"]);
+                            $("#admin-msg").val(temp_record["Message_x0020_To_x0020_Admin"]);
+                            $("#admin-cmts").val(temp_record["Message_x0020_From_x0020_Admin"]);
 
                             // uses these values to check if Status needs to be set ot 'Pending'
-                            initialCat = $('#r-cat').val();
-                            initialUserCmts = $('#admin-msg').val();
-                            initialFunc = $('#r-func').val();
-                            initialCmtsPlan = $('#cmts-plan').val();
+                            initialCat = $("#r-cat").val();
+                            initialUserCmts = $("#admin-msg").val();
+                            initialFunc = $("#r-func").val();
+                            initialCmtsPlan = $("#cmts-plan").val();
 
                             // if common record, don't allow user to change Record Type, Category, or
                             // Function
-                            if ($(this).closest('tr').children()[0].innerText.charAt(0) == 'C') {
-                                $('#r-type').prop('disabled', true);
-                                $('#r-cat').prop('disabled', true);
-                                $('#r-func').prop('disabled', true // if unique record, allow user to change Record Type and Function
+                            if ($(this).closest("tr").children()[0].innerText.charAt(0) == "C") {
+                                $("#r-type").prop("disabled", true);
+                                $("#r-cat").prop("disabled", true);
+                                $("#r-func").prop("disabled", true // if unique record, allow user to change Record Type and Function
                                 );
                             } else {
-                                $('#r-type').prop('disabled', false);
-                                $('#r-func').prop('disabled', false);
+                                $("#r-type").prop("disabled", false);
+                                $("#r-func").prop("disabled", false);
                             }
                         });
 
                         // adds on-change event to function dropdown
-                        $('#r-func').change(function () {
+                        $("#r-func").change(function () {
                             // empties retention and record category
-                            $('#r-ret').val('');
-                            $('#r-cat').empty();
+                            $("#r-ret").val("");
+                            $("#r-cat").empty();
 
                             // if new function chosen is empty string, disable category drop-down and empty
                             // it
-                            if ($('#r-func').val() == '') {
-                                $('#r-cat').prop('disabled', true);
-                                $('#r-cat').val('');
+                            if ($("#r-func").val() == "") {
+                                $("#r-cat").prop("disabled", true);
+                                $("#r-cat").val("");
                                 return;
                             }
 
                             // new function chosen is not empty - make options for categories and add them
                             // to drop-down
-                            $('#r-cat').prop('disabled', false);
+                            $("#r-cat").prop("disabled", false);
                             var catOptions = '<option selected="selected" disabled>Select a category</option><option></option>';
-                            for (var i = 0; i < generalFunctionLookup[$('#r-func').val()].length; i++) {
-                                catOptions += '<option>';
-                                catOptions += generalFunctionLookup[$('#r-func').val()][i];
-                                catOptions += '</option>';
+                            for (var i = 0; i < generalFunctionLookup[$("#r-func").val()].length; i++) {
+                                catOptions += "<option>";
+                                catOptions += generalFunctionLookup[$("#r-func").val()][i];
+                                catOptions += "</option>";
                             }
-                            $('#r-cat').append(catOptions);
+                            $("#r-cat").append(catOptions);
                         });
 
                         // adds on-click event to Save button on dialog box
                         // adds on-click event to Save button on dialog box
-                        $('#saveRecord').click(function () {
+                        $("#saveRecord").click(function () {
                             // retrieves all new values from dialog
-                            var itemID = itemIDLookup[$('#r-code').val()];
-                            var newFunc = $('#r-func option:selected').val();
-                            var newType = $('#r-type').val();
+                            var itemID = itemIDLookup[$("#r-code").val()];
+                            var newFunc = $("#r-func option:selected").val();
+                            var newType = $("#r-type").val();
                             var newCatID;
                             var newCat;
-                            if ($('#r-cat option:selected').val() == 'Select a category' || $('#r-cat option:selected').val() == '' || $('#r-cat option:selected').val() == undefined) {
-                                newCatID = '';
-                                newCat = '';
+                            if ($("#r-cat option:selected").val() == "Select a category" || $("#r-cat option:selected").val() == "" || $("#r-cat option:selected").val() == undefined) {
+                                newCatID = "";
+                                newCat = "";
                             } else {
-                                newCatID = $('#r-cat option:selected').val().split(' ')[0];
-                                newCat = $('#r-cat option:selected').val().split(' ')[0];
+                                newCatID = $("#r-cat option:selected").val().split(" ")[0];
+                                newCat = $("#r-cat option:selected").val().split(" ")[0];
                             }
-                            var newRet = $('#r-ret').val();
-                            var newCmtsPlan = $('#cmts-plan').val();
-                            var newAdminMsg = $('#admin-msg').val();
+                            var newRet = $("#r-ret").val();
+                            var newCmtsPlan = $("#cmts-plan").val();
+                            var newAdminMsg = $("#admin-msg").val();
                             var notifyAdmin = 1;
-                            var newRepo = $('#r-repo option:selected').val();
-                            var archival = 'No';
-                            var vital = 'No';
-                            var highlyConfidential = 'No';
-                            if ($('#archival').is(':checked')) {
-                                archival = 'Yes';
+                            var newRepo = $("#r-repo option:selected").val();
+                            var archival = "No";
+                            var vital = "No";
+                            var highlyConfidential = "No";
+                            if ($("#archival").is(":checked")) {
+                                archival = "Yes";
                             }
-                            if ($('#vital').is(':checked')) {
-                                vital = 'Yes';
+                            if ($("#vital").is(":checked")) {
+                                vital = "Yes";
                             }
-                            if ($('#confidential').is(':checked')) {
-                                highlyConfidential = 'Yes';
+                            if ($("#confidential").is(":checked")) {
+                                highlyConfidential = "Yes";
                             }
 
                             // checks if record is common
-                            if ($('#r-code').val().charAt(0) == 'C') {
+                            if ($("#r-code").val().charAt(0) == "C") {
                                 // calls function to update common record, close modal, and end script
-                                $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+                                $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
                                 updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, notifyAdmin);
-                                $('#myModal').modal('hide');
+                                $("#myModal").modal("hide");
                                 return;
                             }
 
                             // calls function to update unique record and close modal
-                            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+                            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
                             //           itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential
 
                             updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, notifyAdmin, newRepo, archival, vital, highlyConfidential);
-                            $('#myModal').modal('hide');
+                            $("#myModal").modal("hide");
                         });
 
                         // adds on-click function to Delete button which opens modal and updates current
                         // row selected
-                        $('.deleteRecord').click(function () {
-                            $('#delete-modal').modal('show');
-                            row = $(this).closest('tr');
+                        $(".deleteRecord").click(function () {
+                            $("#delete-modal").modal("show");
+                            row = $(this).closest("tr");
                         });
 
                         // adds on-click function to 'Ok' button in Delete modal
-                        $('#ok-delete').click(function () {
+                        $("#ok-delete").click(function () {
                             // retrieves ID of the record, deletes the row, and closes the modal
                             var id = itemIDLookup[row.children()[0].innerText];
-                            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+                            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
                             deleteRecord(row, id);
-                            $('#delete-modal').modal('hide');
+                            $("#delete-modal").modal("hide");
                         });
 
                     case 86:
-                    case 'end':
+                    case "end":
                         return _context2.stop();
                 }
             }
@@ -11458,7 +11458,7 @@ var deleteRecord = function () {
                         return util.deleteRecord(row, id);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context3.stop();
                 }
             }
@@ -11483,7 +11483,7 @@ var updateRecord = function () {
                         return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, 1, newRepo, archival, vital, highlyConfidential);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context4.stop();
                 }
             }
@@ -11508,7 +11508,7 @@ var updateCommonRecord = function () {
                         return util.updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context5.stop();
                 }
             }
@@ -11533,7 +11533,7 @@ var messageRead = function () {
                         return util.messageRead(itemID);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context6.stop();
                 }
             }
@@ -11558,7 +11558,7 @@ var setDRS = function () {
                         return util.setDRS(id, drsComplete);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context7.stop();
                 }
             }
@@ -11583,7 +11583,7 @@ var setReview = function () {
                         return util.setReview(id, reviewComplete);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context8.stop();
                 }
             }
@@ -11606,25 +11606,25 @@ var populateCommonRecordsTab = function () {
                 switch (_context9.prev = _context9.next) {
                     case 0:
                         // divs in department records tab
-                        $('#common-records').append('<div id="common-records-alert"></div>');
-                        $('#common-records').append('<div id="common-records-search"></div>');
-                        $('#common-records').append('<div id="common-table"></div>');
-                        $('#common-records').append('<div id="common-buttons"></div>');
-                        $('#common-records').append('<div id="add-common-dialog" title="Are you sure?"></div>');
-                        $('#common-records').append('<div id="delete-common-dialog" title="Are you sure?"></div>');
+                        $("#common-records").append('<div id="common-records-alert"></div>');
+                        $("#common-records").append('<div id="common-records-search"></div>');
+                        $("#common-records").append('<div id="common-table"></div>');
+                        $("#common-records").append('<div id="common-buttons"></div>');
+                        $("#common-records").append('<div id="add-common-dialog" title="Are you sure?"></div>');
+                        $("#common-records").append('<div id="delete-common-dialog" title="Are you sure?"></div>');
 
                         if (depts.length > 1) {
-                            if ($('#retention-dropdown option:selected').text() != 'Select a department') {
+                            if ($("#retention-dropdown option:selected").text() != "Select a department") {
                                 addCommonRecordsTable(deptParam);
                             } else {
-                                $('#common-records-alert').html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+                                $("#common-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
                             }
                         } else {
                             addCommonRecordsTable(deptParam);
                         }
 
                     case 7:
-                    case 'end':
+                    case "end":
                         return _context9.stop();
                 }
             }
@@ -11652,38 +11652,38 @@ var addCommonRecordsTable = function () {
                         idLookup = {};
 
                         for (i = 0; i < deptRecords.length; i++) {
-                            deptIDList.push(deptRecords[i]['Code']);
-                            idLookup[deptRecords[i]['Code']] = deptRecords[i]['ID'];
+                            deptIDList.push(deptRecords[i]["Code"]);
+                            idLookup[deptRecords[i]["Code"]] = deptRecords[i]["ID"];
                         }
-                        tableRows = '';
+                        tableRows = "";
                         // creates all rows for common records table
 
                         for (i = 0; i < commonRecordsList.length; i++) {
-                            tableRows += '<tr id="commonrow' + i + '"><td style="display:none">' + commonRecordsList[i]['Code'] + '</td>';
-                            if (deptIDList.indexOf(commonRecordsList[i]['Code']) > -1) {
+                            tableRows += '<tr id="commonrow' + i + '"><td style="display:none">' + commonRecordsList[i]["Code"] + "</td>";
+                            if (deptIDList.indexOf(commonRecordsList[i]["Code"]) > -1) {
                                 tableRows += '<td><input title="To delete a record, go to the Department Retention Schedule ta' + 'b" type="checkbox" id="chkbx' + i + '" checked disabled></td>';
                             } else {
                                 tableRows += '<td><input type="checkbox" id="chkbx' + i + '"></td>';
                             }
-                            tableRows += '<td>' + commonRecordsList[i]['Function'] + '</td>';
-                            tableRows += '<td>' + commonRecordsList[i]['Record_x0020_Type'] + '</td>';
-                            tableRows += '<td>' + commonRecordsList[i]['Retention_x0020_Description'] + '</td>';
-                            arch = commonRecordsList[i]['Archival'];
+                            tableRows += "<td>" + commonRecordsList[i]["Function"] + "</td>";
+                            tableRows += "<td>" + commonRecordsList[i]["Record_x0020_Type"] + "</td>";
+                            tableRows += "<td>" + commonRecordsList[i]["Retention_x0020_Description"] + "</td>";
+                            arch = commonRecordsList[i]["Archival"];
 
-                            if (arch == 'No') {
-                                arch = '';
+                            if (arch == "No") {
+                                arch = "";
                             }
-                            tableRows += '<td>' + arch + '</td></tr>';
+                            tableRows += "<td>" + arch + "</td></tr>";
                         }
                         // adds table to Common Records tab
-                        $('#common-table').empty();
-                        $('#common-table').html('</br><table class="table table-striped" id="common-table"><thead><tr><th style="display:none">Code</th><th>Select</th><th>Function</th><th>Record Type</th> \
-  ' + '                              <th>Retention Description</th><th>Archival</th></t' + 'r></thead><tbody>' + tableRows + '</tbody></table>');
+                        $("#common-table").empty();
+                        $("#common-table").html('</br><table class="table table-striped" id="common-table"><thead><tr><th style="display:none">Code</th><th>Select</th><th>Function</th><th>Record Type</th> \
+  ' + "                              <th>Retention Description</th><th>Archival</th></t" + "r></thead><tbody>" + tableRows + "</tbody></table>");
                         // adds buttons below
                         addCommonSubmitButton(deptRecords, deptIDList, commonRecordsList.length, idLookup, dept);
 
                     case 11:
-                    case 'end':
+                    case "end":
                         return _context10.stop();
                 }
             }
@@ -11705,7 +11705,7 @@ var addCommonRecord = function () {
                         return util.addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context11.stop();
                 }
             }
@@ -11737,25 +11737,25 @@ var addUniqueFields = function () {
                         size = result[0];
                         itemID = result[1];
 
-                        $('#unique-fields').html('<div class="container">');
-                        options = '';
+                        $("#unique-fields").html('<div class="container">');
+                        options = "";
 
-                        options += '<option disabled selected>Select a function</option>';
-                        options += '<option></option>';
+                        options += "<option disabled selected>Select a function</option>";
+                        options += "<option></option>";
                         funcList = Object.keys(generalFunctionLookup);
 
                         funcList.sort();
                         for (i = 0; i < funcList.length; i++) {
-                            options += '<option>' + funcList[i] + '</option>';
+                            options += "<option>" + funcList[i] + "</option>";
                         }
-                        repoOptions = '';
+                        repoOptions = "";
 
-                        repoOptions += '<option disabled selected>Select a repository</option>';
+                        repoOptions += "<option disabled selected>Select a repository</option>";
                         for (i = 0; i < repos.length; i++) {
-                            repoOptions += '<option>' + repos[i]['Repository'] + '</option>';
+                            repoOptions += "<option>" + repos[i]["Repository"] + "</option>";
                         }
 
-                        $('#unique-fields').append('</br></br><form id="uniqueRecordsForm" class="form-horizontal"> \
+                        $("#unique-fields").append('</br></br><form id="uniqueRecordsForm" class="form-horizontal"> \
                                 <div class="form-group"> \
                                   <label class="control-label col-sm-2" for="rec-type">Record Type: <span id="red-ast">*</span></label> \
                                   <div class="col-sm-8"> \
@@ -11766,11 +11766,11 @@ var addUniqueFields = function () {
                                   <label class="control-label col-sm-2" for="rec-func">Proposed Function:</label> \
                                   <div class="col-sm-8"> \
                                     <select class="form-control" id="rec-func"> \
-             ' + options + ' \
+             ' + options + " \
                                     </select> \
-                             ' + '     </div> \
+                             " + "     </div> \
                                 </div> \
-                         ' + '       <div class="form-group"> \
+                         " + '       <div class="form-group"> \
                                   <label class="control-label col-sm-2" for="rec-cat">Proposed Category:</label> \
                                   <div class="col-sm-8"> \
                                   <select class="form-control" id="rec-cat" disabled> \
@@ -11799,7 +11799,7 @@ var addUniqueFields = function () {
                                   <label class="control-label col-sm-2" for="rec-repo">Repository: </label> \
                                   <div class="col-sm-8"> \
                                     <select class="form-control" id="rec-repo"> \
-    ' + '                                  ' + repoOptions + ' \
+    ' + "                                  " + repoOptions + ' \
                                     </select> \
                   </div> \
                                 </div> \
@@ -11815,43 +11815,43 @@ var addUniqueFields = function () {
                                 </div> \
                <div class="form-group"> \
                                   <div style="padding-left: 15em"> \
-                                    <label><input type="checkbox" value="" id="confidential-chkbx"> Highly Confidential</label> ' + '\
+                                    <label><input type="checkbox" value="" id="confidential-chkbx"> Highly Confidential</label> ' + "\
                                   </div> \
-                                </d' + 'iv> \
+                                </d" + 'iv> \
                                 <div class="form-group"> \
                                   <div style="padding-left: 8em"><span display="inline-block" id="red-ast">*</span> means required field</div> \
-                              ' + '  </div> \
-                              </form>');
+                              ' + "  </div> \
+                              </form>");
 
-                        $('#rec-func').change(function () {
-                            $('#retention').val('');
-                            $('#rec-cat').empty();
-                            if ($('#rec-func').val() == '') {
-                                $('#rec-cat').val('');
-                                $('#rec-cat').prop('disabled', true);
+                        $("#rec-func").change(function () {
+                            $("#retention").val("");
+                            $("#rec-cat").empty();
+                            if ($("#rec-func").val() == "") {
+                                $("#rec-cat").val("");
+                                $("#rec-cat").prop("disabled", true);
                                 return;
                             } else {
-                                var catOptions = '<option>Select a category</option><option></option>';
-                                for (var i = 0; i < generalFunctionLookup[$('#rec-func').val()].length; i++) {
-                                    catOptions += '<option>';
-                                    catOptions += generalFunctionLookup[$('#rec-func').val()][i];
-                                    catOptions += '</option>';
+                                var catOptions = "<option>Select a category</option><option></option>";
+                                for (var i = 0; i < generalFunctionLookup[$("#rec-func").val()].length; i++) {
+                                    catOptions += "<option>";
+                                    catOptions += generalFunctionLookup[$("#rec-func").val()][i];
+                                    catOptions += "</option>";
                                 }
-                                $('#rec-cat').append(catOptions);
-                                $('#rec-cat').prop('disabled', false);
+                                $("#rec-cat").append(catOptions);
+                                $("#rec-cat").prop("disabled", false);
                             }
                         });
 
-                        $('#rec-cat').change(function () {
-                            var index = $('#rec-cat').val().indexOf('-');
-                            var category = $('#rec-cat').val().substring($('#rec-cat').val().indexOf('-') + 2);
-                            $('#retention').val(generalRetentionLookup[category]);
+                        $("#rec-cat").change(function () {
+                            var index = $("#rec-cat").val().indexOf("-");
+                            var category = $("#rec-cat").val().substring($("#rec-cat").val().indexOf("-") + 2);
+                            $("#retention").val(generalRetentionLookup[category]);
                         });
 
                         addUniqueSubmit(dept, size, itemID);
 
                     case 22:
-                    case 'end':
+                    case "end":
                         return _context12.stop();
                 }
             }
@@ -11873,10 +11873,10 @@ var getSize = function () {
                         return util.getSize(dept);
 
                     case 2:
-                        return _context13.abrupt('return', _context13.sent);
+                        return _context13.abrupt("return", _context13.sent);
 
                     case 3:
-                    case 'end':
+                    case "end":
                         return _context13.stop();
                 }
             }
@@ -11898,7 +11898,7 @@ var updateSize = function () {
                         return util.updateSize(itemID, size);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context14.stop();
                 }
             }
@@ -11920,7 +11920,7 @@ var addSize = function () {
                         return util.addSize(dept, size);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context15.stop();
                 }
             }
@@ -11942,7 +11942,7 @@ var addUniqueRecord = function () {
                         return util.addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
 
                     case 2:
-                    case 'end':
+                    case "end":
                         return _context16.stop();
                 }
             }
@@ -11992,14 +11992,14 @@ var deptParam = void 0,
     populateDeptRetentionTab();
 
     // adds on-click event when changing tabs - loads respective tab
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        var target = $(e.target).attr('href');
-        if (target == '#dept-retention') {
+    $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+        var target = $(e.target).attr("href");
+        if (target == "#dept-retention") {
             populateDeptRetentionTab();
-        } else if (target == '#common-records') {
+        } else if (target == "#common-records") {
             populateCommonRecordsTab();
-        } else if (target == '#unique-records') {
-            $('#finished').prop('disabled', 'disabled');
+        } else if (target == "#unique-records") {
+            $("#finished").prop("disabled", "disabled");
             populateUniqueRecordsTab();
         }
     });
@@ -12011,81 +12011,81 @@ Loads drop-down list of depts based on if you are Record Liaison of one or multi
 */
 function populateDeptRetentionTab() {
     // divs to organize content in Dept Retention tab
-    $('#dept-retention').html('<div id="dept-ret-dropdown"></div>');
-    $('#dept-retention').append('<div id="dept-ret-table"></div>');
-    $('#dept-retention').append('<div id="ret-table-alert"></div>');
-    $('#dept-retention').append('<div id="dept-ret-buttons"></div>');
-    $('#dept-retention').append('<div id="update-dialog" title="Update Record"></div>');
+    $("#dept-retention").html('<div id="dept-ret-dropdown"></div>');
+    $("#dept-retention").append('<div id="dept-ret-table"></div>');
+    $("#dept-retention").append('<div id="ret-table-alert"></div>');
+    $("#dept-retention").append('<div id="dept-ret-buttons"></div>');
+    $("#dept-retention").append('<div id="update-dialog" title="Update Record"></div>');
 
     // function which defines layout of 'Edit Details' modal and 'Delete' modal
     setModals();
 
     // if user is listed on Administrator list, all depts are viewable
     if (isAdmin) {
-        var optionsStr = '';
-        optionsStr += '<option disabled selected>Select a department</option>';
+        var optionsStr = "";
+        optionsStr += "<option disabled selected>Select a department</option>";
         for (var i = 0; i < depts.length; i++) {
             if (deptParam == depts[i]) {
-                optionsStr += '<option value=' + depts[i] + ' selected>' + depts[i] + ' - ' + deptNameLookup[depts[i]] + '</option>';
+                optionsStr += "<option value=" + depts[i] + " selected>" + depts[i] + " - " + deptNameLookup[depts[i]] + "</option>";
             } else {
-                optionsStr += '<option value=' + depts[i] + '>' + depts[i] + ' - ' + deptNameLookup[depts[i]] + '</option>';
+                optionsStr += "<option value=" + depts[i] + ">" + depts[i] + " - " + deptNameLookup[depts[i]] + "</option>";
             }
         }
-        $('#retention-dropdown').html(optionsStr);
+        $("#retention-dropdown").html(optionsStr);
 
         // loads dept retention schedule if dept was previously selected and page
         // reloaded, else alerts user to select a department
-        if ($('#retention-dropdown option:selected').text() != 'Select a department') {
+        if ($("#retention-dropdown option:selected").text() != "Select a department") {
             loadRetentionSchedule(deptParam);
         } else {
-            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
         }
 
         // when user selects dept, retention schedule is loaded for selected dept, and
         // dept appended to URL to remember dept number on page reload
-        $('#retention-dropdown').on('change', function () {
+        $("#retention-dropdown").on("change", function () {
             var dept = $(this).val().slice(0, 3);
             var currentURL = location.href;
-            if (currentURL.indexOf('&dept=') != -1) {
+            if (currentURL.indexOf("&dept=") != -1) {
                 currentURL = currentURL.slice(0, -9);
             }
-            location.replace(currentURL + '&dept=' + dept);
+            location.replace(currentURL + "&dept=" + dept);
         }); // loads retention schedule immediately if user is liaison of only one
         // department
     } else if (depts.length == 1) {
         deptParam = depts[0];
-        $('#retention-dropdown').html('<option value=' + deptParam + ' selected>' + deptParam + ' - ' + deptNameLookup[deptParam] + '</option>');
+        $("#retention-dropdown").html("<option value=" + deptParam + " selected>" + deptParam + " - " + deptNameLookup[deptParam] + "</option>");
         loadRetentionSchedule(deptParam); // populates drop-down list with depts of which user is a liaison and adds
         // on-change event
     } else {
-        var optionsStr = '';
-        optionsStr += '<option disabled selected>Select a department</option>';
+        var optionsStr = "";
+        optionsStr += "<option disabled selected>Select a department</option>";
         for (var i = 0; i < depts.length; i++) {
             if (deptParam == depts[i]) {
-                optionsStr += '<option value=' + depts[i] + ' selected>' + depts[i] + ' - ' + deptNameLookup[depts[i]] + '</option>';
+                optionsStr += "<option value=" + depts[i] + " selected>" + depts[i] + " - " + deptNameLookup[depts[i]] + "</option>";
             } else {
-                optionsStr += '<option value=' + depts[i] + '>' + depts[i] + ' - ' + deptNameLookup[depts[i]] + '</option>';
+                optionsStr += "<option value=" + depts[i] + ">" + depts[i] + " - " + deptNameLookup[depts[i]] + "</option>";
             }
         }
 
         // loads dept retention schedule if dept was previously selected and page
         // reloaded, else alerts user to select a department
-        $('#retention-dropdown').html(optionsStr);
-        if ($('#retention-dropdown option:selected').text() != 'Select a department') {
+        $("#retention-dropdown").html(optionsStr);
+        if ($("#retention-dropdown option:selected").text() != "Select a department") {
             loadRetentionSchedule(deptParam);
         } else {
-            $('#ret-table-alert').html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+            $("#ret-table-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
         }
 
         // when user selects dept, retention schedule is loaded for selected dept, and
         // dept appended to URL to remember dept number on page reload
-        $('#retention-dropdown').on('change', function () {
+        $("#retention-dropdown").on("change", function () {
             var dept = $(this).val().slice(0, 3);
             var currentURL = location.href;
-            if (currentURL.indexOf('&dept=') != -1) {
+            if (currentURL.indexOf("&dept=") != -1) {
                 currentURL = currentURL.slice(0, -9);
             }
-            location.replace(currentURL + '&dept=' + dept);
+            location.replace(currentURL + "&dept=" + dept);
         });
     }
 }
@@ -12096,7 +12096,7 @@ The content for the text boxes and drop-down lists are added dynamically when cl
 */
 function setModals() {
     // the 'Edit Details' dialog box is formatted
-    $('#dept-retention').append('<div id="myModal" class="modal fade" role="dialog"> \
+    $("#dept-retention").append('<div id="myModal" class="modal fade" role="dialog"> \
                           <div class="modal-dialog"> \
                                 <div class="modal-content"> \
                                   <div class="modal-header"> \
@@ -12197,7 +12197,7 @@ function setModals() {
            </div>');
 
     // the 'Delete' dialog box is formatted
-    $('#dept-retention').append('<div id="delete-modal" class="modal fade" role="dialog"> \
+    $("#dept-retention").append('<div id="delete-modal" class="modal fade" role="dialog"> \
                               <div class="modal-dialog"> \
                                 <div class="modal-content"> \
                                   <div class="modal-header"> \
@@ -12217,22 +12217,22 @@ function setModals() {
                             </div>');
 }function makePDF() {
     // creates title, headers, and a heading for the PDF
-    var titleString = '\nDepartment Retention Schedule for Dept# ' + deptParam + ' - ' + deptNameLookup[deptParam];
+    var titleString = "\nDepartment Retention Schedule for Dept# " + deptParam + " - " + deptNameLookup[deptParam];
     var headers = [{
-        text: 'Record Type',
-        style: 'tableHeader'
+        text: "Record Type",
+        style: "tableHeader"
     }, {
-        text: 'Retention',
-        style: 'tableHeader'
+        text: "Retention",
+        style: "tableHeader"
     }, {
-        text: 'Exception',
-        style: 'tableHeader'
+        text: "Exception",
+        style: "tableHeader"
     }, {
-        text: 'Archival',
-        style: 'tableHeader'
+        text: "Archival",
+        style: "tableHeader"
     }, {
-        text: 'Comments / Plan',
-        style: 'tableHeader'
+        text: "Comments / Plan",
+        style: "tableHeader"
     }];
     var theBody = [];
     var date = new Date();
@@ -12241,67 +12241,67 @@ function setModals() {
 
     // iterates through rows of table to retrieve values - adds value to PDF row if
     // not empty
-    var rows = $('#dept-ret-table tr');
+    var rows = $("#dept-ret-table tr");
     for (var i = 1; i < rows.length; i++) {
         var tempRow = [];
         var cells = $(rows[i])[0].childNodes;
-        if ($(cells)[2].innerText == '' || $(cells)[2].innerText == 'null' || $(cells)[2].innerText == null) {
-            tempRow.push(' - ');
+        if ($(cells)[2].innerText == "" || $(cells)[2].innerText == "null" || $(cells)[2].innerText == null) {
+            tempRow.push(" - ");
         } else {
             tempRow.push($(cells)[2].innerText);
         }
-        if ($(cells)[5].innerText == '' || $(cells)[5].innerText == 'null' || $(cells)[5].innerText == null) {
-            tempRow.push(' - ');
+        if ($(cells)[5].innerText == "" || $(cells)[5].innerText == "null" || $(cells)[5].innerText == null) {
+            tempRow.push(" - ");
         } else {
             tempRow.push($(cells)[5].innerText);
         }
-        if ($(cells)[6].innerText == '' || $(cells)[6].innerText == 'null' || $(cells)[6].innerText == null) {
-            tempRow.push(' - ');
+        if ($(cells)[6].innerText == "" || $(cells)[6].innerText == "null" || $(cells)[6].innerText == null) {
+            tempRow.push(" - ");
         } else {
             tempRow.push($(cells)[6].innerText);
         }
-        if ($(cells)[11].innerText == 'Yes') {
-            tempRow.push('Yes');
+        if ($(cells)[11].innerText == "Yes") {
+            tempRow.push("Yes");
         } else {
-            tempRow.push('No');
+            tempRow.push("No");
         }
 
         // Adds repo, vital, and highly confidential to Comments section if not
         // empty/checked
-        var comments = '';
+        var comments = "";
         var hasComment = false;
         var hasRepo = false;
         var isVital = false;
         var isConf = false;
-        if ($(cells)[7].innerText != '' && $(cells)[7].innerText != 'null' && $(cells)[7].innerText != null) {
+        if ($(cells)[7].innerText != "" && $(cells)[7].innerText != "null" && $(cells)[7].innerText != null) {
             hasComment = true;
             comments += $(cells)[7].innerText;
         }
-        if ($(cells)[14].innerText != '' && $(cells)[14].innerText != 'null' && $(cells)[14].innerText != null && $(cells)[14].innerText != 'Select a repository') {
+        if ($(cells)[14].innerText != "" && $(cells)[14].innerText != "null" && $(cells)[14].innerText != null && $(cells)[14].innerText != "Select a repository") {
             hasRepo = true;
             if (hasComment) {
-                comments += '\n';
+                comments += "\n";
             }
-            if ($(cells)[14].innerText != 'Other (please specify in the Comments section)') {
-                comments += 'Stored in: ' + $(cells)[14].innerText;
+            if ($(cells)[14].innerText != "Other (please specify in the Comments section)") {
+                comments += "Stored in: " + $(cells)[14].innerText;
             }
         }
-        if ($(cells)[12].innerText == 'Yes') {
+        if ($(cells)[12].innerText == "Yes") {
             isVital = true;
             if (hasComment || hasRepo) {
-                comments += '\n';
+                comments += "\n";
             }
-            comments += 'Vital record';
+            comments += "Vital record";
         }
-        if ($(cells)[13].innerText == 'Yes') {
+        if ($(cells)[13].innerText == "Yes") {
             isConf = true;
             if (hasComments || hasRepo || isVital) {
-                comments += '\n';
+                comments += "\n";
             }
-            comments += 'Highly Confidential';
+            comments += "Highly Confidential";
         }
         if (!hasComment && !hasRepo && !isVital && !isConf) {
-            tempRow.push(' - ');
+            tempRow.push(" - ");
         } else {
             tempRow.push(comments);
         }
@@ -12312,35 +12312,35 @@ function setModals() {
 
     // document definition for PDF, adding in table body I created above
     var dd = {
-        title: 'Department Retention Schedule',
+        title: "Department Retention Schedule",
         footer: function footer(currentPage, pageCount) {
             return {
-                text: currentPage.toString() + ' of ' + pageCount,
-                alignment: 'center'
+                text: currentPage.toString() + " of " + pageCount,
+                alignment: "center"
             };
         },
-        pageOrientation: 'landscape',
+        pageOrientation: "landscape",
         content: [{
-            text: 'University Records & Information Management\nDate Printed: ' + dateStr,
-            style: 'header'
+            text: "University Records & Information Management\nDate Printed: " + dateStr,
+            style: "header"
         }, {
             text: titleString,
-            style: 'title'
-        }, '\n\n', {
+            style: "title"
+        }, "\n\n", {
             columns: [{
-                width: '*',
-                text: ''
+                width: "*",
+                text: ""
             }, {
-                style: 'table',
-                width: 'auto',
+                style: "table",
+                width: "auto",
                 table: {
-                    widths: ['*', '*', 75, 30, '*'],
+                    widths: ["*", "*", 75, 30, "*"],
                     body: theBody
                 },
-                layout: 'lightHorizontalLines'
+                layout: "lightHorizontalLines"
             }, {
-                width: '*',
-                text: ''
+                width: "*",
+                text: ""
             }]
         }],
         styles: {
@@ -12350,7 +12350,7 @@ function setModals() {
             },
             title: {
                 fontSize: 16,
-                alignment: 'center'
+                alignment: "center"
             },
             table: {
                 fontSize: 9
@@ -12362,39 +12362,39 @@ function setModals() {
         }
 
         // after creation, PDF will be downloaded automatically
-    };pdfMake.createPdf(dd).download('DRS.pdf');
+    };pdfMake.createPdf(dd).download("DRS.pdf");
 }
 
 function addCommonSubmitButton(deptRecords, deptIDList, length, idLookup, dept) {
     // adds buttons to Common Records tab below table
-    $('#common-buttons').empty();
-    $('#common-buttons').append('<div id="submit-alert"></div></br>');
-    $('#common-buttons').append('<div class="btn-group"><button type="button" class="btn btn-primary" id="common-submit">Submit</button></div>');
+    $("#common-buttons").empty();
+    $("#common-buttons").append('<div id="submit-alert"></div></br>');
+    $("#common-buttons").append('<div class="btn-group"><button type="button" class="btn btn-primary" id="common-submit">Submit</button></div>');
     // adds events to button clicks
-    $('#common-submit').click(function () {
-        $('#submit-alert').html('');
+    $("#common-submit").click(function () {
+        $("#submit-alert").html("");
         var addRows = [];
         for (var i = 0; i < length; i++) {
-            if ($('#commonrow' + i).find('input:checkbox')[0].checked) {
-                if (deptIDList.indexOf($('#commonrow' + i).children()[0].innerText) == -1) {
+            if ($("#commonrow" + i).find("input:checkbox")[0].checked) {
+                if (deptIDList.indexOf($("#commonrow" + i).children()[0].innerText) == -1) {
                     addRows.push(i);
                 }
             }
         }
 
         if (addRows.length > 0) {
-            $('#submit-alert').html('');
+            $("#submit-alert").html("");
             for (var i = 0; i < addRows.length; i++) {
                 var rowNum = addRows[i];
-                var tempCode = $('#commonrow' + rowNum).children()[0].innerText;
-                var tempFunc = $('#commonrow' + rowNum).children()[2].innerText;
-                var tempType = $('#commonrow' + rowNum).children()[3].innerText;
-                var tempRet = $('#commonrow' + rowNum).children()[4].innerText;
-                var tempArch = $('#commonrow' + rowNum).children()[5].innerText;
-                if (tempArch == '') {
-                    tempArch = 'No';
+                var tempCode = $("#commonrow" + rowNum).children()[0].innerText;
+                var tempFunc = $("#commonrow" + rowNum).children()[2].innerText;
+                var tempType = $("#commonrow" + rowNum).children()[3].innerText;
+                var tempRet = $("#commonrow" + rowNum).children()[4].innerText;
+                var tempArch = $("#commonrow" + rowNum).children()[5].innerText;
+                if (tempArch == "") {
+                    tempArch = "No";
                 }
-                $('#submit-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+                $("#submit-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
                 if (i == addRows.length - 1) {
                     addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, 1);
                 } else {
@@ -12402,23 +12402,23 @@ function addCommonSubmitButton(deptRecords, deptIDList, length, idLookup, dept) 
                 }
             }
         } else {
-            $('#submit-alert').html('<div class="alert alert-info" role="alert">There were no records selected to be added.</div>');
+            $("#submit-alert").html('<div class="alert alert-info" role="alert">There were no records selected to be added.</div>');
         }
     });
 }
 
 function populateUniqueRecordsTab() {
     // adds divs for different parts of unique records tab
-    $('#unique-records').append('<div id="unique-records-alert"></div>');
-    $('#unique-records').append('<div id="unique-fields"></div>');
-    $('#unique-records').append('<div id="unique-alert"></div>');
-    $('#unique-records').append('<div id="unique-buttons"></div>');
+    $("#unique-records").append('<div id="unique-records-alert"></div>');
+    $("#unique-records").append('<div id="unique-fields"></div>');
+    $("#unique-records").append('<div id="unique-alert"></div>');
+    $("#unique-records").append('<div id="unique-buttons"></div>');
     // user is a part of more than one department
     if (depts.length > 1) {
-        if ($('#retention-dropdown option:selected').text() != 'Select a department') {
+        if ($("#retention-dropdown option:selected").text() != "Select a department") {
             addUniqueFields(deptParam);
         } else {
-            $('#unique-records-alert').html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+            $("#unique-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
         }
     } else {
         addUniqueFields(deptParam);
@@ -12426,53 +12426,53 @@ function populateUniqueRecordsTab() {
 }
 
 function addUniqueSubmit(dept, size, itemID) {
-    $('#unique-buttons').empty();
-    $('#unique-buttons').append('<div align="center"><button type="button" class="btn btn-primary" id="unique-submit">Submit</button> \
+    $("#unique-buttons").empty();
+    $("#unique-buttons").append('<div align="center"><button type="button" class="btn btn-primary" id="unique-submit">Submit</button> \
     &ensp;<button type="button" class="btn btn-primary" id="finished" disabled>Finished</button></div>');
-    $('#unique-buttons').append('\n\n\n\n\n');
+    $("#unique-buttons").append("\n\n\n\n\n");
     // adds event handlers to buttons
-    $('#unique-submit').click(function () {
-        $('#unique-alert').empty();
-        if ($('#rec-type').val() == '') {
-            $('#unique-alert').html('</br><div class="alert alert-warning" role="alert">Record Type cannot be left blank</div>');
+    $("#unique-submit").click(function () {
+        $("#unique-alert").empty();
+        if ($("#rec-type").val() == "") {
+            $("#unique-alert").html('</br><div class="alert alert-warning" role="alert">Record Type cannot be left blank</div>');
             setTimeout(function () {
-                $('#unique-alert').empty();
+                $("#unique-alert").empty();
             }, 5000);
             return;
         }
-        var recRepo = $('#rec-repo option:selected').val();
-        if (recRepo == 'Select a repository') {
-            recRepo = '';
+        var recRepo = $("#rec-repo option:selected").val();
+        if (recRepo == "Select a repository") {
+            recRepo = "";
         }
-        var recFunc = $('#rec-func option:selected').val();
-        if (recFunc == 'Select a function') {
-            recFunc = '';
+        var recFunc = $("#rec-func option:selected").val();
+        if (recFunc == "Select a function") {
+            recFunc = "";
         }
-        var recType = $('#rec-type').val();
+        var recType = $("#rec-type").val();
         var recCat;
-        if ($('#rec-cat option:selected').val() == '' || $('#rec-cat option:selected').val() == null) {
-            recCat = '';
+        if ($("#rec-cat option:selected").val() == "" || $("#rec-cat option:selected").val() == null) {
+            recCat = "";
         } else {
-            recCat = $('#rec-cat option:selected').val().split(' ')[0];
+            recCat = $("#rec-cat option:selected").val().split(" ")[0];
         }
-        var adminMsg = $('#adminMsg').val();
-        var commentsPlan = $('#commentsPlan').val();
-        $('#finished').prop('disabled', false);
-        var archival = 'No';
-        var vital = 'No';
-        var highlyConfidential = 'No';
-        if ($('#archival-chkbx').is(':checked')) {
-            archival = 'Yes';
+        var adminMsg = $("#adminMsg").val();
+        var commentsPlan = $("#commentsPlan").val();
+        $("#finished").prop("disabled", false);
+        var archival = "No";
+        var vital = "No";
+        var highlyConfidential = "No";
+        if ($("#archival-chkbx").is(":checked")) {
+            archival = "Yes";
         }
-        if ($('#vital-chkbx').is(':checked')) {
-            vital = 'Yes';
+        if ($("#vital-chkbx").is(":checked")) {
+            vital = "Yes";
         }
-        if ($('#confidential-chkbx').is(':checked')) {
-            highlyConfidential = 'Yes';
+        if ($("#confidential-chkbx").is(":checked")) {
+            highlyConfidential = "Yes";
         }
 
-        var code = 'U' + size;
-        $('#unique-alert').html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+        var code = "U" + size;
+        $("#unique-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
         addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
         size++;
         if (itemID == -1) {
@@ -12482,7 +12482,7 @@ function addUniqueSubmit(dept, size, itemID) {
         }
     });
 
-    $('#finished').click(function () {
+    $("#finished").click(function () {
         location.reload();
     });
 }
