@@ -9685,7 +9685,7 @@
 	                            window.getCurrentState = getCurrentState;
 	                            $('#editForm').change(function () {
 	                                var latestState = getCurrentState();
-	                                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null) {
+	                                if (latestState[1].parse === "" || latestState[2] === "" || latestState[2] === "Select a category" || latestState[2] === null || latestState[3] === "" || latestState[3] === "Select a category" || latestState[3] === null || latestState[6] === initialCmtsPlan) {
 	                                    $('#saveRecord').prop('disabled', true);
 	                                    return;
 	                                }
@@ -9822,6 +9822,7 @@
 	                            initialCat = $('#r-cat').val();
 	                            initialUserCmts = $('#admin-msg').val();
 	                            initialFunc = $('#r-func').val();
+	                            initialCmtsPlan = $('#cmts-plan').val();
 	
 	                            // if common record, don't allow user to change Record Type, Category, or
 	                            // Function
@@ -10483,6 +10484,7 @@
 	    initialCat = void 0,
 	    initialUserCmts = void 0,
 	    initialFunc = void 0,
+	    initialCmtsPlan = void 0,
 	    repos = void 0,
 	    commonRecordsList = void 0,
 	    commonRetentionLookup = void 0,
