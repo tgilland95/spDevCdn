@@ -9233,6 +9233,11 @@
 
 	"use strict";
 	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.run = undefined;
+	
 	/*
 	Initial function called by main.js
 	Tests to see if user is admin or not
@@ -9240,7 +9245,7 @@
 	Makes lookup objects for later use
 	Calls 'populateTabs' to continue script
 	*/
-	var run = function () {
+	var run = exports.run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
 	
