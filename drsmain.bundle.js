@@ -9233,11 +9233,6 @@
 
 	"use strict";
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.run = undefined;
-	
 	/*
 	Initial function called by main.js
 	Tests to see if user is admin or not
@@ -9245,7 +9240,7 @@
 	Makes lookup objects for later use
 	Calls 'populateTabs' to continue script
 	*/
-	var run = exports.run = function () {
+	var run = function () {
 	    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hWebUrl, aWebUrl, deptURLParam) {
 	        var userName, admins, deptArr, _deptArr, i, tempList;
 	
@@ -9388,11 +9383,6 @@
 	Sets on-tab-change event to call respective function based on tab clicked
 	*/
 	
-	
-	/*
-	'Edit Details' and 'Delete' dialog boxes are formatted
-	The content for the text boxes and drop-down lists are added dynamically when clicked
-	*/
 	
 	/*
 	Checks if dept parameter has completed DRS / Annual Review to populate checkboxes
@@ -10465,18 +10455,21 @@
 	
 	var util = _interopRequireWildcard(_Utils);
 	
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"@types/jquery\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
 	var _jquery = __webpack_require__(332);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _html = __webpack_require__(333);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; } //@ts-check
+	// imports
 	
+	
+	// global vars
 	var deptParam = void 0,
 	    depts = void 0,
 	    deptNameLookup = void 0,
@@ -10527,7 +10520,7 @@
 	    (0, _jquery2.default)("#dept-retention").append('<div id="update-dialog" title="Update Record"></div>');
 	
 	    // function which defines layout of 'Edit Details' modal and 'Delete' modal
-	    _html.html.setModals();
+	    setModals();
 	
 	    // if user is listed on Administrator list, all depts are viewable
 	    if (isAdmin) {
@@ -10597,6 +10590,133 @@
 	            location.replace(currentURL + "&dept=" + dept);
 	        });
 	    }
+	}
+	
+	/*
+	'Edit Details' and 'Delete' dialog boxes are formatted
+	The content for the text boxes and drop-down lists are added dynamically when clicked
+	*/
+	function setModals() {
+	    // the 'Edit Details' dialog box is formatted
+	    (0, _jquery2.default)("#dept-retention").append('<div id="myModal" class="modal fade" role="dialog"> \
+	                          <div class="modal-dialog"> \
+	                                <div class="modal-content"> \
+	                                  <div class="modal-header"> \
+	                                    <h4 class="modal-title">Edit</h4> \
+	                                      </div> \
+	                                  <div class="modal-body"> \
+	                                    <form id="editForm" class="form-horizontal"> \
+	                                      <div class="form-group" style="display:none"> \
+	                                        <label class="control-label col-sm-3" for="r-code">Code: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <input type="text" class="form-control" id="r-code" disabled> \
+	                                        </div> \
+	                                      </div> \
+	                          <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-type">Record Type: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <input type="text" class="form-control" id="r-type"> \
+	                                        </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-func">Function: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-func"></select> \
+	                                      </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-cat">Record Category: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-cat" disabled></select> \
+	                                      </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-ret">Retention: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="r-ret" disabled></textarea> \
+	                                        </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                <label class="control-label col-sm-3" for="r-exc">Exception: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="r-exc" disabled></textarea> \
+	                                      </div> \
+	                                        </div> \
+	                               <div class="form-group"> \
+	                 <label class="control-label col-sm-3" for="cmts-plan">Comments / Plan: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="cmts-plan"></textarea> \
+	          </div> \
+	                                      </div> \
+	                    <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="admin-msg">Message to Administrator: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="admin-msg"></textarea> \
+	         </div> \
+	                                      </div> \
+	          <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="admin-cmts">Message from Administrator: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <textarea style="resize:none" class="form-control" id="admin-cmts" disabled></textarea> \
+	                 </div> \
+	                                      </div> \
+	                           <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="r-repo">Repository: </label> \
+	                                        <div class="col-sm-7"> \
+	                                          <select class="form-control" id="r-repo">\
+	                                          </select> \
+	                                        </div> \
+									</div> \
+	                                      <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="archival"> Archival</label> \
+	                                          </div> \
+	                                      </div> \
+	                                        <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="vital"> Vital</label> \
+	                                          </div> \
+	                                      </div> \
+	                                      <div class="form-group"> \
+	                                        <div style="padding-left: 11em"> \
+	                                          <label><input type="checkbox" value="" id="confidential"> Highly Confidential</label> \
+	                                        </div>\
+	                                        </div> \
+	                                        <div class="form-group"> \
+	                                        <label class="control-label col-sm-3" for="blank"></label> \
+	                                        <div class="col-sm-7"> \
+	                                          <span style="font-size: .75em; color:gray">*Changing function, category, or user comments to admin will set the record as pending and will require admin approval.</span>\
+	                                        </div> \
+	                                        </div> \
+	                                    </form> \
+	                                  </div> \
+	                                  <div class="modal-footer"> \
+	                                    <button type="button"  class="btn btn-default" id="saveRecord" disabled="true" >Save</button> \
+	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
+	                              </div> \
+	               </div> \
+	                              </div> \
+	           </div>');
+	
+	    // the 'Delete' dialog box is formatted
+	    (0, _jquery2.default)("#dept-retention").append('<div id="delete-modal" class="modal fade" role="dialog"> \
+	                              <div class="modal-dialog"> \
+	                                <div class="modal-content"> \
+	                                  <div class="modal-header"> \
+	                                    <h4 class="modal-title">Delete Record</h4> \
+	                                  </div> \
+	    <div class="modal-body"> \
+	                                    <h3>Are you sure you want to delete this record?</h3> \
+	                                    </br>\
+	                                    <h5>All user comments will be lost.</p> \
+	                                  </div> \
+	                                  <div class="modal-footer"> \
+	                                    <button type="button" class="btn btn-default" id="ok-delete">OK</button> \
+	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> \
+	                                </div> \
+	                                </div> \
+	                                </div> \
+	                            </div>');
 	}function makePDF() {
 	    // creates title, headers, and a heading for the PDF
 	    var titleString = "\nDepartment Retention Schedule for Dept# " + deptParam + " - " + deptNameLookup[deptParam];
@@ -22536,141 +22656,6 @@
 		return jQuery;
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(324)(module)))
-
-/***/ }),
-/* 333 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var html = exports.html = {
-	
-	    setModals: function setModals() {
-	        // the 'Edit Details' dialog box is formatted
-	        $("#dept-retention").append('<div id="myModal" class="modal fade" role="dialog"> \
-	        <div class="modal-dialog"> \
-	        <div class="modal-content"> \
-	        <div class="modal-header"> \
-	        <h4 class="modal-title">Edit</h4> \
-	        </div> \
-	        <div class="modal-body"> \
-	        <form id="editForm" class="form-horizontal"> \
-	                                      <div class="form-group" style="display:none"> \
-	                                      <label class="control-label col-sm-3" for="r-code">Code: </label> \
-	                                      <div class="col-sm-7"> \
-	                                      <input type="text" class="form-control" id="r-code" disabled> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                      <label class="control-label col-sm-3" for="r-type">Record Type: </label> \
-	                                      <div class="col-sm-7"> \
-	                                      <input type="text" class="form-control" id="r-type"> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                      <label class="control-label col-sm-3" for="r-func">Function: </label> \
-	                                        <div class="col-sm-7"> \
-	                                        <select class="form-control" id="r-func"></select> \
-	                                        </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                      <label class="control-label col-sm-3" for="r-cat">Record Category: </label> \
-	                                      <div class="col-sm-7"> \
-	                                      <select class="form-control" id="r-cat" disabled></select> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                      <label class="control-label col-sm-3" for="r-ret">Retention: </label> \
-	                                      <div class="col-sm-7"> \
-	                                      <textarea style="resize:none" class="form-control" id="r-ret" disabled></textarea> \
-	                                        </div> \
-	                                        </div> \
-	                                      <div class="form-group"> \
-	                                      <label class="control-label col-sm-3" for="r-exc">Exception: </label> \
-	                                      <div class="col-sm-7"> \
-	                                      <textarea style="resize:none" class="form-control" id="r-exc" disabled></textarea> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                 <label class="control-label col-sm-3" for="cmts-plan">Comments / Plan: </label> \
-	                 <div class="col-sm-7"> \
-	                 <textarea style="resize:none" class="form-control" id="cmts-plan"></textarea> \
-	                 </div> \
-	                 </div> \
-	                    <div class="form-group"> \
-	                    <label class="control-label col-sm-3" for="admin-msg">Message to Administrator: </label> \
-	                    <div class="col-sm-7"> \
-	                    <textarea style="resize:none" class="form-control" id="admin-msg"></textarea> \
-	                    </div> \
-	                    </div> \
-	                    <div class="form-group"> \
-	                    <label class="control-label col-sm-3" for="admin-cmts">Message from Administrator: </label> \
-	                    <div class="col-sm-7"> \
-	                    <textarea style="resize:none" class="form-control" id="admin-cmts" disabled></textarea> \
-	                    </div> \
-	                    </div> \
-	                    <div class="form-group"> \
-	                    <label class="control-label col-sm-3" for="r-repo">Repository: </label> \
-	                    <div class="col-sm-7"> \
-	                    <select class="form-control" id="r-repo">\
-	                    </select> \
-	                    </div> \
-	                    </div> \
-	                    <div class="form-group"> \
-	                    <div style="padding-left: 11em"> \
-	                    <label><input type="checkbox" value="" id="archival"> Archival</label> \
-	                    </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                      <div style="padding-left: 11em"> \
-	                                      <label><input type="checkbox" value="" id="vital"> Vital</label> \
-	                                          </div> \
-	                                          </div> \
-	                                          <div class="form-group"> \
-	                                        <div style="padding-left: 11em"> \
-	                                        <label><input type="checkbox" value="" id="confidential"> Highly Confidential</label> \
-	                                        </div>\
-	                                        </div> \
-	                                        <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="blank"></label> \
-	                                        <div class="col-sm-7"> \
-	                                        <span style="font-size: .75em; color:gray">*Changing function, category, or user comments to admin will set the record as pending and will require admin approval.</span>\
-	                                        </div> \
-	                                        </div> \
-	                                        </form> \
-	                                  </div> \
-	                                  <div class="modal-footer"> \
-	                                  <button type="button"  class="btn btn-default" id="saveRecord" disabled="true" >Save</button> \
-	                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
-	                                  </div> \
-	                                  </div> \
-	                                  </div> \
-	                                  </div>');
-	
-	        // the 'Delete' dialog box is formatted
-	        $("#dept-retention").append('<div id="delete-modal" class="modal fade" role="dialog"> \
-	                              <div class="modal-dialog"> \
-	                              <div class="modal-content"> \
-	                              <div class="modal-header"> \
-	                              <h4 class="modal-title">Delete Record</h4> \
-	                              </div> \
-	                              <div class="modal-body"> \
-	                              <h3>Are you sure you want to delete this record?</h3> \
-	                              </br>\
-	                                    <h5>All user comments will be lost.</p> \
-	                                    </div> \
-	                                    <div class="modal-footer"> \
-	                                    <button type="button" class="btn btn-default" id="ok-delete">OK</button> \
-	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> \
-	                                    </div> \
-	                                    </div> \
-	                                    </div> \
-	                                    </div>');
-	    }
-	};
 
 /***/ })
 /******/ ]);
