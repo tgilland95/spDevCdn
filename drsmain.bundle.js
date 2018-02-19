@@ -9389,6 +9389,11 @@
 	
 	
 	/*
+	'Edit Details' and 'Delete' dialog boxes are formatted
+	The content for the text boxes and drop-down lists are added dynamically when clicked
+	*/
+	
+	/*
 	Checks if dept parameter has completed DRS / Annual Review to populate checkboxes
 	Adds on-click event to checkboxes to set/unset DRS Complete and Annual Review completed
 	Retreives records submitted by given dept
@@ -9630,7 +9635,7 @@
 	
 	                        // adds on-click event to Download button which creates PDF
 	                        $(".pdf").click(function () {
-	                            makePDF();
+	                            _IndexUtils.IndexUtils.makePDF();
 	                        });
 	
 	                        // adds on-change event to #r-cat value in 'Edit Details' dialog box
@@ -9943,8 +9948,9 @@
 	Adds ability to download the PDF upon creation
 	*/
 	
-	
 	// deletes record based on ID passed in
+	
+	
 	var deleteRecord = function () {
 	    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(row, id) {
 	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -10461,6 +10467,8 @@
 	
 	var _html = __webpack_require__(332);
 	
+	var _IndexUtils = __webpack_require__(333);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; } // imports
@@ -10587,281 +10595,6 @@
 	            location.replace(currentURL + "&dept=" + dept);
 	        });
 	    }
-	}
-	
-	/*
-	'Edit Details' and 'Delete' dialog boxes are formatted
-	The content for the text boxes and drop-down lists are added dynamically when clicked
-	*/
-	function setModals() {
-	    // the 'Edit Details' dialog box is formatted
-	    $("#dept-retention").append('<div id="myModal" class="modal fade" role="dialog"> \
-	                          <div class="modal-dialog"> \
-	                                <div class="modal-content"> \
-	                                  <div class="modal-header"> \
-	                                    <h4 class="modal-title">Edit</h4> \
-	                                      </div> \
-	                                  <div class="modal-body"> \
-	                                    <form id="editForm" class="form-horizontal"> \
-	                                      <div class="form-group" style="display:none"> \
-	                                        <label class="control-label col-sm-3" for="r-code">Code: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <input type="text" class="form-control" id="r-code" disabled> \
-	                                        </div> \
-	                                      </div> \
-	                          <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="r-type">Record Type: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <input type="text" class="form-control" id="r-type"> \
-	                                        </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="r-func">Function: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <select class="form-control" id="r-func"></select> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="r-cat">Record Category: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <select class="form-control" id="r-cat" disabled></select> \
-	                                      </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="r-ret">Retention: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <textarea style="resize:none" class="form-control" id="r-ret" disabled></textarea> \
-	                                        </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                <label class="control-label col-sm-3" for="r-exc">Exception: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <textarea style="resize:none" class="form-control" id="r-exc" disabled></textarea> \
-	                                      </div> \
-	                                        </div> \
-	                               <div class="form-group"> \
-	                 <label class="control-label col-sm-3" for="cmts-plan">Comments / Plan: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <textarea style="resize:none" class="form-control" id="cmts-plan"></textarea> \
-	          </div> \
-	                                      </div> \
-	                    <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="admin-msg">Message to Administrator: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <textarea style="resize:none" class="form-control" id="admin-msg"></textarea> \
-	         </div> \
-	                                      </div> \
-	          <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="admin-cmts">Message from Administrator: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <textarea style="resize:none" class="form-control" id="admin-cmts" disabled></textarea> \
-	                 </div> \
-	                                      </div> \
-	                           <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="r-repo">Repository: </label> \
-	                                        <div class="col-sm-7"> \
-	                                          <select class="form-control" id="r-repo">\
-	                                          </select> \
-	                                        </div> \
-									</div> \
-	                                      <div class="form-group"> \
-	                                        <div style="padding-left: 11em"> \
-	                                          <label><input type="checkbox" value="" id="archival"> Archival</label> \
-	                                          </div> \
-	                                      </div> \
-	                                        <div class="form-group"> \
-	                                        <div style="padding-left: 11em"> \
-	                                          <label><input type="checkbox" value="" id="vital"> Vital</label> \
-	                                          </div> \
-	                                      </div> \
-	                                      <div class="form-group"> \
-	                                        <div style="padding-left: 11em"> \
-	                                          <label><input type="checkbox" value="" id="confidential"> Highly Confidential</label> \
-	                                        </div>\
-	                                        </div> \
-	                                        <div class="form-group"> \
-	                                        <label class="control-label col-sm-3" for="blank"></label> \
-	                                        <div class="col-sm-7"> \
-	                                          <span style="font-size: .75em; color:gray">*Changing function, category, or user comments to admin will set the record as pending and will require admin approval.</span>\
-	                                        </div> \
-	                                        </div> \
-	                                    </form> \
-	                                  </div> \
-	                                  <div class="modal-footer"> \
-	                                    <button type="button"  class="btn btn-default" id="saveRecord" disabled="true" >Save</button> \
-	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
-	                              </div> \
-	               </div> \
-	                              </div> \
-	           </div>');
-	
-	    // the 'Delete' dialog box is formatted
-	    $("#dept-retention").append('<div id="delete-modal" class="modal fade" role="dialog"> \
-	                              <div class="modal-dialog"> \
-	                                <div class="modal-content"> \
-	                                  <div class="modal-header"> \
-	                                    <h4 class="modal-title">Delete Record</h4> \
-	                                  </div> \
-	    <div class="modal-body"> \
-	                                    <h3>Are you sure you want to delete this record?</h3> \
-	                                    </br>\
-	                                    <h5>All user comments will be lost.</p> \
-	                                  </div> \
-	                                  <div class="modal-footer"> \
-	                                    <button type="button" class="btn btn-default" id="ok-delete">OK</button> \
-	                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> \
-	                                </div> \
-	                                </div> \
-	                                </div> \
-	                            </div>');
-	}function makePDF() {
-	    // creates title, headers, and a heading for the PDF
-	    var titleString = "\nDepartment Retention Schedule for Dept# " + deptParam + " - " + deptNameLookup[deptParam];
-	    var headers = [{
-	        text: "Record Type",
-	        style: "tableHeader"
-	    }, {
-	        text: "Retention",
-	        style: "tableHeader"
-	    }, {
-	        text: "Exception",
-	        style: "tableHeader"
-	    }, {
-	        text: "Archival",
-	        style: "tableHeader"
-	    }, {
-	        text: "Comments / Plan",
-	        style: "tableHeader"
-	    }];
-	    var theBody = [];
-	    var date = new Date();
-	    var dateStr = date.toDateString();
-	    theBody.push(headers);
-	
-	    // iterates through rows of table to retrieve values - adds value to PDF row if
-	    // not empty
-	    var rows = $("#dept-ret-table tr");
-	    for (var i = 1; i < rows.length; i++) {
-	        var tempRow = [];
-	        var cells = $(rows[i])[0].childNodes;
-	        if ($(cells)[2].innerText == "" || $(cells)[2].innerText == "null" || $(cells)[2].innerText == null) {
-	            tempRow.push(" - ");
-	        } else {
-	            tempRow.push($(cells)[2].innerText);
-	        }
-	        if ($(cells)[5].innerText == "" || $(cells)[5].innerText == "null" || $(cells)[5].innerText == null) {
-	            tempRow.push(" - ");
-	        } else {
-	            tempRow.push($(cells)[5].innerText);
-	        }
-	        if ($(cells)[6].innerText == "" || $(cells)[6].innerText == "null" || $(cells)[6].innerText == null) {
-	            tempRow.push(" - ");
-	        } else {
-	            tempRow.push($(cells)[6].innerText);
-	        }
-	        if ($(cells)[11].innerText == "Yes") {
-	            tempRow.push("Yes");
-	        } else {
-	            tempRow.push("No");
-	        }
-	
-	        // Adds repo, vital, and highly confidential to Comments section if not
-	        // empty/checked
-	        var comments = "";
-	        var hasComment = false;
-	        var hasRepo = false;
-	        var isVital = false;
-	        var isConf = false;
-	        if ($(cells)[7].innerText != "" && $(cells)[7].innerText != "null" && $(cells)[7].innerText != null) {
-	            hasComment = true;
-	            comments += $(cells)[7].innerText;
-	        }
-	        if ($(cells)[14].innerText != "" && $(cells)[14].innerText != "null" && $(cells)[14].innerText != null && $(cells)[14].innerText != "Select a repository") {
-	            hasRepo = true;
-	            if (hasComment) {
-	                comments += "\n";
-	            }
-	            if ($(cells)[14].innerText != "Other (please specify in the Comments section)") {
-	                comments += "Stored in: " + $(cells)[14].innerText;
-	            }
-	        }
-	        if ($(cells)[12].innerText == "Yes") {
-	            isVital = true;
-	            if (hasComment || hasRepo) {
-	                comments += "\n";
-	            }
-	            comments += "Vital record";
-	        }
-	        if ($(cells)[13].innerText == "Yes") {
-	            isConf = true;
-	            if (hasComments || hasRepo || isVital) {
-	                comments += "\n";
-	            }
-	            comments += "Highly Confidential";
-	        }
-	        if (!hasComment && !hasRepo && !isVital && !isConf) {
-	            tempRow.push(" - ");
-	        } else {
-	            tempRow.push(comments);
-	        }
-	
-	        // adds PDF row to body object
-	        theBody.push(tempRow);
-	    }
-	
-	    // document definition for PDF, adding in table body I created above
-	    var dd = {
-	        title: "Department Retention Schedule",
-	        footer: function footer(currentPage, pageCount) {
-	            return {
-	                text: currentPage.toString() + " of " + pageCount,
-	                alignment: "center"
-	            };
-	        },
-	        pageOrientation: "landscape",
-	        content: [{
-	            text: "University Records & Information Management\nDate Printed: " + dateStr,
-	            style: "header"
-	        }, {
-	            text: titleString,
-	            style: "title"
-	        }, "\n\n", {
-	            columns: [{
-	                width: "*",
-	                text: ""
-	            }, {
-	                style: "table",
-	                width: "auto",
-	                table: {
-	                    widths: ["*", "*", 75, 30, "*"],
-	                    body: theBody
-	                },
-	                layout: "lightHorizontalLines"
-	            }, {
-	                width: "*",
-	                text: ""
-	            }]
-	        }],
-	        styles: {
-	            header: {
-	                fontSize: 10,
-	                margin: 5
-	            },
-	            title: {
-	                fontSize: 16,
-	                alignment: "center"
-	            },
-	            table: {
-	                fontSize: 9
-	            },
-	            tableHeader: {
-	                fontSize: 9,
-	                bold: true
-	            }
-	        }
-	
-	        // after creation, PDF will be downloaded automatically
-	    };pdfMake.createPdf(dd).download("DRS.pdf");
 	}
 	
 	function addCommonSubmitButton(deptRecords, deptIDList, length, idLookup, dept) {
@@ -12226,6 +11959,167 @@
 	                                    </div> \
 	                                    </div> \
 	                                    </div>');
+	    }
+	};
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var IndexUtils = exports.IndexUtils = {
+	    makePDF: function makePDF() {
+	        // creates title, headers, and a heading for the PDF
+	        var titleString = "\nDepartment Retention Schedule for Dept# " + deptParam + " - " + deptNameLookup[deptParam];
+	        var headers = [{
+	            text: "Record Type",
+	            style: "tableHeader"
+	        }, {
+	            text: "Retention",
+	            style: "tableHeader"
+	        }, {
+	            text: "Exception",
+	            style: "tableHeader"
+	        }, {
+	            text: "Archival",
+	            style: "tableHeader"
+	        }, {
+	            text: "Comments / Plan",
+	            style: "tableHeader"
+	        }];
+	        var theBody = [];
+	
+	        var dateStr = new Date().toDateString();
+	        theBody.push(headers);
+	
+	        // iterates through rows of table to retrieve values - adds value to PDF row if
+	        // not empty
+	        var rows = $("#dept-ret-table tr");
+	        for (var i = 1; i < rows.length; i++) {
+	            var tempRow = [];
+	            var cells = $(rows[i])[0].childNodes;
+	            if ($(cells)[2].innerText == "" || $(cells)[2].innerText == "null" || $(cells)[2].innerText == null) {
+	                tempRow.push(" - ");
+	            } else {
+	                tempRow.push($(cells)[2].innerText);
+	            }
+	            if ($(cells)[5].innerText == "" || $(cells)[5].innerText == "null" || $(cells)[5].innerText == null) {
+	                tempRow.push(" - ");
+	            } else {
+	                tempRow.push($(cells)[5].innerText);
+	            }
+	            if ($(cells)[6].innerText == "" || $(cells)[6].innerText == "null" || $(cells)[6].innerText == null) {
+	                tempRow.push(" - ");
+	            } else {
+	                tempRow.push($(cells)[6].innerText);
+	            }
+	            if ($(cells)[11].innerText == "Yes") {
+	                tempRow.push("Yes");
+	            } else {
+	                tempRow.push("No");
+	            }
+	
+	            // Adds repo, vital, and highly confidential to Comments section if not
+	            // empty/checked
+	            var comments = "";
+	            var hasComment = false;
+	            var hasRepo = false;
+	            var isVital = false;
+	            var isConf = false;
+	            if ($(cells)[7].innerText != "" && $(cells)[7].innerText != "null" && $(cells)[7].innerText != null) {
+	                hasComment = true;
+	                comments += $(cells)[7].innerText;
+	            }
+	            if ($(cells)[14].innerText != "" && $(cells)[14].innerText != "null" && $(cells)[14].innerText != null && $(cells)[14].innerText != "Select a repository") {
+	                hasRepo = true;
+	                if (hasComment) {
+	                    comments += "\n";
+	                }
+	                if ($(cells)[14].innerText != "Other (please specify in the Comments section)") {
+	                    comments += "Stored in: " + $(cells)[14].innerText;
+	                }
+	            }
+	            if ($(cells)[12].innerText == "Yes") {
+	                isVital = true;
+	                if (hasComment || hasRepo) {
+	                    comments += "\n";
+	                }
+	                comments += "Vital record";
+	            }
+	            if ($(cells)[13].innerText == "Yes") {
+	                isConf = true;
+	                if (hasComments || hasRepo || isVital) {
+	                    comments += "\n";
+	                }
+	                comments += "Highly Confidential";
+	            }
+	            if (!hasComment && !hasRepo && !isVital && !isConf) {
+	                tempRow.push(" - ");
+	            } else {
+	                tempRow.push(comments);
+	            }
+	
+	            // adds PDF row to body object
+	            theBody.push(tempRow);
+	        }
+	
+	        // document definition for PDF, adding in table body I created above
+	        var dd = {
+	            title: "Department Retention Schedule",
+	            footer: function footer(currentPage, pageCount) {
+	                return {
+	                    text: currentPage.toString() + " of " + pageCount,
+	                    alignment: "center"
+	                };
+	            },
+	            pageOrientation: "landscape",
+	            content: [{
+	                text: "University Records & Information Management\nDate Printed: " + dateStr,
+	                style: "header"
+	            }, {
+	                text: titleString,
+	                style: "title"
+	            }, "\n\n", {
+	                columns: [{
+	                    width: "*",
+	                    text: ""
+	                }, {
+	                    style: "table",
+	                    width: "auto",
+	                    table: {
+	                        widths: ["*", "*", 75, 30, "*"],
+	                        body: theBody
+	                    },
+	                    layout: "lightHorizontalLines"
+	                }, {
+	                    width: "*",
+	                    text: ""
+	                }]
+	            }],
+	            styles: {
+	                header: {
+	                    fontSize: 10,
+	                    margin: 5
+	                },
+	                title: {
+	                    fontSize: 16,
+	                    alignment: "center"
+	                },
+	                table: {
+	                    fontSize: 9
+	                },
+	                tableHeader: {
+	                    fontSize: 9,
+	                    bold: true
+	                }
+	            }
+	
+	            // after creation, PDF will be downloaded automatically
+	        };pdfMake.createPdf(dd).download("DRS.pdf");
 	    }
 	};
 
