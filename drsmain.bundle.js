@@ -9952,6 +9952,512 @@
 	// deletes record based on ID passed in
 	
 	
+	var deleteRecord = function () {
+	    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(row, id) {
+	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+	            while (1) {
+	                switch (_context3.prev = _context3.next) {
+	                    case 0:
+	                        _context3.next = 2;
+	                        return util.deleteRecord(row, id);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context3.stop();
+	                }
+	            }
+	        }, _callee3, this);
+	    }));
+	
+	    return function deleteRecord(_x5, _x6) {
+	        return _ref3.apply(this, arguments);
+	    };
+	}();
+	
+	// updates unique record based on ID and metadata passed in
+	
+	
+	var updateRecord = function () {
+	    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, flag, newRepo, archival, vital, highlyConfidential) {
+	        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+	            while (1) {
+	                switch (_context4.prev = _context4.next) {
+	                    case 0:
+	                        _context4.next = 2;
+	                        return util.updateRecord(itemID, newFunc, newType, newCatID, newCat, newRet, newCmtsPlan, newAdminMsg, 1, newRepo, archival, vital, highlyConfidential);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context4.stop();
+	                }
+	            }
+	        }, _callee4, this);
+	    }));
+	
+	    return function updateRecord(_x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19) {
+	        return _ref4.apply(this, arguments);
+	    };
+	}();
+	
+	// updates common record based on ID and metadata passed in
+	
+	
+	var updateCommonRecord = function () {
+	    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag) {
+	        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+	            while (1) {
+	                switch (_context5.prev = _context5.next) {
+	                    case 0:
+	                        _context5.next = 2;
+	                        return util.updateCommonRecord(itemID, newCmtsPlan, newAdminMsg, newRepo, archival, vital, highlyConfidential, flag);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context5.stop();
+	                }
+	            }
+	        }, _callee5, this);
+	    }));
+	
+	    return function updateCommonRecord(_x20, _x21, _x22, _x23, _x24, _x25, _x26, _x27) {
+	        return _ref5.apply(this, arguments);
+	    };
+	}();
+	
+	// unsets flag which alerts user of new message from admin
+	
+	
+	var messageRead = function () {
+	    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(itemID) {
+	        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+	            while (1) {
+	                switch (_context6.prev = _context6.next) {
+	                    case 0:
+	                        _context6.next = 2;
+	                        return util.messageRead(itemID);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context6.stop();
+	                }
+	            }
+	        }, _callee6, this);
+	    }));
+	
+	    return function messageRead(_x28) {
+	        return _ref6.apply(this, arguments);
+	    };
+	}();
+	
+	// sets/unsets flag which specifies if dept completed their DRS
+	
+	
+	var setDRS = function () {
+	    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(id, drsComplete) {
+	        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+	            while (1) {
+	                switch (_context7.prev = _context7.next) {
+	                    case 0:
+	                        _context7.next = 2;
+	                        return util.setDRS(id, drsComplete);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context7.stop();
+	                }
+	            }
+	        }, _callee7, this);
+	    }));
+	
+	    return function setDRS(_x29, _x30) {
+	        return _ref7.apply(this, arguments);
+	    };
+	}();
+	
+	// sets/unsets flag which specifies if dept completed their Annual Review
+	
+	
+	var setReview = function () {
+	    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(id, reviewComplete) {
+	        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+	            while (1) {
+	                switch (_context8.prev = _context8.next) {
+	                    case 0:
+	                        _context8.next = 2;
+	                        return util.setReview(id, reviewComplete);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context8.stop();
+	                }
+	            }
+	        }, _callee8, this);
+	    }));
+	
+	    return function setReview(_x31, _x32) {
+	        return _ref8.apply(this, arguments);
+	    };
+	}();
+	
+	/*
+	*/
+	
+	
+	var populateCommonRecordsTab = function () {
+	    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+	        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+	            while (1) {
+	                switch (_context9.prev = _context9.next) {
+	                    case 0:
+	                        // divs in department records tab
+	                        $("#common-records").append('<div id="common-records-alert"></div>');
+	                        $("#common-records").append('<div id="common-records-search"></div>');
+	                        $("#common-records").append('<div id="common-table"></div>');
+	                        $("#common-records").append('<div id="common-buttons"></div>');
+	                        $("#common-records").append('<div id="add-common-dialog" title="Are you sure?"></div>');
+	                        $("#common-records").append('<div id="delete-common-dialog" title="Are you sure?"></div>');
+	
+	                        if (depts.length > 1) {
+	                            if ($("#retention-dropdown option:selected").text() != "Select a department") {
+	                                addCommonRecordsTable(deptParam);
+	                            } else {
+	                                $("#common-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+	                            }
+	                        } else {
+	                            addCommonRecordsTable(deptParam);
+	                        }
+	
+	                    case 7:
+	                    case "end":
+	                        return _context9.stop();
+	                }
+	            }
+	        }, _callee9, this);
+	    }));
+	
+	    return function populateCommonRecordsTab() {
+	        return _ref9.apply(this, arguments);
+	    };
+	}();
+	
+	var addCommonRecordsTable = function () {
+	    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(dept, searchTerm) {
+	        var deptIDList, idLookup, i, tableRows, arch;
+	        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+	            while (1) {
+	                switch (_context10.prev = _context10.next) {
+	                    case 0:
+	                        _context10.next = 2;
+	                        return util.getRecordsByDept(dept);
+	
+	                    case 2:
+	                        deptRecords = _context10.sent;
+	                        deptIDList = [];
+	                        idLookup = {};
+	
+	                        for (i = 0; i < deptRecords.length; i++) {
+	                            deptIDList.push(deptRecords[i]["Code"]);
+	                            idLookup[deptRecords[i]["Code"]] = deptRecords[i]["ID"];
+	                        }
+	                        tableRows = "";
+	                        // creates all rows for common records table
+	
+	                        for (i = 0; i < commonRecordsList.length; i++) {
+	                            tableRows += '<tr id="commonrow' + i + '"><td style="display:none">' + commonRecordsList[i]["Code"] + "</td>";
+	                            if (deptIDList.indexOf(commonRecordsList[i]["Code"]) > -1) {
+	                                tableRows += '<td><input title="To delete a record, go to the Department Retention Schedule ta' + 'b" type="checkbox" id="chkbx' + i + '" checked disabled></td>';
+	                            } else {
+	                                tableRows += '<td><input type="checkbox" id="chkbx' + i + '"></td>';
+	                            }
+	                            tableRows += "<td>" + commonRecordsList[i]["Function"] + "</td>";
+	                            tableRows += "<td>" + commonRecordsList[i]["Record_x0020_Type"] + "</td>";
+	                            tableRows += "<td>" + commonRecordsList[i]["Retention_x0020_Description"] + "</td>";
+	                            arch = commonRecordsList[i]["Archival"];
+	
+	                            if (arch == "No") {
+	                                arch = "";
+	                            }
+	                            tableRows += "<td>" + arch + "</td></tr>";
+	                        }
+	                        // adds table to Common Records tab
+	                        $("#common-table").empty();
+	                        $("#common-table").html('</br><table class="table table-striped" id="common-table"><thead><tr><th style="display:none">Code</th><th>Select</th><th>Function</th><th>Record Type</th> \
+	  ' + "                              <th>Retention Description</th><th>Archival</th></t" + "r></thead><tbody>" + tableRows + "</tbody></table>");
+	                        // adds buttons below
+	                        addCommonSubmitButton(deptRecords, deptIDList, commonRecordsList.length, idLookup, dept);
+	
+	                    case 11:
+	                    case "end":
+	                        return _context10.stop();
+	                }
+	            }
+	        }, _callee10, this);
+	    }));
+	
+	    return function addCommonRecordsTable(_x33, _x34) {
+	        return _ref10.apply(this, arguments);
+	    };
+	}();
+	
+	var addCommonRecord = function () {
+	    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag) {
+	        return regeneratorRuntime.wrap(function _callee11$(_context11) {
+	            while (1) {
+	                switch (_context11.prev = _context11.next) {
+	                    case 0:
+	                        _context11.next = 2;
+	                        return util.addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, flag);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context11.stop();
+	                }
+	            }
+	        }, _callee11, this);
+	    }));
+	
+	    return function addCommonRecord(_x35, _x36, _x37, _x38, _x39, _x40, _x41) {
+	        return _ref11.apply(this, arguments);
+	    };
+	}();
+	
+	var addUniqueFields = function () {
+	    var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(dept) {
+	        var result, size, itemID, options, funcList, i, repoOptions;
+	        return regeneratorRuntime.wrap(function _callee12$(_context12) {
+	            while (1) {
+	                switch (_context12.prev = _context12.next) {
+	                    case 0:
+	                        _context12.next = 2;
+	                        return util.getRecordsByDept(dept);
+	
+	                    case 2:
+	                        deptRecords = _context12.sent;
+	                        _context12.next = 5;
+	                        return getSize(dept);
+	
+	                    case 5:
+	                        result = _context12.sent;
+	                        size = result[0];
+	                        itemID = result[1];
+	
+	                        $("#unique-fields").html('<div class="container">');
+	                        options = "";
+	
+	                        options += "<option disabled selected>Select a function</option>";
+	                        options += "<option></option>";
+	                        funcList = Object.keys(generalFunctionLookup);
+	
+	                        funcList.sort();
+	                        for (i = 0; i < funcList.length; i++) {
+	                            options += "<option>" + funcList[i] + "</option>";
+	                        }
+	                        repoOptions = "";
+	
+	                        repoOptions += "<option disabled selected>Select a repository</option>";
+	                        for (i = 0; i < repos.length; i++) {
+	                            repoOptions += "<option>" + repos[i]["Repository"] + "</option>";
+	                        }
+	
+	                        $("#unique-fields").append('</br></br><form id="uniqueRecordsForm" class="form-horizontal"> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-type">Record Type: <span id="red-ast">*</span></label> \
+	                                  <div class="col-sm-8"> \
+	                                    <input type="text" class="form-control" id="rec-type" placeholder="Enter record type"> \
+	                                  </div> \
+	                                  </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-func">Proposed Function:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <select class="form-control" id="rec-func"> \
+	             ' + options + " \
+	                                    </select> \
+	                             " + "     </div> \
+	                                </div> \
+	                         " + '       <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-cat">Proposed Category:</label> \
+	                                  <div class="col-sm-8"> \
+	                                  <select class="form-control" id="rec-cat" disabled> \
+	                                  </select> \
+	                                                        </div> \
+	                                 </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="retention">Proposed Retention:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="retention" rows="2" style="resize:none" disabled></textarea> \
+	        </div> \
+	                                  </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="adminMsg">Message to Administrator:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="adminMsg" rows="3" style="resize:none" placeholder="Type your message"></textarea> \
+	                                    </div> \
+	                                  </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="commentsPlan">Comments / Plan:</label> \
+	                                  <div class="col-sm-8"> \
+	                                    <textarea class="form-control" id="commentsPlan" rows="3" style="resize:none" placeholder="Type your comment"></textarea> ' + '\
+	                                  </div> \
+	                                </div> \
+	                                <div class="form-group"> \
+	                                  <label class="control-label col-sm-2" for="rec-repo">Repository: </label> \
+	                                  <div class="col-sm-8"> \
+	                                    <select class="form-control" id="rec-repo"> \
+	    ' + "                                  " + repoOptions + ' \
+	                                    </select> \
+	                  </div> \
+	                                </div> \
+	                    <div class="form-group"> \
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="archival-chkbx"> Archival</label> \
+	                         </div> \
+	                                </div> \
+	                          <div class="form-group"> \
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="vital-chkbx"> Vital</label> \
+	                                </div> \
+	                                </div> \
+	               <div class="form-group"> \
+	                                  <div style="padding-left: 15em"> \
+	                                    <label><input type="checkbox" value="" id="confidential-chkbx"> Highly Confidential</label> ' + "\
+	                                  </div> \
+	                                </d" + 'iv> \
+	                                <div class="form-group"> \
+	                                  <div style="padding-left: 8em"><span display="inline-block" id="red-ast">*</span> means required field</div> \
+	                              ' + "  </div> \
+	                              </form>");
+	
+	                        $("#rec-func").change(function () {
+	                            $("#retention").val("");
+	                            $("#rec-cat").empty();
+	                            if ($("#rec-func").val() == "") {
+	                                $("#rec-cat").val("");
+	                                $("#rec-cat").prop("disabled", true);
+	                                return;
+	                            } else {
+	                                var catOptions = "<option>Select a category</option><option></option>";
+	                                for (var i = 0; i < generalFunctionLookup[$("#rec-func").val()].length; i++) {
+	                                    catOptions += "<option>";
+	                                    catOptions += generalFunctionLookup[$("#rec-func").val()][i];
+	                                    catOptions += "</option>";
+	                                }
+	                                $("#rec-cat").append(catOptions);
+	                                $("#rec-cat").prop("disabled", false);
+	                            }
+	                        });
+	
+	                        $("#rec-cat").change(function () {
+	                            var index = $("#rec-cat").val().toString().indexOf("-");
+	                            var category = $("#rec-cat").val().toString().substring($("#rec-cat").val().toString().indexOf("-") + 2);
+	                            $("#retention").val(generalRetentionLookup[category]);
+	                        });
+	
+	                        addUniqueSubmit(dept, size, itemID);
+	
+	                    case 22:
+	                    case "end":
+	                        return _context12.stop();
+	                }
+	            }
+	        }, _callee12, this);
+	    }));
+	
+	    return function addUniqueFields(_x42) {
+	        return _ref12.apply(this, arguments);
+	    };
+	}();
+	
+	var getSize = function () {
+	    var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(dept) {
+	        return regeneratorRuntime.wrap(function _callee13$(_context13) {
+	            while (1) {
+	                switch (_context13.prev = _context13.next) {
+	                    case 0:
+	                        _context13.next = 2;
+	                        return util.getSize(dept);
+	
+	                    case 2:
+	                        return _context13.abrupt("return", _context13.sent);
+	
+	                    case 3:
+	                    case "end":
+	                        return _context13.stop();
+	                }
+	            }
+	        }, _callee13, this);
+	    }));
+	
+	    return function getSize(_x43) {
+	        return _ref13.apply(this, arguments);
+	    };
+	}();
+	
+	var updateSize = function () {
+	    var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14(itemID, size) {
+	        return regeneratorRuntime.wrap(function _callee14$(_context14) {
+	            while (1) {
+	                switch (_context14.prev = _context14.next) {
+	                    case 0:
+	                        _context14.next = 2;
+	                        return util.updateSize(itemID, size);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context14.stop();
+	                }
+	            }
+	        }, _callee14, this);
+	    }));
+	
+	    return function updateSize(_x44, _x45) {
+	        return _ref14.apply(this, arguments);
+	    };
+	}();
+	
+	var addSize = function () {
+	    var _ref15 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee15(dept, size) {
+	        return regeneratorRuntime.wrap(function _callee15$(_context15) {
+	            while (1) {
+	                switch (_context15.prev = _context15.next) {
+	                    case 0:
+	                        _context15.next = 2;
+	                        return util.addSize(dept, size);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context15.stop();
+	                }
+	            }
+	        }, _callee15, this);
+	    }));
+	
+	    return function addSize(_x46, _x47) {
+	        return _ref15.apply(this, arguments);
+	    };
+	}();
+	
+	var addUniqueRecord = function () {
+	    var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo) {
+	        return regeneratorRuntime.wrap(function _callee16$(_context16) {
+	            while (1) {
+	                switch (_context16.prev = _context16.next) {
+	                    case 0:
+	                        _context16.next = 2;
+	                        return util.addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
+	
+	                    case 2:
+	                    case "end":
+	                        return _context16.stop();
+	                }
+	            }
+	        }, _callee16, this);
+	    }));
+	
+	    return function addUniqueRecord(_x48, _x49, _x50, _x51, _x52, _x53, _x54, _x55, _x56, _x57, _x58) {
+	        return _ref16.apply(this, arguments);
+	    };
+	}();
+	
 	var _DataAccess = __webpack_require__(330);
 	
 	var dao = _interopRequireWildcard(_DataAccess);
@@ -10090,6 +10596,128 @@
 	            location.replace(currentURL + "&dept=" + dept);
 	        });
 	    }
+	}
+	
+	function addCommonSubmitButton(deptRecords, deptIDList, length, idLookup, dept) {
+	    // adds buttons to Common Records tab below table
+	    $("#common-buttons").empty();
+	    $("#common-buttons").append('<div id="submit-alert"></div></br>');
+	    $("#common-buttons").append('<div class="btn-group"><button type="button" class="btn btn-primary" id="common-submit">Submit</button></div>');
+	    // adds events to button clicks
+	    $("#common-submit").click(function () {
+	        $("#submit-alert").html("");
+	        var addRows = [];
+	        for (var i = 0; i < length; i++) {
+	            if ($("#commonrow" + i).find("input:checkbox")[0].checked) {
+	                if (deptIDList.indexOf($("#commonrow" + i).children()[0].innerText) == -1) {
+	                    addRows.push(i);
+	                }
+	            }
+	        }
+	
+	        if (addRows.length > 0) {
+	            $("#submit-alert").html("");
+	            for (var i = 0; i < addRows.length; i++) {
+	                var rowNum = addRows[i];
+	                var tempCode = $("#commonrow" + rowNum).children()[0].innerText;
+	                var tempFunc = $("#commonrow" + rowNum).children()[2].innerText;
+	                var tempType = $("#commonrow" + rowNum).children()[3].innerText;
+	                var tempRet = $("#commonrow" + rowNum).children()[4].innerText;
+	                var tempArch = $("#commonrow" + rowNum).children()[5].innerText;
+	                if (tempArch == "") {
+	                    tempArch = "No";
+	                }
+	                $("#submit-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+	                if (i == addRows.length - 1) {
+	                    addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, 1);
+	                } else {
+	                    addCommonRecord(dept, rowNum, tempCode, tempFunc, tempType, tempArch, 0);
+	                }
+	            }
+	        } else {
+	            $("#submit-alert").html('<div class="alert alert-info" role="alert">There were no records selected to be added.</div>');
+	        }
+	    });
+	}
+	
+	function populateUniqueRecordsTab() {
+	    // adds divs for different parts of unique records tab
+	    $("#unique-records").append('<div id="unique-records-alert"></div>');
+	    $("#unique-records").append('<div id="unique-fields"></div>');
+	    $("#unique-records").append('<div id="unique-alert"></div>');
+	    $("#unique-records").append('<div id="unique-buttons"></div>');
+	    // user is a part of more than one department
+	    if (depts.length > 1) {
+	        if ($("#retention-dropdown option:selected").text() != "Select a department") {
+	            addUniqueFields(deptParam);
+	        } else {
+	            $("#unique-records-alert").html('</br><div class="alert alert-info" role="alert">Please select a department above</div>');
+	        }
+	    } else {
+	        addUniqueFields(deptParam);
+	    }
+	}
+	
+	function addUniqueSubmit(dept, size, itemID) {
+	    $("#unique-buttons").empty();
+	    $("#unique-buttons").append('<div align="center"><button type="button" class="btn btn-primary" id="unique-submit">Submit</button> \
+	    &ensp;<button type="button" class="btn btn-primary" id="finished" disabled>Finished</button></div>');
+	    $("#unique-buttons").append("\n\n\n\n\n");
+	    // adds event handlers to buttons
+	    $("#unique-submit").click(function () {
+	        $("#unique-alert").empty();
+	        if ($("#rec-type").val() == "") {
+	            $("#unique-alert").html('</br><div class="alert alert-warning" role="alert">Record Type cannot be left blank</div>');
+	            setTimeout(function () {
+	                $("#unique-alert").empty();
+	            }, 5000);
+	            return;
+	        }
+	        var recRepo = $("#rec-repo option:selected").val();
+	        if (recRepo == "Select a repository") {
+	            recRepo = "";
+	        }
+	        var recFunc = $("#rec-func option:selected").val();
+	        if (recFunc == "Select a function") {
+	            recFunc = "";
+	        }
+	        var recType = $("#rec-type").val();
+	        var recCat;
+	        if ($("#rec-cat option:selected").val() == "" || $("#rec-cat option:selected").val() == null) {
+	            recCat = "";
+	        } else {
+	            recCat = $("#rec-cat option:selected").val().toString().split(" ")[0];
+	        }
+	        var adminMsg = $("#adminMsg").val();
+	        var commentsPlan = $("#commentsPlan").val();
+	        $("#finished").prop("disabled", false);
+	        var archival = "No";
+	        var vital = "No";
+	        var highlyConfidential = "No";
+	        if ($("#archival-chkbx").is(":checked")) {
+	            archival = "Yes";
+	        }
+	        if ($("#vital-chkbx").is(":checked")) {
+	            vital = "Yes";
+	        }
+	        if ($("#confidential-chkbx").is(":checked")) {
+	            highlyConfidential = "Yes";
+	        }
+	
+	        var code = "U" + size;
+	        $("#unique-alert").html('</br><div class="alert alert-info" role="alert">Processing...</div>');
+	        addUniqueRecord(dept, code, recType, recFunc, recCat, adminMsg, commentsPlan, highlyConfidential, vital, archival, recRepo);
+	        size++;
+	        if (itemID == -1) {
+	            addSize(dept, size.toString());
+	        } else {
+	            updateSize(itemID, size.toString());
+	        }
+	    });
+	
+	    $("#finished").click(function () {
+	        location.reload();
+	    });
 	}
 
 /***/ }),
