@@ -9801,7 +9801,7 @@
 	                            }
 	
 	                            // unsets flag used to notify user of admin message
-	                            messageRead(itemIDLookup[$("#r-code").val()]);
+	                            _IndexUtils.IndexUtils.messageRead(itemIDLookup[$("#r-code").val()]);
 	
 	                            // iterates through dept retention schedule for selected record
 	                            var temp_record;
